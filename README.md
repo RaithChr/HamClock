@@ -34,6 +34,14 @@ Ein vollständiges Amateur Radio Dashboard mit **Echtzeit-Sonne/Mond-Tracking**,
 
 ---
 
+## 🖼️ Screenshots
+
+![OE3LCR Dashboard](https://craith.cloud/dashboard-screenshot.jpg)
+
+*Live Dashboard mit NASA SDO Sonne, Band Conditions, Active Satellites und DX Cluster*
+
+---
+
 ## 🛠️ Tech Stack
 
 | Komponente | Details |
