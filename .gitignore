@@ -1,4 +1,10 @@
 # ===== SECURITY: Sensitive Files =====
+# ALL IMAGE FILES - PRIVATE!
+*.jpg
+*.jpeg
+*.png
+*.gif
+
 # Passwort-geschütztes Verzeichnis
 /myhoney/
 myhoney/
