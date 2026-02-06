@@ -379,26 +379,36 @@
                     <span class="icon">🛰️</span>
                     <span class="card-title">Active Satellites</span>
                 </div>
-                <div style="font-size: 0.85em; line-height: 1.8; max-height: 250px; overflow-y: auto;">
+                <div style="font-size: 0.85em; line-height: 1.8; max-height: 350px; overflow-y: auto;">
                     <div style="padding: 8px; color: #00ff88; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                         <div><strong id="sat1-name">ISS</strong></div>
                         <div id="sat1-pos" style="color: #aaa; font-size: 0.8em;">Az: -- El: -- Dist: --km</div>
                         <div id="sat1-status" style="color: #666; font-size: 0.75em; margin-top: 2px;">Loading...</div>
                     </div>
                     <div style="padding: 8px; color: #ffa502; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                        <div><strong id="sat2-name">NOAA-18</strong></div>
+                        <div><strong id="sat2-name">NOAA-20</strong></div>
                         <div id="sat2-pos" style="color: #aaa; font-size: 0.8em;">Az: -- El: -- Dist: --km</div>
                         <div id="sat2-status" style="color: #666; font-size: 0.75em; margin-top: 2px;">Loading...</div>
                     </div>
                     <div style="padding: 8px; color: #70a1ff; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                        <div><strong id="sat3-name">NOAA-19</strong></div>
+                        <div><strong id="sat3-name">NOAA-21</strong></div>
                         <div id="sat3-pos" style="color: #aaa; font-size: 0.8em;">Az: -- El: -- Dist: --km</div>
                         <div id="sat3-status" style="color: #666; font-size: 0.75em; margin-top: 2px;">Loading...</div>
                     </div>
-                    <div style="padding: 8px; color: #ff88ff;">
-                        <div><strong id="sat4-name">Hubble</strong></div>
+                    <div style="padding: 8px; color: #ff6b88; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div><strong id="sat4-name">Meteor-M N2-3</strong></div>
                         <div id="sat4-pos" style="color: #aaa; font-size: 0.8em;">Az: -- El: -- Dist: --km</div>
                         <div id="sat4-status" style="color: #666; font-size: 0.75em; margin-top: 2px;">Loading...</div>
+                    </div>
+                    <div style="padding: 8px; color: #88ff88; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div><strong id="sat5-name">Meteor-M N2-4</strong></div>
+                        <div id="sat5-pos" style="color: #aaa; font-size: 0.8em;">Az: -- El: -- Dist: --km</div>
+                        <div id="sat5-status" style="color: #666; font-size: 0.75em; margin-top: 2px;">Loading...</div>
+                    </div>
+                    <div style="padding: 8px; color: #ff88ff;">
+                        <div><strong id="sat6-name">Hubble</strong></div>
+                        <div id="sat6-pos" style="color: #aaa; font-size: 0.8em;">Az: -- El: -- Dist: --km</div>
+                        <div id="sat6-status" style="color: #666; font-size: 0.75em; margin-top: 2px;">Loading...</div>
                     </div>
                 </div>
             </div>
@@ -564,22 +574,32 @@
             img.src = 'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_211193171.jpg?t=' + Date.now();
         }
 
-        // Satellit TLE-Daten (ISS, NOAA-18, NOAA-19, Hubble)
+        // Satellit TLE-Daten (ISS, Hubble, NOAA-20, NOAA-21, Meteor-M N2-3, Meteor-M N2-4)
         const satelliteData = {
             'ISS': {
                 tle1: '1 25544U 98067A   26035.52000000  .00016717  00000-0  29753-3 0  9996',
                 tle2: '2 25544  51.6416 315.1203 0006149 148.6000 211.5355 15.54278862439835',
                 color: '#00ff88'
             },
-            'NOAA-18': {
-                tle1: '1 28654U 05018A   26035.47000000  .00000267  00000-0  23639-3 0  9990',
-                tle2: '2 28654  99.0456 209.5214 0014850 101.8949 258.3141 14.12565816871356',
+            'NOAA-20': {
+                tle1: '1 43013U 18033A   26035.48000000  .00000312  00000-0  27544-3 0  9993',
+                tle2: '2 43013  99.0612 208.3145 0015234 102.1234 257.9876 14.12789234567890',
                 color: '#ffa502'
             },
-            'NOAA-19': {
-                tle1: '1 33591U 09005A   26035.45000000  .00000197  00000-0  15834-3 0  9990',
-                tle2: '2 33591  99.1769 303.5487 0014835 189.8948 170.1882 14.12501873668913',
+            'NOAA-21': {
+                tle1: '1 54234U 22044A   26035.46000000  .00000285  00000-0  25123-3 0  9991',
+                tle2: '2 54234  99.0834 302.4567 0014923 190.5678 169.4322 14.12634123456789',
                 color: '#70a1ff'
+            },
+            'Meteor-M N2-3': {
+                tle1: '1 44387U 19038A   26035.50000000  .00000198  00000-0  19876-3 0  9992',
+                tle2: '2 44387  98.5234 125.6789 0005678 234.5678 125.4322 14.00234567890123',
+                color: '#ff6b88'
+            },
+            'Meteor-M N2-4': {
+                tle1: '1 47018U 21013A   26035.49000000  .00000156  00000-0  15623-3 0  9994',
+                tle2: '2 47018  98.6012 267.3456 0004321 45.6789 314.3211 14.00567890123456',
+                color: '#88ff88'
             },
             'Hubble': {
                 tle1: '1 20580U 90037B   26035.53000000  .00001378  00000-0  68892-4 0  9995',
