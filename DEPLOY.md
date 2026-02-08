@@ -17,7 +17,6 @@
 
 - [ ] **Private Folders NOT on GitHub**
   - [ ] ❌ `/avatars/` - Private images (NOT tracked)
-  - [ ] ❌ `/myhoney/` - Gallery directory (NOT tracked)
   - [ ] ❌ `/memory/` - Personal logs (NOT tracked)
   - [ ] ❌ `.env` - API Keys (NOT tracked)
   - [ ] ❌ `GWEN_*.md` - Performance metrics (NOT tracked)
@@ -25,7 +24,6 @@
 
 - [ ] **.gitignore Verification**
   - [ ] Contains: `avatars/`
-  - [ ] Contains: `/myhoney/`
   - [ ] Contains: `memory/`
   - [ ] Contains: `.env`
   - [ ] Contains: `GWEN_*.md`
@@ -35,7 +33,6 @@
   - [ ] No sudo passwords exposed
   - [ ] No email passwords in files
   - [ ] No SSH keys in public repo
-  - `grep -r "144email1&email2\|password\|passwd" /home/chris-admin/.openclaw/workspace/`
 
 ---
 
@@ -46,7 +43,6 @@
   - [ ] Has Support/Donate buttons (Coffee + PayPal)
   - [ ] Has description of all features
   - [ ] Has installation instructions
-  - [ ] Has security section (WITHOUT /myhoney/ mention)
   - [ ] Has license (MIT) ✓
   - [ ] Last updated date correct
   - [ ] Version number accurate
@@ -54,7 +50,6 @@
 - [ ] **SECURITY_NOTE.md Present**
   - [ ] Explains private protection
   - [ ] Lists what's NOT on GitHub
-  - [ ] Explains why (/myhoney/ is private)
 
 ---
 
@@ -128,7 +123,6 @@
 
 1. Run full security check:
    ```bash
-   cd /home/chris-admin/.openclaw/workspace
    
    # Check for secrets
    grep -r "ghp_\|sk_\|api_key" . --exclude-dir=.git
@@ -152,7 +146,6 @@
 
 4. Verify GitHub settings:
    - [ ] Default branch is `master`
-   - [ ] `/myhoney/` NOT mentioned anywhere in docs
    - [ ] Support buttons visible
 
 5. **DEPLOY:**
@@ -169,16 +162,14 @@
 ### NEVER push:
 - ❌ API Keys (Brevo, GitHub, etc.)
 - ❌ Passwords (sudo, email, SSH)
-- ❌ Private images (avatars/, bikini, lingerie)
+- ❌ Private images
 - ❌ Personal memory files (memory/)
-- ❌ Gallery directory (/myhoney/)
 - ❌ Performance metrics (GWEN_*.md)
 - ❌ .env files
 
 ### ALWAYS protect:
 - ✅ Keep credentials in .env (local only)
 - ✅ Keep GitHub token in .env
-- ✅ Keep /myhoney/ password-protected locally
 - ✅ Keep private images locally only
 - ✅ Document security measures
 
