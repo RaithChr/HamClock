@@ -1,7 +1,7 @@
 # ⚠️ LOCAL WORKSPACE CONFIGURATION - NEVER PUSH!
 # These files contain personal, sensitive, and operational data
 
-# User Configuration Files
+# User Configuration Files & Security Docs (LOCAL USE ONLY)
 MEMORY.md
 SOUL.md
 USER.md
@@ -9,6 +9,8 @@ IDENTITY.md
 AGENTS.md
 HEARTBEAT.md
 BOOTSTRAP.md
+DEPLOY.md
+SECURITY_NOTE.md
 memory/
 daily_notes/
 
