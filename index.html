@@ -59,8 +59,8 @@
             justify-content: center;
         }
         .sun-container {
-            width: 400px;
-            height: 400px;
+            width: 450px;
+            height: 450px;
             margin: 15px 0;
             border-radius: 50%;
             overflow: hidden;
@@ -657,6 +657,17 @@
                 if (el_wind) {
                     el_wind.textContent = '7 km/h';
                     console.log('✅ TEST: Set localWind to 7 km/h');
+                }
+                
+                // NACHT TEST: Check current hour and set moon if night (18:00 - 07:00)
+                const now = new Date();
+                const hour = now.getHours();
+                const isNightNow = hour >= 18 || hour < 7;  // Night between 18:00 and 07:00
+                
+                const el_icon = document.getElementById('localWeatherIcon');
+                if (el_icon) {
+                    el_icon.textContent = isNightNow ? '🌙' : '☀️';
+                    console.log(`✅ TEST: Set icon to ${isNightNow ? '🌙 (Nacht)' : '☀️ (Tag)'} (hour: ${hour})`);
                 }
             }, 100);
         });
@@ -1697,7 +1708,7 @@
                 
                 console.log('🌍 Fetching weather for Vienna (JN87ct)');
                 
-                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=auto`, {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,is_day&timezone=auto`, {
                     timeout: 5000
                 });
                 
@@ -1713,7 +1724,8 @@
                 }
                 
                 // Weather code mapping with Icons/Emojis
-                const weatherCodes = {
+                // DAY icons
+                const weatherCodesDay = {
                     0: { text: 'Klar', icon: '☀️' },
                     1: { text: 'Bedeckt', icon: '🌤️' },
                     2: { text: 'Bedeckt', icon: '⛅' },
@@ -1736,7 +1748,37 @@
                     86: { text: 'Schnee', icon: '🌨️' }
                 };
                 
+                // NIGHT icons (for clear/partly cloudy conditions)
+                const weatherCodesNight = {
+                    0: { text: 'Klar', icon: '🌙' },
+                    1: { text: 'Bedeckt', icon: '🌙' },
+                    2: { text: 'Bedeckt', icon: '☁️' },
+                    3: { text: 'Bewölkt', icon: '☁️' },
+                    45: { text: 'Neblig', icon: '🌫️' },
+                    48: { text: 'Neblig', icon: '🌫️' },
+                    51: { text: 'L. Regen', icon: '🌧️' },
+                    53: { text: 'M. Regen', icon: '🌧️' },
+                    55: { text: 'St. Regen', icon: '⛈️' },
+                    61: { text: 'Regen', icon: '🌧️' },
+                    63: { text: 'M. Regen', icon: '🌧️' },
+                    65: { text: 'St. Regen', icon: '⛈️' },
+                    71: { text: 'Schnee', icon: '🌨️' },
+                    73: { text: 'Schnee', icon: '🌨️' },
+                    75: { text: 'St. Schnee', icon: '🌨️' },
+                    80: { text: 'Regen', icon: '🌧️' },
+                    81: { text: 'Regen', icon: '🌧️' },
+                    82: { text: 'St. Regen', icon: '⛈️' },
+                    85: { text: 'Schnee', icon: '🌨️' },
+                    86: { text: 'Schnee', icon: '🌨️' }
+                };
+                
+                // Choose day or night icons based on is_day flag
+                // IMPORTANT: isDay is 0 at night, 1 during day
+                const isDay = current.is_day === 1;  // Convert to boolean (true = day, false = night)
+                const weatherCodes = isDay ? weatherCodesDay : weatherCodesNight;
                 const weatherData = weatherCodes[current.weather_code] || { text: 'Unbekannt', icon: '❓' };
+                
+                console.log(`🌡️ is_day raw value: ${current.is_day}, isDay boolean: ${isDay}, Weather Code: ${current.weather_code}, Icon: ${weatherData.icon}`);
                 
                 // Update DOM with safe element checks
                 try {
