@@ -14,19 +14,32 @@
 
 ---
 
-## 📸 Production Screenshot (Feb 8, 2026)
+## 📸 Production Screenshots (Feb 8, 2026)
 
-![OE3LCR Dashboard](screenshot-2026-02-08.png)
+### Top Panel - Sun, QTH & Band Conditions
+![OE3LCR Dashboard - Top](screenshot-top-2026-02-08.png)
 
-**Features:**
+**Top Panel Features:**
 - ✅ Dual Time Display (LOC + UTC)
-- ✅ NASA SDO Live Sun Image
+- ✅ NASA SDO Live Sun Image (450px, stunning quality)
 - ✅ QTH Information (Sunrise/Sunset/Moonrise/Set)
+- ✅ Band Conditions (13 Bands with Neon Green Design)
+  - Real NOAA K-Index Data
+  - GOOD/FAIR/POOR Status Indicators
+
+### Bottom Panel - Weather, Solar, Satellites & System
+![OE3LCR Dashboard - Bottom](screenshot-bottom-2026-02-08.png)
+
+**Bottom Panel Features:**
 - ✅ Combined Weather Box (Local + Space Weather)
-- ✅ Solar Activity (K-Index, SFI, Space Weather)
-- ✅ Band Conditions (13 Bands with Neon Design)
-- ✅ Active Satellites (ISS, NOAA, Meteor-M, Hubble)
-- ✅ DX Cluster Spots (clickable QRZ.com lookup)
+  - Local: 6°C, 85% Humidity, 7 km/h Wind (with Moon icon for night)
+  - Space Weather: K-Index=2, Solar Flux=95, A-Index=31, Status=Quiet
+- ✅ Solar Activity Panel (K-Index, SFI, Sunspots, Space Weather)
+- ✅ Propagation Panel (SSN, R-Index, Aurora, MUF)
+- ✅ Moon Phase Panel (Accurate lunar cycle tracking)
+- ✅ Active Satellites Panel (ISS, NOAA-20/21, Meteor-M N2-3 with Az/El/Distance)
+- ✅ DX Cluster Spots (Real-time with callsigns and bands)
+- ✅ System Status Panel (Live CPU/RAM/Disk metrics + Uptime)
 
 ---
 
