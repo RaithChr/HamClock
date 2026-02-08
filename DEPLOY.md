@@ -16,7 +16,7 @@
   - `grep -r "sk_\|ghp_\|api_key\|token" /var/www/html/*.js /var/www/html/*.html`
 
 - [ ] **Private Folders NOT on GitHub**
-  - [ ] ❌ `/avatars/` - Private images (NOT tracked)
+  - [ ] ❌ `/avatars/` - Private images
   - [ ] ❌ `/memory/` - Personal logs (NOT tracked)
   - [ ] ❌ `.env` - API Keys (NOT tracked)
   - [ ] ❌ `GWEN_*.md` - Performance metrics (NOT tracked)
@@ -136,7 +136,7 @@
 
 2. Verify .gitignore:
    ```bash
-   cat .gitignore | grep -E "avatars|myhoney|memory|env|GWEN"
+   cat .gitignore | grep -E "avatars|memory|env|GWEN"
    ```
 
 3. Check what would be pushed:
@@ -144,7 +144,7 @@
    git diff --cached --name-only
    ```
 
-4. Verify GitHub settings:
+4. Verify GitHub settings:p
    - [ ] Default branch is `master`
    - [ ] Support buttons visible
 
