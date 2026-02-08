@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OE3LCR - Legende</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script src="/js/user-settings.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px; margin-bottom: 20px;
+            background: rgba(20, 20, 35, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em; font-weight: 700;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+        .back-link {
+            text-decoration: none;
+            color: #00ff88;
+            padding: 8px 16px;
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .legend-card {
+            background: rgba(20, 20, 35, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .legend-title {
+            font-size: 1.3em;
+            color: #ff4757;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .legend-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .legend-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .legend-label {
+            font-weight: 600;
+            color: #ffa502;
+            margin-bottom: 5px;
+            font-size: 1.05em;
+        }
+        .legend-description {
+            font-size: 0.9em;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        .color-box {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .band-good { background: rgba(0, 255, 100, 0.3); border: 1.5px solid #00ff64; }
+        .band-fair { background: rgba(255, 165, 0, 0.3); border: 1.5px solid #ffa500; }
+        .band-poor { background: rgba(255, 100, 130, 0.3); border: 1.5px solid #ff6482; }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .header { flex-direction: column; text-align: center; }
+            .content { grid-template-columns: 1fr; }
+            .title { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title" id="page-title">ℹ️ Legende</div>
+            <a href="index.html" class="back-link">← <span id="back-text">Zurück</span></a>
+        </div>
+
+        <div class="content">
+            <!-- Band Conditions -->
+            <div class="legend-card">
+                <div class="legend-title" id="band-title">📡 Band Bedingungen</div>
+                
+                <div class="legend-item">
+                    <div class="legend-label"><span class="color-box band-good"></span>GOOD</div>
+                    <div class="legend-description" id="band-good-short">Ausgezeichnete Bedingungen</div>
+                    <div class="legend-description" id="band-good-long" style="margin-top: 8px; font-size: 0.85em; color: #999;">Band ist offen und stark. Perfekt für DX-Kontakte und lange Reichweite. Ionosphäre unterstützt Reflektion über große Entfernungen.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label"><span class="color-box band-fair"></span>FAIR</div>
+                    <div class="legend-description" id="band-fair-short">Durchschnittliche Bedingungen</div>
+                    <div class="legend-description" id="band-fair-long" style="margin-top: 8px; font-size: 0.85em; color: #999;">Band funktioniert, aber mit Einschränkungen. Lokale bis regionale Kontakte möglich. Ionosphäre ist aktiv, aber nicht optimal für DX.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label"><span class="color-box band-poor"></span>POOR</div>
+                    <div class="legend-description" id="band-poor-short">Schlechte Bedingungen</div>
+                    <div class="legend-description" id="band-poor-long" style="margin-top: 8px; font-size: 0.85em; color: #999;">Band ist schwach oder geschlossen. Nur kurze Reichweite oder gar keine Ausbreitung. Ionosphäre bietet keine gute Reflektion.</div>
+                </div>
+                
+                <div class="legend-item" style="border: none;">
+                    <div class="legend-label" id="band-info">ℹ️ Abhängigkeit</div>
+                    <div class="legend-description" id="band-info-text">Band Conditions werden vom K-Index beeinflusst. Höhere Sonnenaktivität = bessere Propagation auf höheren Bändern (20m, 15m, 10m).</div>
+                </div>
+            </div>
+
+            <!-- Solar Activity -->
+            <div class="legend-card">
+                <div class="legend-title" id="solar-title">☀️ Sonnenaktivität</div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">K-Index</div>
+                    <div class="legend-description" id="kindex-desc">Geomagnetische Sturmskala (0-9). Misst Ionosphärenaktivität. Höhere Werte = mehr Activity. Ab K>5 entstehen Aurora Effekte.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">Solar Flux (SFI)</div>
+                    <div class="legend-description" id="sfi-desc">Sonnenaktivitätsmass (60-300). Misst UV-Strahlung. Höher = bessere Ionosphären-Reflektion auf HF-Bändern. Typisch: 70-150.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">A-Index</div>
+                    <div class="legend-description" id="aindex-desc">Tägliche geomagnetische Störung (0-400). Durchschnitt vom K-Index über den Tag. Niedriger ist besser. Under 20 = gut für DX.</div>
+                </div>
+
+                <div class="legend-item" style="border: none;">
+                    <div class="legend-label" id="solar-info">ℹ️ Quellen</div>
+                    <div class="legend-description" id="solar-source">Daten vom NOAA Space Weather Prediction Center. Aktualisiert alle 5 Minuten. Echte Echtzeit-Daten für genaue Propagation-Planung.</div>
+                </div>
+            </div>
+
+            <!-- Satellites -->
+            <div class="legend-card">
+                <div class="legend-title" id="sat-title">🛰️ Satelliten</div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">ISS</div>
+                    <div class="legend-description" id="iss-desc">Internationale Raumstation. 436.700 MHz Transponder. Höhe ~400km. Sichtbar mehrmals täglich. Perfekt für anfänger-freundliche Funkverbindungen.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">NOAA-20/21</div>
+                    <div class="legend-description" id="noaa-desc">Wettersatelliten mit Amateurfunk-Transpondern. Polare Umlaufbahn. Nutzbringend für Wetterbildempfang und APT-Signale (Automatic Picture Transmission).</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">Meteor-M N2</div>
+                    <div class="legend-description" id="meteor-desc">Russische Wettersatelliten. LRPT-Signale (METEOR-M Data Format). Höherauflösende Bilder als NOAA. Für erweiterte Satelliten-Bildempfang.</div>
+                </div>
+
+                <div class="legend-item" style="border: none;">
+                    <div class="legend-label" id="sat-info">ℹ️ Verfolgung</div>
+                    <div class="legend-description" id="sat-track">Echtzeit-Positionen berechnet mit aktuellem TLE-Daten (Two-Line Element Set). Elevation zeigt optimalen Antennenladewinkel. Azimuth für Antennendrehung.</div>
+                </div>
+            </div>
+
+            <!-- DX Cluster / QRZ -->
+            <div class="legend-card">
+                <div class="legend-title" id="dxcluster-title">📍 DX Cluster & QRZ Lookup</div>
+                
+                <div class="legend-item">
+                    <div class="legend-label" id="dxcluster-label">DX Cluster Spots</div>
+                    <div class="legend-description" id="dxcluster-desc">Real-time DX activity reports from amateur radio operators worldwide. Callsigns are clickable to view operator details.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label" id="qrz-label">QRZ.com Integration</div>
+                    <div class="legend-description" id="qrz-desc">Click any callsign in the DX Cluster to open QRZ.com lookup in a modal window. QRZ provides comprehensive amateur radio license information, operator contact details, and FCC records.</div>
+                </div>
+                
+                <div class="legend-item" style="border: none;">
+                    <div class="legend-label" id="dxcluster-info">💡 How It Works</div>
+                    <div class="legend-description" id="dxcluster-info-text">1. Click any callsign in the DX Cluster 2. Modal window opens with QRZ lookup link 3. View operator information on QRZ.com 4. Close modal to return to dashboard</div>
+                </div>
+            </div>
+
+            <!-- Data Sources -->
+            <div class="legend-card" style="grid-column: 1 / -1;">
+                <div class="legend-title" id="sources-title">📚 Datenquellen</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+                    <div class="legend-item">
+                        <div class="legend-label" id="sources-noaa">NOAA Space Weather Prediction Center</div>
+                        <div class="legend-description" id="sources-noaa-desc">K-Index, Solar Flux (SFI), A-Index • Echtzeit • Alle 5 Min • https://www.swpc.noaa.gov</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-label" id="sources-celestrak">CelesTrak - Satellite Data</div>
+                        <div class="legend-description" id="sources-celestrak-desc">TLE für Satelliten • ISS, NOAA, Meteor-M, Hubble • Täglich • https://celestrak.org</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-label" id="sources-nasa">NASA Solar Dynamics Observatory</div>
+                        <div class="legend-description" id="sources-nasa-desc">Echtzeit-Sonnenbilder (AIA 211 Å) • Alle 15 Min • https://sdo.gsfc.nasa.gov</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-label" id="sources-itu">ITU-R Recommendations (P.373)</div>
+                        <div class="legend-description" id="sources-itu-desc">Maidenhead Locator System • Wissenschaftlicher Standard • https://www.itu.int</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer" id="footer-text">
+            Wissenschaftliche Daten • NOAA, NASA, CelesTrak, ITU-R • Alle 5 Minuten aktualisiert
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            de: {
+                page_title: 'ℹ️ Legende',
+                back_text: 'Zurück',
+                band_title: '📡 Band Bedingungen',
+                band_good_short: 'Ausgezeichnete Bedingungen',
+                band_good_long: 'Band ist offen und stark. Perfekt für DX-Kontakte und lange Reichweite. Ionosphäre unterstützt Reflektion über große Entfernungen.',
+                band_fair_short: 'Durchschnittliche Bedingungen',
+                band_fair_long: 'Band funktioniert, aber mit Einschränkungen. Lokale bis regionale Kontakte möglich. Ionosphäre ist aktiv, aber nicht optimal für DX.',
+                band_poor_short: 'Schlechte Bedingungen',
+                band_poor_long: 'Band ist schwach oder geschlossen. Nur kurze Reichweite oder gar keine Ausbreitung. Ionosphäre bietet keine gute Reflektion.',
+                band_info: 'ℹ️ Abhängigkeit',
+                band_info_text: 'Band Conditions werden vom K-Index beeinflusst. Höhere Sonnenaktivität = bessere Propagation auf höheren Bändern (20m, 15m, 10m).',
+                solar_title: '☀️ Sonnenaktivität',
+                kindex_desc: 'Geomagnetische Sturmskala (0-9). Misst Ionosphärenaktivität. Höhere Werte = mehr Activity. Ab K>5 entstehen Aurora Effekte.',
+                sfi_desc: 'Sonnenaktivitätsmass (60-300). Misst UV-Strahlung. Höher = bessere Ionosphären-Reflektion auf HF-Bändern. Typisch: 70-150.',
+                aindex_desc: 'Tägliche geomagnetische Störung (0-400). Durchschnitt vom K-Index über den Tag. Niedriger ist besser. Under 20 = gut für DX.',
+                solar_info: 'ℹ️ Quellen',
+                solar_source: 'Daten vom NOAA Space Weather Prediction Center. Aktualisiert alle 5 Minuten. Echte Echtzeit-Daten für genaue Propagation-Planung.',
+                sat_title: '🛰️ Satelliten',
+                iss_desc: 'Internationale Raumstation. 436.700 MHz Transponder. Höhe ~400km. Sichtbar mehrmals täglich. Perfekt für anfänger-freundliche Funkverbindungen.',
+                noaa_desc: 'Wettersatelliten mit Amateurfunk-Transpondern. Polare Umlaufbahn. Nutzbringend für Wetterbildempfang und APT-Signale (Automatic Picture Transmission).',
+                meteor_desc: 'Russische Wettersatelliten. LRPT-Signale (METEOR-M Data Format). Höherauflösende Bilder als NOAA. Für erweiterte Satelliten-Bildempfang.',
+                sat_info: 'ℹ️ Verfolgung',
+                sat_track: 'Echtzeit-Positionen berechnet mit aktuellem TLE-Daten (Two-Line Element Set). Elevation zeigt optimalen Antennenladewinkel. Azimuth für Antennendrehung.',
+                dxcluster_title: '📍 DX Cluster & QRZ Lookup',
+                dxcluster_label: 'DX Cluster Spots',
+                dxcluster_desc: 'Echtzeit-DX-Aktivitätsberichte von Amateurfunkoperatoren weltweit. Rufzeichen sind anklickbar um Operatordetails anzuzeigen.',
+                qrz_label: 'QRZ.com Integration',
+                qrz_desc: 'Klick auf ein beliebiges Rufzeichen im DX Cluster um QRZ.com Lookup in einem Modal-Fenster zu öffnen. QRZ bietet umfassende Amateurfunk-Lizenzinformationen, Operatorkontaktdaten und FCC-Unterlagen.',
+                dxcluster_info: '💡 So funktioniert\'s',
+                dxcluster_info_text: '1. Klick auf ein Rufzeichen im DX Cluster 2. Modal-Fenster öffnet sich mit QRZ Lookup Link 3. Operatorinformation auf QRZ.com ansehen 4. Modal schließen um zur Dashboard zurückzukehren',
+                sources_title: '📚 Datenquellen',
+                sources_noaa: 'NOAA Space Weather Prediction Center',
+                sources_noaa_desc: 'K-Index, Solar Flux (SFI), A-Index • Echtzeit • Alle 5 Min • https://www.swpc.noaa.gov',
+                sources_celestrak: 'CelesTrak - Satellite Data',
+                sources_celestrak_desc: 'TLE für Satelliten • ISS, NOAA, Meteor-M, Hubble • Täglich • https://celestrak.org',
+                sources_nasa: 'NASA Solar Dynamics Observatory',
+                sources_nasa_desc: 'Echtzeit-Sonnenbilder (AIA 211 Å) • Alle 15 Min • https://sdo.gsfc.nasa.gov',
+                sources_itu: 'ITU-R Recommendations (P.373)',
+                sources_itu_desc: 'Maidenhead Locator System • Wissenschaftlicher Standard • https://www.itu.int',
+                footer_text: 'Wissenschaftliche Daten • NOAA, NASA, CelesTrak, ITU-R • Alle 5 Minuten aktualisiert',
+            },
+            en: {
+                page_title: 'ℹ️ Legend',
+                back_text: 'Back',
+                band_title: '📡 Band Conditions',
+                band_good_short: 'Excellent conditions',
+                band_good_long: 'Band is open and strong. Perfect for DX contacts and long range. Ionosphere supports reflection over great distances.',
+                band_fair_short: 'Average conditions',
+                band_fair_long: 'Band works with limitations. Local to regional contacts possible. Ionosphere is active but not optimal for DX.',
+                band_poor_short: 'Poor conditions',
+                band_poor_long: 'Band is weak or closed. Only short range or no propagation. Ionosphere offers no good reflection.',
+                band_info: 'ℹ️ Dependency',
+                band_info_text: 'Band conditions are influenced by K-Index. Higher solar activity = better propagation on higher bands (20m, 15m, 10m).',
+                solar_title: '☀️ Solar Activity',
+                kindex_desc: 'Geomagnetic storm scale (0-9). Measures ionosphere activity. Higher values = more activity. Above K>5 causes aurora effects.',
+                sfi_desc: 'Solar activity measure (60-300). Measures UV radiation. Higher = better ionosphere reflection on HF bands. Typical: 70-150.',
+                aindex_desc: 'Daily geomagnetic disturbance (0-400). Average of K-Index over the day. Lower is better. Below 20 = good for DX.',
+                solar_info: 'ℹ️ Sources',
+                solar_source: 'Data from NOAA Space Weather Prediction Center. Updated every 5 minutes. Real-time data for accurate propagation planning.',
+                sat_title: '🛰️ Satellites',
+                iss_desc: 'International Space Station. 436.700 MHz transponder. Altitude ~400km. Visible multiple times daily. Perfect for beginner-friendly radio contacts.',
+                noaa_desc: 'Weather satellites with amateur radio transponders. Polar orbit. Useful for weather image reception and APT signals (Automatic Picture Transmission).',
+                meteor_desc: 'Russian weather satellites. LRPT signals (METEOR-M Data Format). Higher resolution images than NOAA. For advanced satellite image reception.',
+                sat_info: 'ℹ️ Tracking',
+                sat_track: 'Real-time positions calculated with current TLE data (Two-Line Element Set). Elevation shows optimal antenna elevation angle. Azimuth for antenna rotation.',
+                dxcluster_title: '📍 DX Cluster & QRZ Lookup',
+                dxcluster_label: 'DX Cluster Spots',
+                dxcluster_desc: 'Real-time DX activity reports from amateur radio operators worldwide. Callsigns are clickable to view operator details.',
+                qrz_label: 'QRZ.com Integration',
+                qrz_desc: 'Click any callsign in the DX Cluster to open QRZ.com lookup in a modal window. QRZ provides comprehensive amateur radio license information, operator contact details, and FCC records.',
+                dxcluster_info: '💡 How It Works',
+                dxcluster_info_text: '1. Click any callsign in the DX Cluster 2. Modal window opens with QRZ lookup link 3. View operator information on QRZ.com 4. Close modal to return to dashboard',
+                sources_title: '📚 Data Sources',
+                sources_noaa: 'NOAA Space Weather Prediction Center',
+                sources_noaa_desc: 'K-Index, Solar Flux (SFI), A-Index • Real-time • Every 5 min • https://www.swpc.noaa.gov',
+                sources_celestrak: 'CelesTrak - Satellite Data',
+                sources_celestrak_desc: 'TLE for satellites • ISS, NOAA, Meteor-M, Hubble • Daily • https://celestrak.org',
+                sources_nasa: 'NASA Solar Dynamics Observatory',
+                sources_nasa_desc: 'Real-time sun images (AIA 211 Å) • Every 15 min • https://sdo.gsfc.nasa.gov',
+                sources_itu: 'ITU-R Recommendations (P.373)',
+                sources_itu_desc: 'Maidenhead Locator System • Scientific Standard • https://www.itu.int',
+                footer_text: 'Scientific data • NOAA, NASA, CelesTrak, ITU-R • Updated every 5 minutes',
+            }
+        };
+
+        let currentLang = 'de';
+
+        function t(key) {
+            return translations[currentLang]?.[key] || translations.de[key] || key;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            updateTranslations();
+            UserSettings.save({ language: lang });
+        }
+
+        function updateTranslations() {
+            // Update all elements with id that matches translation keys
+            const keys = [
+                'page-title', 'back-text', 'band-title', 'band-good-short', 'band-good-long',
+                'band-fair-short', 'band-fair-long', 'band-poor-short', 'band-poor-long',
+                'band-info', 'band-info-text',
+                'solar-title', 'kindex-desc', 'sfi-desc', 'aindex-desc', 'solar-info', 'solar-source',
+                'sat-title', 'iss-desc', 'noaa-desc', 'meteor-desc', 'sat-info', 'sat-track',
+                'dxcluster-title', 'dxcluster-label', 'dxcluster-desc', 'qrz-label', 'qrz-desc', 'dxcluster-info', 'dxcluster-info-text',
+                'sources-title', 'sources-noaa', 'sources-noaa-desc', 
+                'sources-celestrak', 'sources-celestrak-desc',
+                'sources-nasa', 'sources-nasa-desc',
+                'sources-itu', 'sources-itu-desc',
+                'footer-text'
+            ];
+            
+            keys.forEach(key => {
+                const el = document.getElementById(key);
+                if (el) {
+                    const translationKey = key.replace(/-/g, '_');
+                    el.textContent = t(translationKey);
+                }
+            });
+        }
+
+        // Initialize with user's selected language
+        document.addEventListener('DOMContentLoaded', () => {
+            currentLang = UserSettings.get('language') || 'de';
+            updateTranslations();
+        });
+    </script>
+</body>
+</html>
