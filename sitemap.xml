@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:mobile="http://www.mobile.googlebot.com/schemas/mobile/1.0">
+    
+    <!-- Home Page (root) -->
+    <url>
+        <loc>https://craith.cloud/</loc>
+        <lastmod>2026-02-08T15:00:00Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        <mobile:mobile/>
+    </url>
+    
+    <!-- Dashboard Page -->
+    <url>
+        <loc>https://craith.cloud/index.html</loc>
+        <lastmod>2026-02-08T15:00:00Z</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.95</priority>
+        <mobile:mobile/>
+    </url>
+    
+    <!-- Information/Legende Page -->
+    <url>
+        <loc>https://craith.cloud/info.html</loc>
+        <lastmod>2026-02-08T15:00:00Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <mobile:mobile/>
+    </url>
+
+</urlset>

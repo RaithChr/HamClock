@@ -1,0 +1,31 @@
+# robots.txt for craith.cloud - OE3LCR Ham Radio Dashboard
+# Allows all search engines to crawl and index content
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /info.html
+Allow: /js/
+Allow: /data/
+Allow: /screenshots/
+
+# Disallow private areas
+Disallow: /myhoney/
+Disallow: /.git/
+Disallow: /.env
+
+# Sitemap
+Sitemap: https://craith.cloud/sitemap.xml
+
+# Crawl parameters
+Crawl-delay: 5
+
+# Googlebot - More aggressive crawl
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+# Bing - Standard crawl
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 3
