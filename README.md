@@ -16,7 +16,7 @@
 
 ## 📸 Production Screenshot (Feb 8, 2026)
 
-![OE3LCR Dashboard](screenshots/dashboard-2026-02-08.jpg)
+![OE3LCR Dashboard](screenshot-2026-02-08.png)
 
 **Features:**
 - ✅ Dual Time Display (LOC + UTC)
