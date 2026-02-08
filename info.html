@@ -216,6 +216,31 @@
                 </div>
             </div>
 
+            <!-- System Status -->
+            <div class="legend-card">
+                <div class="legend-title" id="system-title">💻 System Status</div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">🖥️ CPU Usage</div>
+                    <div class="legend-description" id="system-cpu-desc">Prozessorauslastung in Prozent (0-100%). Zeigt die aktuelle CPU-Nutzung des Dashboard-Servers an. Live aktualisiert alle 10 Sekunden.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">🧠 RAM Usage</div>
+                    <div class="legend-description" id="system-ram-desc">Speicherauslastung in Prozent (0-100%). Zeigt den verfügbaren Arbeitsspeicher des Servers. Höher als 80% deutet auf Ressourcenengpässe hin.</div>
+                </div>
+                
+                <div class="legend-item">
+                    <div class="legend-label">💾 Disk Usage</div>
+                    <div class="legend-description" id="system-disk-desc">Festplattenauslastung in Prozent (0-100%). Zeigt den belegten Speicherplatz. Über 90% ist kritisch und kann die Systemperformance beeinflussen.</div>
+                </div>
+                
+                <div class="legend-item" style="border: none;">
+                    <div class="legend-label" id="system-uptime">⏱️ Uptime</div>
+                    <div class="legend-description" id="system-uptime-desc">Betriebszeit des Servers seit dem letzten Neustart. Zeigt die Zuverlässigkeit und Stabilität der Dashboard-Infrastruktur an. Höhere Uptime = bessere Verfügbarkeit.</div>
+                </div>
+            </div>
+
             <!-- Data Sources -->
             <div class="legend-card" style="grid-column: 1 / -1;">
                 <div class="legend-title" id="sources-title">📚 Datenquellen</div>
@@ -279,6 +304,12 @@
                 qrz_desc: 'Klick auf ein beliebiges Rufzeichen im DX Cluster um QRZ.com Lookup in einem Modal-Fenster zu öffnen. QRZ bietet umfassende Amateurfunk-Lizenzinformationen, Operatorkontaktdaten und FCC-Unterlagen.',
                 dxcluster_info: '💡 So funktioniert\'s',
                 dxcluster_info_text: '1. Klick auf ein Rufzeichen im DX Cluster 2. Modal-Fenster öffnet sich mit QRZ Lookup Link 3. Operatorinformation auf QRZ.com ansehen 4. Modal schließen um zur Dashboard zurückzukehren',
+                system_title: '💻 System Status',
+                system_cpu_desc: 'Prozessorauslastung in Prozent (0-100%). Zeigt die aktuelle CPU-Nutzung des Dashboard-Servers an. Live aktualisiert alle 10 Sekunden.',
+                system_ram_desc: 'Speicherauslastung in Prozent (0-100%). Zeigt den verfügbaren Arbeitsspeicher des Servers. Höher als 80% deutet auf Ressourcenengpässe hin.',
+                system_disk_desc: 'Festplattenauslastung in Prozent (0-100%). Zeigt den belegten Speicherplatz. Über 90% ist kritisch und kann die Systemperformance beeinflussen.',
+                system_uptime: '⏱️ Betriebszeit',
+                system_uptime_desc: 'Betriebszeit des Servers seit dem letzten Neustart. Zeigt die Zuverlässigkeit und Stabilität der Dashboard-Infrastruktur an. Höhere Uptime = bessere Verfügbarkeit.',
                 sources_title: '📚 Datenquellen',
                 sources_noaa: 'NOAA Space Weather Prediction Center',
                 sources_noaa_desc: 'K-Index, Solar Flux (SFI), A-Index • Echtzeit • Alle 5 Min • https://www.swpc.noaa.gov',
@@ -321,6 +352,12 @@
                 qrz_desc: 'Click any callsign in the DX Cluster to open QRZ.com lookup in a modal window. QRZ provides comprehensive amateur radio license information, operator contact details, and FCC records.',
                 dxcluster_info: '💡 How It Works',
                 dxcluster_info_text: '1. Click any callsign in the DX Cluster 2. Modal window opens with QRZ lookup link 3. View operator information on QRZ.com 4. Close modal to return to dashboard',
+                system_title: '💻 System Status',
+                system_cpu_desc: 'CPU usage in percent (0-100%). Shows the current CPU utilization of the dashboard server. Live updated every 10 seconds.',
+                system_ram_desc: 'Memory usage in percent (0-100%). Shows the available RAM of the server. Above 80% indicates resource constraints.',
+                system_disk_desc: 'Disk usage in percent (0-100%). Shows the occupied storage space. Over 90% is critical and can impact system performance.',
+                system_uptime: '⏱️ Uptime',
+                system_uptime_desc: 'Server uptime since last reboot. Shows the reliability and stability of the dashboard infrastructure. Higher uptime = better availability.',
                 sources_title: '📚 Data Sources',
                 sources_noaa: 'NOAA Space Weather Prediction Center',
                 sources_noaa_desc: 'K-Index, Solar Flux (SFI), A-Index • Real-time • Every 5 min • https://www.swpc.noaa.gov',
