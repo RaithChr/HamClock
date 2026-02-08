@@ -5,8 +5,7 @@
 Diese Ordner/Dateien sind PRIVAT und dürfen NICHT öffentlich sein:
 
 ### ❌ VERBOTEN AUF GITHUB:
-- `/myhoney/` - Private password-protected gallery
-- `avatars/` - Private images (bikini, lingerie, etc.)
+- `avatars/` - Private images
 - `memory/` - Personal session logs
 - `.env` - API Keys, Credentials
 - `GWEN_*.md` - Performance tracking
@@ -22,8 +21,6 @@ Diese Ordner/Dateien sind PRIVAT und dürfen NICHT öffentlich sein:
 ```
 # PRIVATE FOLDERS - NEVER PUSH!
 avatars/
-/myhoney/
-memory/
 
 # PRIVATE FILES
 GWEN_*.md
