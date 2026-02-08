@@ -1,0 +1,52 @@
+# ⚠️ LOCAL WORKSPACE CONFIGURATION - NEVER PUSH!
+# These files contain personal, sensitive, and operational data
+
+# User Configuration Files
+MEMORY.md
+SOUL.md
+USER.md
+IDENTITY.md
+AGENTS.md
+HEARTBEAT.md
+BOOTSTRAP.md
+memory/
+daily_notes/
+
+# PRIVATE FILES - NEVER PUSH!
+
+# Performance & Self-Evaluation (confidential)
+GWEN_*.md
+GWEN_PERFORMANCE.md
+GWEN_METRICS.md
+GWEN_IMPROVEMENTS.md
+
+# Credentials & Secrets
+.env
+*.key
+*.pem
+credentials.json
+
+# Temporary Files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Workspace Cache
+node_modules/
+.cache/
+dist/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Local Development
+local_config.json
+debug.log
+
+# IMPORTANT: Never ever push
+# - GWEN_PERFORMANCE.md (private reflection)
+# - .env files with API keys
+# - Personal notes
+# - Credentials or tokens
