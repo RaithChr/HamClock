@@ -56,3 +56,4 @@ debug.log
 # - .env files with API keys
 # - Personal notes
 # - Credentials or tokens
+.sudo_pass
