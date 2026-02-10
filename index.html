@@ -151,21 +151,43 @@
         
 
 
-        /* Bottom view - Grid layout for even spacing */
+        
+        /* Bottom view - Force equal width cards */
+        body.kiosk-mode.view-bottom .container { max-width: 100vw !important; }
         body.kiosk-mode.view-bottom .grid-3 { 
             display: grid !important; 
-            grid-template-columns: 1fr 1fr 1fr !important;
+            grid-template-columns: repeat(3, 1fr) !important;
             grid-template-rows: auto auto !important;
-            gap: 20px !important;
+            gap: 15px !important;
         }
         
-        /* First row: Satellites, DX, System (equal width) */
-        body.kiosk-mode.view-bottom #kiosk-satellites { grid-column: 1; grid-row: 1; }
-        body.kiosk-mode.view-bottom #kiosk-dx { grid-column: 2; grid-row: 1; }
-        body.kiosk-mode.view-bottom #kiosk-system { grid-column: 3; grid-row: 1; }
+        /* Row 1: Three equal cards */
+        body.kiosk-mode.view-bottom #kiosk-satellites { 
+            grid-column: 1 !important; 
+            grid-row: 1 !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
+        body.kiosk-mode.view-bottom #kiosk-dx { 
+            grid-column: 2 !important; 
+            grid-row: 1 !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
+        body.kiosk-mode.view-bottom #kiosk-system { 
+            grid-column: 3 !important; 
+            grid-row: 1 !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
         
-        /* Second row: Weather (full width) */
-        body.kiosk-mode.view-bottom #kiosk-weather { grid-column: 1 / -1; grid-row: 2; }
+        /* Row 2: Weather full width */
+        body.kiosk-mode.view-bottom #kiosk-weather { 
+            grid-column: 1 / -1 !important; 
+            grid-row: 2 !important;
+            width: 100% !important;
+        }
+
 
 </style>
     <script src="/js/user-settings.js"></script>
