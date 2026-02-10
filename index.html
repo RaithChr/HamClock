@@ -156,30 +156,37 @@
 
 
 
-        /* Kiosk Bottom View - Flexbox Layout (ROBUST) */
-        body.kiosk-mode.view-bottom .main-content { display: flex !important; flex-direction: column !important; }
+        
+
+
+        /* Kiosk Bottom View - EXACT equal widths */
         body.kiosk-mode.view-bottom .grid-3 { 
             display: flex !important; 
             flex-direction: row !important;
             flex-wrap: wrap !important;
-            gap: 15px !important;
+            gap: 0 !important;
             width: 100% !important;
+            justify-content: space-between !important;
         }
         
-        /* First row: 3 equal cards */
+        /* Force EXACT 33.333% width for each panel */
         body.kiosk-mode.view-bottom #kiosk-satellites,
         body.kiosk-mode.view-bottom #kiosk-dx,
         body.kiosk-mode.view-bottom #kiosk-system { 
-            flex: 1 1 calc(33.333% - 15px) !important;
-            min-width: calc(33.333% - 15px) !important;
-            max-width: calc(33.333% - 15px) !important;
+            flex: 0 0 33.333% !important;
+            width: 33.333% !important;
+            max-width: 33.333% !important;
+            min-width: 33.333% !important;
+            box-sizing: border-box !important;
+            padding: 0 7.5px !important;
+            margin: 0 !important;
         }
         
-        /* Second row: Weather full width */
+        /* Weather full width with margin-top */
         body.kiosk-mode.view-bottom #kiosk-weather { 
-            flex: 1 1 100% !important;
+            flex: 0 0 100% !important;
             width: 100% !important;
-            max-width: 100% !important;
+            margin-top: 15px !important;
         }
 
 </style>
