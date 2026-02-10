@@ -627,18 +627,24 @@ window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
 
 // Continuously enforce equal widths in kiosk bottom view
 
-// Enforce equal widths in kiosk bottom view
-if(typeof kioskWidthObserver==='undefined'){
-var kioskWidthObserver=setInterval(()=>{
-if(document.body.classList.contains('kiosk-mode')&&document.body.classList.contains('view-bottom')){
+,200);
+}
+
+// BRUTAL width enforcement for kiosk mode
+function enforceKioskWidths(){
+if(!document.body.classList.contains('kiosk-mode')||!document.body.classList.contains('view-bottom'))return;
+const container=document.querySelector('.grid-3');
+if(!container)return;
+const containerWidth=container.offsetWidth;
+const panelWidth=Math.floor(containerWidth/3);
 const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
-if(s&&d&&y){
-const w='33.333%';
-[s,d,y].forEach(el=>{el.style.cssText='flex:0 0 '+w+'!important;width:'+w+'!important;min-width:'+w+'!important;max-width:'+w+'!important;box-sizing:border-box!important;';});
+if(s){s.style.width=panelWidth+'px';s.style.flex='none';s.style.maxWidth=panelWidth+'px';s.style.minWidth=panelWidth+'px';}
+if(d){d.style.width=panelWidth+'px';d.style.flex='none';d.style.maxWidth=panelWidth+'px';d.style.minWidth=panelWidth+'px';}
+if(y){y.style.width=panelWidth+'px';y.style.flex='none';y.style.maxWidth=panelWidth+'px';y.style.minWidth=panelWidth+'px';}
 }
-}
-},200);
-}
+setInterval(enforceKioskWidths,100);
+window.addEventListener('resize',enforceKioskWidths);
+
 </script>
 
 </body>
