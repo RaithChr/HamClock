@@ -3,432 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OE3LCR - Legende</title>
+    <meta name="description" content="OE3LCR Ham Radio Dashboard – Legende und wissenschaftliche Erklärungen.">
+    <title>OE3LCR - Legende / Legend</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <script src="/js/user-settings.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
-            color: #e0e0e0;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px; margin-bottom: 20px;
-            background: rgba(20, 20, 35, 0.8);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2em; font-weight: 700;
-            color: #00ff88;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-        }
-        .back-link {
-            text-decoration: none;
-            color: #00ff88;
-            padding: 8px 16px;
-            border: 1px solid #00ff88;
-            border-radius: 8px;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            background: rgba(0, 255, 136, 0.1);
-        }
-        .content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .legend-card {
-            background: rgba(20, 20, 35, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        .legend-title {
-            font-size: 1.3em;
-            color: #ff4757;
-            margin-bottom: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .legend-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .legend-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .legend-label {
-            font-weight: 600;
-            color: #ffa502;
-            margin-bottom: 5px;
-            font-size: 1.05em;
-        }
-        .legend-description {
-            font-size: 0.9em;
-            color: #aaa;
-            line-height: 1.6;
-        }
-        .color-box {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border-radius: 3px;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-        .band-good { background: rgba(0, 255, 100, 0.3); border: 1.5px solid #00ff64; }
-        .band-fair { background: rgba(255, 165, 0, 0.3); border: 1.5px solid #ffa500; }
-        .band-poor { background: rgba(255, 100, 130, 0.3); border: 1.5px solid #ff6482; }
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9em;
-        }
-        @media (max-width: 768px) {
-            .header { flex-direction: column; text-align: center; }
-            .content { grid-template-columns: 1fr; }
-            .title { font-size: 1.5em; }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#0a0a0f 0%,#1a1a2e 50%,#0f0f1a 100%);color:#e0e0e0;min-height:100vh;padding:40px 20px}.container{max-width:900px;margin:0 auto}.header{display:flex;justify-content:space-between;align-items:center;padding:20px;margin-bottom:40px;background:rgba(20,20,35,.8);border-radius:15px;border:1px solid rgba(0,255,136,.2)}.title{font-family:'Orbitron',sans-serif;font-size:2em;font-weight:700;color:#00ff88;text-shadow:0 0 20px rgba(0,255,136,.5)}.back-link{text-decoration:none;color:#00ff88;padding:8px 16px;border:1px solid #00ff88;border-radius:8px;transition:all .3s}.back-link:hover{background:rgba(0,255,136,.1)}.content{background:rgba(20,20,35,.9);border-radius:15px;padding:40px;border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.3)}.section{margin-bottom:35px}.section:last-child{margin-bottom:0}.section-title{display:flex;align-items:center;gap:10px;font-size:1.3em;font-weight:700;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.1)}.section-title.green{color:#00ff88}.section-title.orange{color:#ffa502}.section-title.red{color:#ff4757}.section-title.blue{color:#70a1ff}.info-box{background:rgba(255,255,255,.03);border-left:3px solid rgba(255,255,255,.2);padding:15px;border-radius:8px;margin-bottom:12px;line-height:1.7}.info-box.green{border-left-color:#00ff88}.info-box.orange{border-left-color:#ffa502}.info-box.red{border-left-color:#ff4757}.info-box.blue{border-left-color:#70a1ff}.info-box strong{color:#fff}.sci{font-size:.9em;color:#aaa;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.1);font-style:italic}.bl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.be{padding:12px;border-radius:8px;text-align:center;font-weight:700}.be.good{background:rgba(0,255,100,.08);border:1.5px solid #00ff64;color:#00ff88}.be.fair{background:rgba(255,165,0,.08);border:1.5px solid #ffa502;color:#ffb020}.be.poor{background:rgba(255,100,130,.08);border:1.5px solid #ff6482;color:#ff7b9c}.be .label{font-size:.75em;margin-top:4px;opacity:.8}table{width:100%;border-collapse:collapse;margin-top:15px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}th{color:#ffa502;font-size:.85em;text-transform:uppercase;letter-spacing:1px}td:first-child{color:#00ff88;font-weight:600}.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);color:#666;font-size:.9em}.lang-hidden{display:none!important}@media(max-width:768px){.header{flex-direction:column;gap:15px;text-align:center}.title{font-size:1.5em}.content{padding:25px 20px}.bl{grid-template-columns:1fr}}
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="title" id="page-title">ℹ️ Legende</div>
-            <a href="index.html" class="back-link">← <span id="back-text">Zurück</span></a>
-        </div>
-
-        <div class="content">
-            <!-- Band Conditions -->
-            <div class="legend-card">
-                <div class="legend-title" id="band-title">📡 Band Bedingungen</div>
-                
-                <div class="legend-item">
-                    <div class="legend-label"><span class="color-box band-good"></span>GOOD</div>
-                    <div class="legend-description" id="band-good-short">Ausgezeichnete Bedingungen</div>
-                    <div class="legend-description" id="band-good-long" style="margin-top: 8px; font-size: 0.85em; color: #999;">Band ist offen und stark. Perfekt für DX-Kontakte und lange Reichweite. Ionosphäre unterstützt Reflektion über große Entfernungen.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label"><span class="color-box band-fair"></span>FAIR</div>
-                    <div class="legend-description" id="band-fair-short">Durchschnittliche Bedingungen</div>
-                    <div class="legend-description" id="band-fair-long" style="margin-top: 8px; font-size: 0.85em; color: #999;">Band funktioniert, aber mit Einschränkungen. Lokale bis regionale Kontakte möglich. Ionosphäre ist aktiv, aber nicht optimal für DX.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label"><span class="color-box band-poor"></span>POOR</div>
-                    <div class="legend-description" id="band-poor-short">Schlechte Bedingungen</div>
-                    <div class="legend-description" id="band-poor-long" style="margin-top: 8px; font-size: 0.85em; color: #999;">Band ist schwach oder geschlossen. Nur kurze Reichweite oder gar keine Ausbreitung. Ionosphäre bietet keine gute Reflektion.</div>
-                </div>
-                
-                <div class="legend-item" style="border: none;">
-                    <div class="legend-label" id="band-calc-title">🔬 ITU-R Berechnung</div>
-                    <div class="legend-description" id="band-calc-desc" style="font-size: 0.85em;">
-                    <strong>Algorithmus:</strong> Band Conditions werden nach ITU-R Empfehlungen aus dem K-Index berechnet:<br>
-                    • <strong>160m/80m:</strong> K ≤ 3 = GOOD, K ≤ 5 = FAIR, K > 5 = POOR<br>
-                    • <strong>40m-15m:</strong> K ≤ 2 = GOOD, K ≤ 4 = GOOD, K ≤ 6 = FAIR<br>
-                    • <strong>10m-2m:</strong> K ≤ 2 = GOOD (+ SFI boost), K ≤ 4 = GOOD, K ≤ 6 = FAIR<br>
-                    <strong>Standard:</strong> NOAA Space Weather Prediction Center (SWPC)
-                    </div>
-                </div>
-            </div>
-
-            <!-- Solar Activity -->
-            <div class="legend-card">
-                <div class="legend-title" id="solar-title">☀️ Sonnenaktivität</div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">K-Index</div>
-                    <div class="legend-description" id="kindex-desc">Geomagnetische Sturmskala (0-9). Misst Ionosphärenaktivität. Höhere Werte = mehr Activity. Ab K>5 entstehen Aurora Effekte.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">Solar Flux (SFI)</div>
-                    <div class="legend-description" id="sfi-desc">Sonnenaktivitätsmass (60-300). Misst UV-Strahlung. Höher = bessere Ionosphären-Reflektion auf HF-Bändern. Typisch: 70-150.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">A-Index</div>
-                    <div class="legend-description" id="aindex-desc">Tägliche geomagnetische Störung (0-400). Durchschnitt vom K-Index über den Tag. Niedriger ist besser. Under 20 = gut für DX.</div>
-                </div>
-
-                <div class="legend-item" style="border: none;">
-                    <div class="legend-label" id="solar-info">ℹ️ Quellen</div>
-                    <div class="legend-description" id="solar-source">Daten vom NOAA Space Weather Prediction Center. Aktualisiert alle 5 Minuten. Echte Echtzeit-Daten für genaue Propagation-Planung.</div>
-                </div>
-            </div>
-
-            <!-- Satellites -->
-            <div class="legend-card">
-                <div class="legend-title" id="sat-title">🛰️ Satelliten</div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">ISS</div>
-                    <div class="legend-description" id="iss-desc">Internationale Raumstation. 436.700 MHz Transponder. Höhe ~400km. Sichtbar mehrmals täglich. Perfekt für anfänger-freundliche Funkverbindungen.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">NOAA-20/21</div>
-                    <div class="legend-description" id="noaa-desc">Wettersatelliten mit Amateurfunk-Transpondern. Polare Umlaufbahn. Nutzbringend für Wetterbildempfang und APT-Signale (Automatic Picture Transmission).</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">Meteor-M N2</div>
-                    <div class="legend-description" id="meteor-desc">Russische Wettersatelliten. LRPT-Signale (METEOR-M Data Format). Höherauflösende Bilder als NOAA. Für erweiterte Satelliten-Bildempfang.</div>
-                </div>
-
-                <div class="legend-item" style="border: none;">
-                    <div class="legend-label" id="sat-info">ℹ️ Verfolgung</div>
-                    <div class="legend-description" id="sat-track">Echtzeit-Positionen berechnet mit aktuellem TLE-Daten (Two-Line Element Set). Elevation zeigt optimalen Antennenladewinkel. Azimuth für Antennendrehung.</div>
-                </div>
-            </div>
-
-            <!-- DX Cluster / QRZ -->
-            <div class="legend-card">
-                <div class="legend-title" id="dxcluster-title">📍 DX Cluster & QRZ Lookup</div>
-                
-                <div class="legend-item">
-                    <div class="legend-label" id="dxcluster-label">DX Cluster Spots</div>
-                    <div class="legend-description" id="dxcluster-desc">Real-time DX activity reports from amateur radio operators worldwide. Callsigns are clickable to view operator details.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label" id="qrz-label">QRZ.com Integration</div>
-                    <div class="legend-description" id="qrz-desc">Click any callsign in the DX Cluster to open QRZ.com lookup in a modal window. QRZ provides comprehensive amateur radio license information, operator contact details, and FCC records.</div>
-                </div>
-                
-                <div class="legend-item" style="border: none;">
-                    <div class="legend-label" id="dxcluster-info">💡 How It Works</div>
-                    <div class="legend-description" id="dxcluster-info-text">1. Click any callsign in the DX Cluster 2. Modal window opens with QRZ lookup link 3. View operator information on QRZ.com 4. Close modal to return to dashboard</div>
-                </div>
-            </div>
-
-            <!-- System Status -->
-            <div class="legend-card">
-                <div class="legend-title" id="system-title">💻 System Status</div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">🖥️ CPU Usage</div>
-                    <div class="legend-description" id="system-cpu-desc">Prozessorauslastung in Prozent (0-100%). Zeigt die aktuelle CPU-Nutzung des Dashboard-Servers an. Live aktualisiert alle 10 Sekunden.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">🧠 RAM Usage</div>
-                    <div class="legend-description" id="system-ram-desc">Speicherauslastung in Prozent (0-100%). Zeigt den verfügbaren Arbeitsspeicher des Servers. Höher als 80% deutet auf Ressourcenengpässe hin.</div>
-                </div>
-                
-                <div class="legend-item">
-                    <div class="legend-label">💾 Disk Usage</div>
-                    <div class="legend-description" id="system-disk-desc">Festplattenauslastung in Prozent (0-100%). Zeigt den belegten Speicherplatz. Über 90% ist kritisch und kann die Systemperformance beeinflussen.</div>
-                </div>
-                
-                <div class="legend-item" style="border: none;">
-                    <div class="legend-label" id="system-uptime">⏱️ Uptime</div>
-                    <div class="legend-description" id="system-uptime-desc">Betriebszeit des Servers seit dem letzten Neustart. Zeigt die Zuverlässigkeit und Stabilität der Dashboard-Infrastruktur an. Höhere Uptime = bessere Verfügbarkeit.</div>
-                </div>
-            </div>
-
-            <!-- Data Sources -->
-            <div class="legend-card" style="grid-column: 1 / -1;">
-                <div class="legend-title" id="sources-title">📚 Datenquellen</div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
-                    <div class="legend-item">
-                        <div class="legend-label" id="sources-noaa">NOAA Space Weather Prediction Center</div>
-                        <div class="legend-description" id="sources-noaa-desc">K-Index, Solar Flux (SFI), A-Index • Echtzeit • Alle 5 Min • https://www.swpc.noaa.gov</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" id="sources-celestrak">CelesTrak - Satellite Data</div>
-                        <div class="legend-description" id="sources-celestrak-desc">TLE für Satelliten • ISS, NOAA, Meteor-M, Hubble • Täglich • https://celestrak.org</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" id="sources-nasa">NASA Solar Dynamics Observatory</div>
-                        <div class="legend-description" id="sources-nasa-desc">Echtzeit-Sonnenbilder (AIA 211 Å) • Alle 15 Min • https://sdo.gsfc.nasa.gov</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label" id="sources-itu">ITU-R Recommendations (P.373)</div>
-                        <div class="legend-description" id="sources-itu-desc">Maidenhead Locator System • Wissenschaftlicher Standard • https://www.itu.int</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer" id="footer-text">
-            Wissenschaftliche Daten • NOAA, NASA, CelesTrak, ITU-R • Alle 5 Minuten aktualisiert
-        </div>
+<div class="container">
+    <div class="header">
+        <div class="title" id="page-title">ℹ️ Legende</div>
+        <a href="index.html" class="back-link">← Dashboard</a>
     </div>
+    <div class="content">
+<!-- ===== DEUTSCH ===== -->
+<div id="content-de">
+<div class="section"><div class="section-title green">📍 QTH – Standort</div>
+<div class="info-box green"><strong>Maidenhead Locator:</strong> Teilt die Erdoberfläche in ein hierarchisches Raster. Der 6-stellige Code (z.B. JN87ct) gibt deinen Standort auf ca. 5 × 2.5 km genau an.<div class="sci">🔬 Standardisiert 1980 auf der IARU Region 1 Konferenz in Maidenhead (England). Basiert auf einer äquidistanten zylindrischen Projektion (Plate Carrée): 18 Felder (A–R) × 10 Unterfelder (0–9) × 24 Sub-Unterfelder (a–x). Jedes Großfeld umfasst 20° Länge × 10° Breite.</div></div>
+<div class="info-box green"><strong>Sunrise / Sunset:</strong> Sonnenauf-/-untergangszeiten für deinen QTH-Standort.<div class="sci">🔬 Berücksichtigt atmosphärische Refraktion (~0.833°). Bei Sonnenauf-/-untergang steht die geometrische Sonnenmitte 50 Bogenminuten unter dem Horizont – die Atmosphäre bricht das Licht durch Brechungsindexgradienten in der Troposphäre.</div></div>
+<div class="info-box green"><strong>Mondphasen:</strong> 🌑 Neumond → 🌒🌓🌔 zunehmend → 🌕 Vollmond → 🌖🌗🌘 abnehmend.<div class="sci">🔬 Synodischer Monat: 29.53059 Tage. Für EME-Verbindungen (Earth-Moon-Earth) fungiert der Mond als passiver Reflektor für VHF/UHF-Signale. Pfadverlust: ~252 dB bei 144 MHz. EME erfordert typisch >1 kW EIRP und hochempfindliche Empfänger.</div></div>
+</div>
 
-    <script>
-        const translations = {
-            de: {
-                page_title: 'ℹ️ Legende',
-                back_text: 'Zurück',
-                band_title: '📡 Band Bedingungen',
-                band_good_short: 'Ausgezeichnete Bedingungen',
-                band_good_long: 'Band ist offen und stark. Perfekt für DX-Kontakte und lange Reichweite. Ionosphäre unterstützt Reflektion über große Entfernungen.',
-                band_fair_short: 'Durchschnittliche Bedingungen',
-                band_fair_long: 'Band funktioniert, aber mit Einschränkungen. Lokale bis regionale Kontakte möglich. Ionosphäre ist aktiv, aber nicht optimal für DX.',
-                band_poor_short: 'Schlechte Bedingungen',
-                band_poor_long: 'Band ist schwach oder geschlossen. Nur kurze Reichweite oder gar keine Ausbreitung. Ionosphäre bietet keine gute Reflektion.',
-                band_info: 'ℹ️ Abhängigkeit',
-                band_info_text: 'Band Conditions werden vom K-Index beeinflusst. Höhere Sonnenaktivität = bessere Propagation auf höheren Bändern (20m, 15m, 10m).',
-                band_calc_title: '🔬 ITU-R Berechnung',
-                band_calc_desc: '<strong>Algorithmus:</strong> Band Conditions werden nach ITU-R Empfehlungen aus dem K-Index berechnet:<br>• <strong>160m/80m:</strong> K ≤ 3 = GOOD, K ≤ 5 = FAIR, K > 5 = POOR<br>• <strong>40m-15m:</strong> K ≤ 2 = GOOD, K ≤ 4 = GOOD, K ≤ 6 = FAIR<br>• <strong>10m-2m:</strong> K ≤ 2 = GOOD (+ SFI boost), K ≤ 4 = GOOD, K ≤ 6 = FAIR<br><strong>Standard:</strong> NOAA Space Weather Prediction Center (SWPC)',
-                solar_title: '☀️ Sonnenaktivität',
-                kindex_desc: 'Geomagnetische Sturmskala (0-9). Misst Ionosphärenaktivität. Höhere Werte = mehr Activity. Ab K>5 entstehen Aurora Effekte.',
-                sfi_desc: 'Sonnenaktivitätsmass (60-300). Misst UV-Strahlung. Höher = bessere Ionosphären-Reflektion auf HF-Bändern. Typisch: 70-150.',
-                aindex_desc: 'Tägliche geomagnetische Störung (0-400). Durchschnitt vom K-Index über den Tag. Niedriger ist besser. Under 20 = gut für DX.',
-                solar_info: 'ℹ️ Quellen',
-                solar_source: 'Daten vom NOAA Space Weather Prediction Center. Aktualisiert alle 5 Minuten. Echte Echtzeit-Daten für genaue Propagation-Planung.',
-                sat_title: '🛰️ Satelliten',
-                iss_desc: 'Internationale Raumstation. 436.700 MHz Transponder. Höhe ~400km. Sichtbar mehrmals täglich. Perfekt für anfänger-freundliche Funkverbindungen.',
-                noaa_desc: 'Wettersatelliten mit Amateurfunk-Transpondern. Polare Umlaufbahn. Nutzbringend für Wetterbildempfang und APT-Signale (Automatic Picture Transmission).',
-                meteor_desc: 'Russische Wettersatelliten. LRPT-Signale (METEOR-M Data Format). Höherauflösende Bilder als NOAA. Für erweiterte Satelliten-Bildempfang.',
-                sat_info: 'ℹ️ Verfolgung',
-                sat_track: 'Echtzeit-Positionen berechnet mit aktuellem TLE-Daten (Two-Line Element Set). Elevation zeigt optimalen Antennenladewinkel. Azimuth für Antennendrehung.',
-                dxcluster_title: '📍 DX Cluster & QRZ Lookup',
-                dxcluster_label: 'DX Cluster Spots',
-                dxcluster_desc: 'Echtzeit-DX-Aktivitätsberichte von Amateurfunkoperatoren weltweit. Rufzeichen sind anklickbar um Operatordetails anzuzeigen.',
-                qrz_label: 'QRZ.com Integration',
-                qrz_desc: 'Klick auf ein beliebiges Rufzeichen im DX Cluster um QRZ.com Lookup in einem Modal-Fenster zu öffnen. QRZ bietet umfassende Amateurfunk-Lizenzinformationen, Operatorkontaktdaten und FCC-Unterlagen.',
-                dxcluster_info: '💡 So funktioniert\'s',
-                dxcluster_info_text: '1. Klick auf ein Rufzeichen im DX Cluster 2. Modal-Fenster öffnet sich mit QRZ Lookup Link 3. Operatorinformation auf QRZ.com ansehen 4. Modal schließen um zur Dashboard zurückzukehren',
-                system_title: '💻 System Status',
-                system_cpu_desc: 'Prozessorauslastung in Prozent (0-100%). Zeigt die aktuelle CPU-Nutzung des Dashboard-Servers an. Live aktualisiert alle 10 Sekunden.',
-                system_ram_desc: 'Speicherauslastung in Prozent (0-100%). Zeigt den verfügbaren Arbeitsspeicher des Servers. Höher als 80% deutet auf Ressourcenengpässe hin.',
-                system_disk_desc: 'Festplattenauslastung in Prozent (0-100%). Zeigt den belegten Speicherplatz. Über 90% ist kritisch und kann die Systemperformance beeinflussen.',
-                system_uptime: '⏱️ Betriebszeit',
-                system_uptime_desc: 'Betriebszeit des Servers seit dem letzten Neustart. Zeigt die Zuverlässigkeit und Stabilität der Dashboard-Infrastruktur an. Höhere Uptime = bessere Verfügbarkeit.',
-                sources_title: '📚 Datenquellen',
-                sources_noaa: 'NOAA Space Weather Prediction Center',
-                sources_noaa_desc: 'K-Index, Solar Flux (SFI), A-Index • Echtzeit • Alle 5 Min • https://www.swpc.noaa.gov',
-                sources_celestrak: 'CelesTrak - Satellite Data',
-                sources_celestrak_desc: 'TLE für Satelliten • ISS, NOAA, Meteor-M, Hubble • Täglich • https://celestrak.org',
-                sources_nasa: 'NASA Solar Dynamics Observatory',
-                sources_nasa_desc: 'Echtzeit-Sonnenbilder (AIA 211 Å) • Alle 15 Min • https://sdo.gsfc.nasa.gov',
-                sources_itu: 'ITU-R Recommendations (P.373)',
-                sources_itu_desc: 'Maidenhead Locator System • Wissenschaftlicher Standard • https://www.itu.int',
-                footer_text: 'Wissenschaftliche Daten • NOAA, NASA, CelesTrak, ITU-R • Alle 5 Minuten aktualisiert',
-            },
-            en: {
-                page_title: 'ℹ️ Legend',
-                back_text: 'Back',
-                band_title: '📡 Band Conditions',
-                band_good_short: 'Excellent conditions',
-                band_good_long: 'Band is open and strong. Perfect for DX contacts and long range. Ionosphere supports reflection over great distances.',
-                band_fair_short: 'Average conditions',
-                band_fair_long: 'Band works with limitations. Local to regional contacts possible. Ionosphere is active but not optimal for DX.',
-                band_poor_short: 'Poor conditions',
-                band_poor_long: 'Band is weak or closed. Only short range or no propagation. Ionosphere offers no good reflection.',
-                band_info: 'ℹ️ Dependency',
-                band_info_text: 'Band conditions are influenced by K-Index. Higher solar activity = better propagation on higher bands (20m, 15m, 10m).',
-                band_calc_title: '🔬 ITU-R Calculation',
-                band_calc_desc: '<strong>Algorithm:</strong> Band Conditions are calculated according to ITU-R recommendations based on K-Index:<br>• <strong>160m/80m:</strong> K ≤ 3 = GOOD, K ≤ 5 = FAIR, K > 5 = POOR<br>• <strong>40m-15m:</strong> K ≤ 2 = GOOD, K ≤ 4 = GOOD, K ≤ 6 = FAIR<br>• <strong>10m-2m:</strong> K ≤ 2 = GOOD (+ SFI boost), K ≤ 4 = GOOD, K ≤ 6 = FAIR<br><strong>Standard:</strong> NOAA Space Weather Prediction Center (SWPC)',
-                solar_title: '☀️ Solar Activity',
-                kindex_desc: 'Geomagnetic storm scale (0-9). Measures ionosphere activity. Higher values = more activity. Above K>5 causes aurora effects.',
-                sfi_desc: 'Solar activity measure (60-300). Measures UV radiation. Higher = better ionosphere reflection on HF bands. Typical: 70-150.',
-                aindex_desc: 'Daily geomagnetic disturbance (0-400). Average of K-Index over the day. Lower is better. Below 20 = good for DX.',
-                solar_info: 'ℹ️ Sources',
-                solar_source: 'Data from NOAA Space Weather Prediction Center. Updated every 5 minutes. Real-time data for accurate propagation planning.',
-                sat_title: '🛰️ Satellites',
-                iss_desc: 'International Space Station. 436.700 MHz transponder. Altitude ~400km. Visible multiple times daily. Perfect for beginner-friendly radio contacts.',
-                noaa_desc: 'Weather satellites with amateur radio transponders. Polar orbit. Useful for weather image reception and APT signals (Automatic Picture Transmission).',
-                meteor_desc: 'Russian weather satellites. LRPT signals (METEOR-M Data Format). Higher resolution images than NOAA. For advanced satellite image reception.',
-                sat_info: 'ℹ️ Tracking',
-                sat_track: 'Real-time positions calculated with current TLE data (Two-Line Element Set). Elevation shows optimal antenna elevation angle. Azimuth for antenna rotation.',
-                dxcluster_title: '📍 DX Cluster & QRZ Lookup',
-                dxcluster_label: 'DX Cluster Spots',
-                dxcluster_desc: 'Real-time DX activity reports from amateur radio operators worldwide. Callsigns are clickable to view operator details.',
-                qrz_label: 'QRZ.com Integration',
-                qrz_desc: 'Click any callsign in the DX Cluster to open QRZ.com lookup in a modal window. QRZ provides comprehensive amateur radio license information, operator contact details, and FCC records.',
-                dxcluster_info: '💡 How It Works',
-                dxcluster_info_text: '1. Click any callsign in the DX Cluster 2. Modal window opens with QRZ lookup link 3. View operator information on QRZ.com 4. Close modal to return to dashboard',
-                system_title: '💻 System Status',
-                system_cpu_desc: 'CPU usage in percent (0-100%). Shows the current CPU utilization of the dashboard server. Live updated every 10 seconds.',
-                system_ram_desc: 'Memory usage in percent (0-100%). Shows the available RAM of the server. Above 80% indicates resource constraints.',
-                system_disk_desc: 'Disk usage in percent (0-100%). Shows the occupied storage space. Over 90% is critical and can impact system performance.',
-                system_uptime: '⏱️ Uptime',
-                system_uptime_desc: 'Server uptime since last reboot. Shows the reliability and stability of the dashboard infrastructure. Higher uptime = better availability.',
-                sources_title: '📚 Data Sources',
-                sources_noaa: 'NOAA Space Weather Prediction Center',
-                sources_noaa_desc: 'K-Index, Solar Flux (SFI), A-Index • Real-time • Every 5 min • https://www.swpc.noaa.gov',
-                sources_celestrak: 'CelesTrak - Satellite Data',
-                sources_celestrak_desc: 'TLE for satellites • ISS, NOAA, Meteor-M, Hubble • Daily • https://celestrak.org',
-                sources_nasa: 'NASA Solar Dynamics Observatory',
-                sources_nasa_desc: 'Real-time sun images (AIA 211 Å) • Every 15 min • https://sdo.gsfc.nasa.gov',
-                sources_itu: 'ITU-R Recommendations (P.373)',
-                sources_itu_desc: 'Maidenhead Locator System • Scientific Standard • https://www.itu.int',
-                footer_text: 'Scientific data • NOAA, NASA, CelesTrak, ITU-R • Updated every 5 minutes',
-            }
-        };
+<div class="section"><div class="section-title orange">📡 Band Conditions</div>
+<div class="info-box orange">Die Ausbreitungsbedingungen werden durch die Ionosphäre bestimmt, ionisiert durch solare UV- und Röntgenstrahlung.<div class="sci">🔬 Ionosphärenschichten: D-Schicht (60–90 km, absorbiert HF), E-Schicht (90–150 km, Sporadic-E bei 50 MHz), F1-Schicht (150–250 km, tagsüber), F2-Schicht (250–400 km, HF-Hauptreflektor). Kritische Frequenz: f₀F2 bestimmt maximale Reflexionsfrequenz. Secant-Gesetz: MUF ≈ f₀F2 / cos(θ).</div></div>
+<div class="bl"><div class="be good"><div>GOOD</div><div class="label">Band offen, DX möglich</div></div><div class="be fair"><div>FAIR</div><div class="label">Eingeschränkte Ausbreitung</div></div><div class="be poor"><div>POOR</div><div class="label">Band geschlossen/gestört</div></div></div>
+<table><thead><tr><th>Band</th><th>Frequenz</th><th>Nutzung</th></tr></thead><tbody>
+<tr><td>160m</td><td>1.810–2.000 MHz</td><td>Nacht-DX, „Top Band"</td></tr><tr><td>80m</td><td>3.500–3.800 MHz</td><td>Regional, Nacht-DX</td></tr><tr><td>60m</td><td>5.351–5.366 MHz</td><td>Sekundär, NVIS</td></tr><tr><td>40m</td><td>7.000–7.200 MHz</td><td>DX nachts, regional tags</td></tr><tr><td>30m</td><td>10.100–10.150 MHz</td><td>CW/Digi, WARC-Band</td></tr><tr><td>20m</td><td>14.000–14.350 MHz</td><td>DX-Band #1</td></tr><tr><td>17m</td><td>18.068–18.168 MHz</td><td>DX, WARC-Band</td></tr><tr><td>15m</td><td>21.000–21.450 MHz</td><td>DX bei Sonnenmaximum</td></tr><tr><td>12m</td><td>24.890–24.990 MHz</td><td>DX, WARC-Band</td></tr><tr><td>11m</td><td>26.965–27.405 MHz</td><td>CB / Sporadic-E</td></tr><tr><td>10m</td><td>28.000–29.700 MHz</td><td>DX bei Sonnenmaximum</td></tr><tr><td>6m</td><td>50.000–52.000 MHz</td><td>„Magic Band", Sporadic-E</td></tr><tr><td>2m</td><td>144.000–146.000 MHz</td><td>Lokal, Relais, Tropo</td></tr>
+</tbody></table></div>
 
-        let currentLang = 'de';
+<div class="section"><div class="section-title red">⚡ Weltraumwetter</div>
+<div class="info-box red"><strong>K-Index (0–9):</strong> Geomagnetische Aktivität über 3-Stunden-Intervalle.<div class="sci">🔬 Quasi-logarithmische Skala der maximalen horizontalen Magnetfeldfluktuation. K=0: ≤5 nT, K=9: ≥500 nT. Planetarer Kp: gewichteter Mittelwert von 13 Observatorien. Bei K≥5: geomagnetische Stürme, ausgelöst durch CMEs (koronale Massenauswürfe) oder CIRs (korotierenden Wechselwirkungsregionen).</div></div>
+<div class="info-box red"><strong>Solar Flux Index (SFI):</strong> Solare Radiostrahlung bei 10.7 cm (2800 MHz).<div class="sci">🔬 Gemessen in Penticton, BC (Kanada) in SFU (1 SFU = 10⁻²² W·m⁻²·Hz⁻¹). Korreliert mit solarer EUV-Strahlung → F2-Schicht-Ionisation. Minimum: ~65 SFU, Maximum: 150–300 SFU (11-jähriger Schwabe-Zyklus). Für gute HF-Bedingungen: >100 SFU.</div></div>
+<div class="info-box red"><strong>Sunspot Number (SSN):</strong> Relative Sonnenfleckenzahl R = k(10g + f).<div class="sci">🔬 g = Anzahl Gruppen, f = Einzelflecken, k = Korrekturfaktor. Sonnenflecken: Regionen starker Magnetfelder (bis 0.4 T), ~3700 K vs. ~5800 K. Aktueller Zyklus 25: Beginn Dezember 2019.</div></div>
+<div class="info-box red"><strong>MUF (Maximum Usable Frequency):</strong> Höchste reflektierbare Frequenz.<div class="sci">🔬 Abhängig von F2-Elektronendichte: Plasmafrequenz fₚ = 9√Nₑ Hz. Secant-Gesetz: MUF ≈ f₀F2 × sec(θ). Maximum ~14:00 Lokalzeit. LUF (Lowest Usable Frequency) durch D-Schicht-Absorption bestimmt.</div></div>
+<div class="info-box red"><strong>Aurora:</strong> Polarlicht bei K≥5, nutzbar für VHF-Scatter.<div class="sci">🔬 Sonnenwindteilchen (Elektronen, Protonen) entlang Magnetfeldlinien → Polkappen. O: grün (557.7 nm, ~100 km) + rot (630.0 nm, ~250 km), N₂: violett/blau. Aurora-Scatter: verzerrte Signale durch Reflexion an ionisierten Vorhängen (144/432 MHz).</div></div>
+</div>
 
-        function t(key) {
-            return translations[currentLang]?.[key] || translations.de[key] || key;
+<div class="section"><div class="section-title orange">☀️ Sonne (NASA SDO)</div>
+<div class="info-box orange">Live-Bild vom Solar Dynamics Observatory (Start 2010, geosynchroner Orbit).<div class="sci">🔬 Falschfarben aus drei EUV-Wellenlängen: 211 Å (Fe XIV, ~2 MK, aktive Regionen), 193 Å (Fe XII/XXIV, ~1.2/20 MK, Korona+Flares), 171 Å (Fe IX, ~0.6 MK, ruhige Korona). Kanäle: 211Å=Rot, 193Å=Grün, 171Å=Blau. Alle 12 Sekunden ein 4096×4096 Bild.</div></div></div>
+
+<div class="section"><div class="section-title blue">🛰️ Satelliten-Tracking</div>
+<div class="info-box blue"><strong>Azimut / Elevation / Distanz:</strong> Echtzeit-Berechnung aus TLE-Daten mittels SGP4-Algorithmus.<div class="sci">🔬 TLE (Two-Line Elements): standardisierte Bahnelement-Datensätze von NORAD/USSPACECOM. SGP4/SDP4 berücksichtigt Erdabplattung (J₂–J₄), atmosphärischen Widerstand und lunisolare Gravitation. Position in ECI → ECF (via GMST) → Azimut/Elevation/Range. ISS: ~400 km, 51.6° Inklination, 92 min Umlaufzeit. Wettersatelliten (NOAA): ~850 km, sonnensynchron.</div></div></div>
+
+<div class="section"><div class="section-title orange">🌍 DX Cluster</div>
+<div class="info-box orange">Gemeldete Funkverbindungen weltweit. Klick öffnet QRZ.com.<div class="sci">🔬 Verteiltes Netzwerk (DX Summit, DXWatch) über Packet-Radio und Internet. Format: „DX de [Spotter] [DX-Station] [Frequenz] [Kommentar] [UTC]".</div></div></div>
+
+<div class="section"><div class="section-title green">🌤️ Wetter & System</div>
+<div class="info-box green"><strong>Lokales Wetter:</strong> Basiert auf Maidenhead-Locator via Open-Meteo API.<div class="sci">🔬 Troposphärische Ausbreitung (Tropo-DX): Temperaturinversionen erzeugen Brechungsindexgradienten (Refraktivität N = 77.6·P/T − 5.6·e/T + 3.75×10⁵·e/T²), die VHF/UHF-Signale über den Horizont leiten. Inversionslagen sind am Bodendruck/Temperaturverlauf erkennbar.</div></div>
+<div class="info-box green"><strong>System Metrics:</strong> Live CPU, RAM, Disk und Uptime des Dashboard-Servers.</div></div>
+</div>
+<!-- ===== ENGLISH ===== -->
+<div id="content-en" class="lang-hidden">
+<div class="section"><div class="section-title green">📍 QTH – Location</div>
+<div class="info-box green"><strong>Maidenhead Locator:</strong> Divides the Earth's surface into a hierarchical grid. The 6-character code (e.g. JN87ct) pinpoints your location to approx. 5 × 2.5 km.<div class="sci">🔬 Standardized in 1980 at the IARU Region 1 conference in Maidenhead, England. Based on an equidistant cylindrical projection (Plate Carrée): 18 fields (A–R) × 10 subfields (0–9) × 24 sub-subfields (a–x). Each major field spans 20° longitude × 10° latitude.</div></div>
+<div class="info-box green"><strong>Sunrise / Sunset:</strong> Calculated for your QTH position.<div class="sci">🔬 Accounts for atmospheric refraction (~0.833°). At sunrise/sunset, the geometric center of the sun is actually 50 arcminutes below the horizon – the atmosphere bends light through refractive index gradients in the troposphere.</div></div>
+<div class="info-box green"><strong>Moon Phases:</strong> 🌑 New Moon → 🌒🌓🌔 waxing → 🌕 Full Moon → 🌖🌗🌘 waning.<div class="sci">🔬 Synodic month: 29.53059 days. For EME (Earth-Moon-Earth) contacts, the moon acts as a passive reflector for VHF/UHF signals. Path loss: ~252 dB at 144 MHz. EME typically requires >1 kW EIRP and highly sensitive receivers.</div></div>
+</div>
+
+<div class="section"><div class="section-title orange">📡 Band Conditions</div>
+<div class="info-box orange">Propagation conditions are determined by the ionosphere, ionized by solar UV and X-ray radiation.<div class="sci">🔬 Ionospheric layers: D-layer (60–90 km, absorbs HF), E-layer (90–150 km, Sporadic-E at 50 MHz), F1-layer (150–250 km, daytime), F2-layer (250–400 km, primary HF reflector). Critical frequency f₀F2 determines maximum reflectable frequency. Secant law: MUF ≈ f₀F2 / cos(θ).</div></div>
+<div class="bl"><div class="be good"><div>GOOD</div><div class="label">Band open, DX possible</div></div><div class="be fair"><div>FAIR</div><div class="label">Limited propagation</div></div><div class="be poor"><div>POOR</div><div class="label">Band closed/disturbed</div></div></div>
+<table><thead><tr><th>Band</th><th>Frequency</th><th>Usage</th></tr></thead><tbody>
+<tr><td>160m</td><td>1.810–2.000 MHz</td><td>Night DX, "Top Band"</td></tr><tr><td>80m</td><td>3.500–3.800 MHz</td><td>Regional, Night DX</td></tr><tr><td>60m</td><td>5.351–5.366 MHz</td><td>Secondary, NVIS</td></tr><tr><td>40m</td><td>7.000–7.200 MHz</td><td>DX at night, regional daytime</td></tr><tr><td>30m</td><td>10.100–10.150 MHz</td><td>CW/Digital, WARC band</td></tr><tr><td>20m</td><td>14.000–14.350 MHz</td><td>Primary DX band</td></tr><tr><td>17m</td><td>18.068–18.168 MHz</td><td>DX, WARC band</td></tr><tr><td>15m</td><td>21.000–21.450 MHz</td><td>DX during solar maximum</td></tr><tr><td>12m</td><td>24.890–24.990 MHz</td><td>DX, WARC band</td></tr><tr><td>11m</td><td>26.965–27.405 MHz</td><td>CB / Sporadic-E</td></tr><tr><td>10m</td><td>28.000–29.700 MHz</td><td>DX during solar maximum</td></tr><tr><td>6m</td><td>50.000–52.000 MHz</td><td>"Magic Band", Sporadic-E</td></tr><tr><td>2m</td><td>144.000–146.000 MHz</td><td>Local, Repeaters, Tropo</td></tr>
+</tbody></table></div>
+
+<div class="section"><div class="section-title red">⚡ Space Weather</div>
+<div class="info-box red"><strong>K-Index (0–9):</strong> Geomagnetic activity measured in 3-hour intervals.<div class="sci">🔬 Quasi-logarithmic scale of maximum horizontal magnetic field fluctuation. K=0: ≤5 nT, K=9: ≥500 nT. Planetary Kp: weighted average from 13 observatories worldwide. K≥5: geomagnetic storms caused by CMEs (coronal mass ejections) or CIRs (co-rotating interaction regions).</div></div>
+<div class="info-box red"><strong>Solar Flux Index (SFI):</strong> Solar radio emission at 10.7 cm wavelength (2800 MHz).<div class="sci">🔬 Measured in Penticton, BC (Canada) in SFU (1 SFU = 10⁻²² W·m⁻²·Hz⁻¹). Correlates with solar EUV → F2-layer ionization. Minimum: ~65 SFU, Maximum: 150–300 SFU (11-year Schwabe cycle). Good HF conditions: >100 SFU.</div></div>
+<div class="info-box red"><strong>Sunspot Number (SSN):</strong> Relative sunspot number R = k(10g + f).<div class="sci">🔬 g = number of groups, f = individual spots, k = correction factor. Sunspots: regions of strong magnetic fields (up to 0.4 T), ~3700 K vs. ~5800 K ambient. Current cycle 25 started December 2019.</div></div>
+<div class="info-box red"><strong>MUF (Maximum Usable Frequency):</strong> Highest frequency reflected by the ionosphere.<div class="sci">🔬 Depends on F2 electron density: plasma frequency fₚ = 9√Nₑ Hz. Secant law: MUF ≈ f₀F2 × sec(θ). Peak ~14:00 local time. LUF (Lowest Usable Frequency) determined by D-layer absorption.</div></div>
+<div class="info-box red"><strong>Aurora:</strong> Northern lights at K≥5, usable for VHF scatter.<div class="sci">🔬 Solar wind particles (electrons, protons) guided along magnetic field lines → polar caps. O: green (557.7 nm, ~100 km) + red (630.0 nm, ~250 km), N₂: violet/blue. Aurora scatter: distorted signals reflected from ionized curtains (144/432 MHz).</div></div>
+</div>
+
+<div class="section"><div class="section-title orange">☀️ Sun (NASA SDO)</div>
+<div class="info-box orange">Live imagery from the Solar Dynamics Observatory (launched 2010, geosynchronous orbit).<div class="sci">🔬 False-color composite from three EUV wavelengths: 211 Å (Fe XIV, ~2 MK, active regions), 193 Å (Fe XII/XXIV, ~1.2/20 MK, corona+flares), 171 Å (Fe IX, ~0.6 MK, quiet corona). Channels: 211Å=Red, 193Å=Green, 171Å=Blue. One 4096×4096 image every 12 seconds.</div></div></div>
+
+<div class="section"><div class="section-title blue">🛰️ Satellite Tracking</div>
+<div class="info-box blue"><strong>Azimuth / Elevation / Distance:</strong> Real-time calculation from TLE data using the SGP4 algorithm.<div class="sci">🔬 TLE (Two-Line Elements): standardized orbital element sets from NORAD/USSPACECOM. SGP4/SDP4 accounts for Earth oblateness (J₂–J₄), atmospheric drag, and lunisolar gravity. Position: ECI → ECF (via GMST) → Az/El/Range. ISS: ~400 km, 51.6° inclination, 92 min period. Weather satellites (NOAA): ~850 km, sun-synchronous.</div></div></div>
+
+<div class="section"><div class="section-title orange">🌍 DX Cluster</div>
+<div class="info-box orange">Reported radio contacts worldwide. Click to open QRZ.com.<div class="sci">🔬 Distributed network (DX Summit, DXWatch) via Packet Radio and Internet. Format: "DX de [Spotter] [DX-Station] [Frequency] [Comment] [UTC]".</div></div></div>
+
+<div class="section"><div class="section-title green">🌤️ Weather & System</div>
+<div class="info-box green"><strong>Local Weather:</strong> Based on your Maidenhead locator via Open-Meteo API.<div class="sci">🔬 Tropospheric propagation (Tropo-DX): Temperature inversions create refractive index gradients (refractivity N = 77.6·P/T − 5.6·e/T + 3.75×10⁵·e/T²) that duct VHF/UHF signals beyond the horizon. Inversions are identifiable from surface pressure/temperature profiles.</div></div>
+<div class="info-box green"><strong>System Metrics:</strong> Live CPU, RAM, Disk and Uptime of the dashboard server.</div></div>
+</div>
+    </div><!-- /content -->
+    <div class="footer"><p>🍯 Powered by Gwen • OE3LCR Dashboard • <a href="index.html" style="color:#00ff88; text-decoration:none;">← Dashboard</a></p></div>
+</div><!-- /container -->
+
+<script>
+function applyLanguage() {
+    const lang = (typeof UserSettings !== 'undefined' && UserSettings.get) ? (UserSettings.get('language') || 'de') : 'de';
+    const de = document.getElementById('content-de');
+    const en = document.getElementById('content-en');
+    const title = document.getElementById('page-title');
+    if (de && en) {
+        if (lang === 'en') {
+            de.classList.add('lang-hidden');
+            en.classList.remove('lang-hidden');
+            if (title) title.textContent = 'ℹ️ Legend';
+        } else {
+            de.classList.remove('lang-hidden');
+            en.classList.add('lang-hidden');
+            if (title) title.textContent = 'ℹ️ Legende';
         }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            updateTranslations();
-            UserSettings.save({ language: lang });
-        }
-
-        function updateTranslations() {
-            // Update all elements with id that matches translation keys
-            const keys = [
-                'page-title', 'back-text', 'band-title', 'band-good-short', 'band-good-long',
-                'band-fair-short', 'band-fair-long', 'band-poor-short', 'band-poor-long',
-                'band-info', 'band-info-text', 'band-calc-title', 'band-calc-desc',
-                'solar-title', 'kindex-desc', 'sfi-desc', 'aindex-desc', 'solar-info', 'solar-source',
-                'sat-title', 'iss-desc', 'noaa-desc', 'meteor-desc', 'sat-info', 'sat-track',
-                'dxcluster-title', 'dxcluster-label', 'dxcluster-desc', 'qrz-label', 'qrz-desc', 'dxcluster-info', 'dxcluster-info-text',
-                'sources-title', 'sources-noaa', 'sources-noaa-desc', 
-                'sources-celestrak', 'sources-celestrak-desc',
-                'sources-nasa', 'sources-nasa-desc',
-                'sources-itu', 'sources-itu-desc',
-                'footer-text'
-            ];
-            
-            keys.forEach(key => {
-                const el = document.getElementById(key);
-                if (el) {
-                    const translationKey = key.replace(/-/g, '_');
-                    const text = t(translationKey);
-                    // For band-calc-desc and other HTML content, use innerHTML
-                    if (key === 'band-calc-desc') {
-                        el.innerHTML = text;
-                    } else {
-                        el.textContent = text;
-                    }
-                }
-            });
-        }
-
-        // Initialize with user's selected language
-        document.addEventListener('DOMContentLoaded', () => {
-            currentLang = UserSettings.get('language') || 'de';
-            updateTranslations();
-        });
-    </script>
+    }
+}
+document.addEventListener('DOMContentLoaded', applyLanguage);
+window.addEventListener('settingsChanged', applyLanguage);
+window.addEventListener('storage', (e) => { if (e.key === 'gwen_hp_settings') applyLanguage(); });
+</script>
 </body>
 </html>
