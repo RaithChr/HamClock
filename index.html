@@ -87,12 +87,36 @@
         .btn-cancel:hover { background: rgba(255,255,255,0.15); }
         #settings-btn { background: rgba(255,165,2,0.2); border: 1px solid rgba(255,165,2,0.4); color: #ffa502; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-size: 0.9em; }
         #settings-btn:hover { background: rgba(255,165,2,0.3); box-shadow: 0 0 20px rgba(255,165,2,0.2); }
+        #kiosk-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9em; transition: all 0.3s; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3); }
+        #kiosk-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5); }
+        body.kiosk-mode { overflow: hidden; }
+        body.kiosk-mode.view-top .bottom-section { display: none; }
+        body.kiosk-mode.view-bottom .top-section { display: none; }
+        .top-section, .bottom-section { transition: opacity 0.5s ease-in-out; }
 
         @media (max-width: 1200px) { .band-conditions-grid { grid-template-columns: repeat(5, 1fr); } }
         @media (max-width: 900px) { .band-conditions-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 768px) { .modal-content, .settings-modal-content { padding: 30px 20px; max-width: 90vw; } .modal-header { font-size: 1.4em; } .form-group input, .form-group select { padding: 14px; font-size: 16px; } .modal-buttons { flex-direction: column; } #settings-btn { padding: 10px 12px; font-size: 0.85em; } .band-conditions-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; } }
         @media (max-width: 480px) { .band-conditions-grid { grid-template-columns: repeat(3, 1fr); gap: 3px; } .band-name { font-size: 0.75em; } .band-condition { font-size: 0.5em; } }
-    </style>
+    
+        /* Kiosk Mode - Card-based splitting */
+        body.kiosk-mode .card { margin: 8px 0 !important; }
+        body.kiosk-mode .container { padding: 10px !important; max-width: 100vw !important; }
+        
+        /* Top view - show only first 3 cards (Sun, QTH, Band Conditions) */
+        body.kiosk-mode.view-top .card:nth-of-type(n+4) { display: none !important; }
+        
+        /* Bottom view - hide first 3 cards */
+        body.kiosk-mode.view-bottom .card:nth-of-type(-n+3) { display: none !important; }
+        
+        /* Smooth transitions */
+        body.kiosk-mode .card { transition: opacity 0.3s ease-in-out; }
+        
+        /* Fullscreen adjustments */
+        body.kiosk-mode .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        body.kiosk-mode .card-header { font-size: 1.3em; }
+
+</style>
     <script src="/js/user-settings.js"></script>
     <script src="/js/band-conditions.js"></script>
     <script>
@@ -189,6 +213,7 @@
             </div>
             <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
                 <button id="settings-btn" data-i18n="settings_btn">⚙️ Einstellungen</button>
+                <button id="kiosk-btn" onclick="toggleKioskMode()">📺 Vollbild</button>
                 <div style="display:flex; gap:30px; align-items:flex-start;">
                     <div style="text-align:right;"><div style="font-size:0.85em; color:#ff6b35; font-weight:600; margin-bottom:3px;">LOC</div><div class="time" id="time">00:00:00</div></div>
                     <div style="text-align:right;"><div style="font-size:0.85em; color:#70a1ff; font-weight:600; margin-bottom:3px;">UTC</div><div class="time" id="time-utc" style="color:#70a1ff;">00:00:00</div></div>
@@ -489,5 +514,22 @@
     setInterval(loadSystemStats,10000);
     setInterval(loadTLEData,3600000); // Reload TLE every hour
     </script>
+
+<script>
+// Kiosk Mode with Auto-Rotate
+let kioskMode=false,currentView='top',rotateInterval=null;
+function loadKioskState(){const s=localStorage.getItem('kioskMode');if(s==='true')enableKioskMode();}
+function saveKioskState(e){localStorage.setItem('kioskMode',e?'true':'false');}
+function enableKioskMode(){if(kioskMode)return;kioskMode=true;saveKioskState(true);const e=document.documentElement;if(e.requestFullscreen)e.requestFullscreen();else if(e.webkitRequestFullscreen)e.webkitRequestFullscreen();document.body.classList.add('kiosk-mode');startAutoRotate();showView('top');}
+function disableKioskMode(){if(!kioskMode)return;kioskMode=false;saveKioskState(false);if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();document.body.classList.remove('kiosk-mode','view-top','view-bottom');stopAutoRotate();}
+function toggleKioskMode(){kioskMode?disableKioskMode():enableKioskMode();}
+function showView(v){currentView=v;document.body.classList.remove('view-top','view-bottom');document.body.classList.add('view-'+v);}
+function startAutoRotate(){stopAutoRotate();rotateInterval=setInterval(()=>{currentView=currentView==='top'?'bottom':'top';showView(currentView);},5000);}
+function stopAutoRotate(){if(rotateInterval){clearInterval(rotateInterval);rotateInterval=null;}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&kioskMode)disableKioskMode();});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&kioskMode)disableKioskMode();});
+window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
+</script>
+
 </body>
 </html>
