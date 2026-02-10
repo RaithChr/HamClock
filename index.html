@@ -175,6 +175,7 @@
                 w_snow:'Schnee', w_heavy_snow:'St. Schnee', w_unknown:'Unbekannt',
                 sat_visible: '✅ Sichtbar', sat_below: '⬇️ Unter Horizont', sat_loading: 'Lade TLE...',
                 tle_source: 'TLE Quelle:', tle_updated: 'TLE aktualisiert:',
+                moon_waxing: 'zunehmend', moon_waning: 'abnehmend',
             },
             en: {
                 settings_btn: '⚙️ Settings', support_btn: '❤️ Support', legend_btn: 'ℹ️ Legend',
@@ -196,6 +197,7 @@
                 w_snow:'Snow', w_heavy_snow:'Heavy Snow', w_unknown:'Unknown',
                 sat_visible: '✅ Visible', sat_below: '⬇️ Below Horizon', sat_loading: 'Loading TLE...',
                 tle_source: 'TLE Source:', tle_updated: 'TLE updated:',
+                moon_waxing: 'waxing', moon_waning: 'waning',
             }
         };
         function t(key) {
@@ -515,7 +517,7 @@
     async function fetchLocalWeather() {
         try{const c=locatorToCoords(UserSettings.load().locator||'JN87ct'),r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,is_day&timezone=auto`);if(!r.ok)throw 0;const d=await r.json(),v=d.current;if(!v)throw 0;const isDay=v.is_day===1;
         const wC={0:{d:'☀️',n:'🌙',k:'w_clear'},1:{d:'🌤️',n:'🌙',k:'w_mostly_clear'},2:{d:'⛅',n:'☁️',k:'w_partly_cloudy'},3:{d:'☁️',n:'☁️',k:'w_overcast'},45:{d:'🌫️',n:'🌫️',k:'w_fog'},48:{d:'🌫️',n:'🌫️',k:'w_fog'},51:{d:'🌦️',n:'🌧️',k:'w_light_rain'},53:{d:'🌧️',n:'🌧️',k:'w_mod_rain'},55:{d:'⛈️',n:'⛈️',k:'w_heavy_rain'},61:{d:'🌧️',n:'🌧️',k:'w_rain'},63:{d:'🌧️',n:'🌧️',k:'w_mod_rain'},65:{d:'⛈️',n:'⛈️',k:'w_heavy_rain'},71:{d:'🌨️',n:'🌨️',k:'w_snow'},73:{d:'🌨️',n:'🌨️',k:'w_snow'},75:{d:'🌨️',n:'🌨️',k:'w_heavy_snow'},80:{d:'🌧️',n:'🌧️',k:'w_rain'},81:{d:'🌧️',n:'🌧️',k:'w_rain'},82:{d:'⛈️',n:'⛈️',k:'w_heavy_rain'},85:{d:'🌨️',n:'🌨️',k:'w_snow'},86:{d:'🌨️',n:'🌨️',k:'w_heavy_snow'}};
-        const w=wC[v.weather_code]||{d:'❓',n:'❓',k:'w_unknown'},icon=isDay?w.d:(v.weather_code<=3?MOON_EMOJIS[getMoonPhase(new Date())]:w.n);
+        const w=wC[v.weather_code]||{d:'❓',n:'❓',k:'w_unknown'},icon=isDay?w.d:(v.weather_code<=3?(()=>{const p=getMoonPhase(new Date()),e=MOON_EMOJIS[p],ph=p<4?t('moon_waxing'):t('moon_waning');return e+' '+ph;})():w.n);
         if($('localTemp'))$('localTemp').textContent=`${v.temperature_2m}°C`;if($('localHumidity'))$('localHumidity').textContent=`${v.relative_humidity_2m}%`;if($('localWind'))$('localWind').textContent=`${Math.round(v.wind_speed_10m)} km/h`;if($('localWeatherIcon'))$('localWeatherIcon').textContent=icon;if($('localWeather'))$('localWeather').innerHTML=`${icon} ${t(w.k)}`;
         }catch(e){if($('localTemp'))$('localTemp').textContent='--°C';if($('localWeather'))$('localWeather').textContent='❌ API Error';if($('localWeatherIcon'))$('localWeatherIcon').textContent='❓';}
     }
@@ -542,7 +544,7 @@
     setInterval(()=>{fetch('/data/solar-data.json?t='+Date.now()).then(r=>r.json()).then(d=>{realSolarData=d;updateSolarData();}).catch(()=>{});},300000);
     setInterval(fetchLocalWeather,600000);
     setInterval(updateDXCluster,60000);
-    setInterval(updateSatellites,5000); // Real tracking: every 5 sec
+    setInterval(updateSatellites,7000); // Real tracking: every 5 sec
     setInterval(refreshSDOImage,300000);
     setInterval(loadSystemStats,10000);
     setInterval(loadTLEData,3600000); // Reload TLE every hour
@@ -557,7 +559,7 @@ function enableKioskMode(){if(kioskMode)return;kioskMode=true;saveKioskState(tru
 function disableKioskMode(){if(!kioskMode)return;kioskMode=false;saveKioskState(false);if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();document.body.classList.remove('kiosk-mode','view-top','view-bottom');stopAutoRotate();}
 function toggleKioskMode(){kioskMode?disableKioskMode():enableKioskMode();}
 function showView(v){currentView=v;document.body.classList.remove('view-top','view-bottom');document.body.classList.add('view-'+v);}
-function startAutoRotate(){stopAutoRotate();rotateInterval=setInterval(()=>{currentView=currentView==='top'?'bottom':'top';showView(currentView);},5000);}
+function startAutoRotate(){stopAutoRotate();rotateInterval=setInterval(()=>{currentView=currentView==='top'?'bottom':'top';showView(currentView);},7000);}
 function stopAutoRotate(){if(rotateInterval){clearInterval(rotateInterval);rotateInterval=null;}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&kioskMode)disableKioskMode();});
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&kioskMode)disableKioskMode();});
