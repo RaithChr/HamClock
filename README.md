@@ -1,4 +1,4 @@
-# 🎙️ HamClock - Amateur Radio Dashboard
+# 🎙️ HamClock – Amateur Radio Dashboard
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen.svg)]()
@@ -6,7 +6,7 @@
 [![Hosted](https://img.shields.io/badge/hosted-craith.cloud-green.svg)](https://craith.cloud)
 [![Language](https://img.shields.io/badge/language-Deutsch%20%7C%20English-blue.svg)]()
 
-🎙️ **Professional Amateur Radio Dashboard** with real-time Sun/Moon tracking, satellite positions, band conditions, weather + space weather, and DX Cluster integration.
+🎙️ **Professional Amateur Radio Dashboard** with real-time Sun/Moon tracking, satellite positions, band conditions (N0NBH/HamQSL), weather, space weather, DX Cluster, live system metrics and fullscreen kiosk mode.
 
 **✨ Live Demo:** https://craith.cloud  
 **🇦🇹 QTH:** JN87ct (Vienna, Austria)  
@@ -14,326 +14,189 @@
 
 ---
 
-## 📸 Production Screenshots (Feb 10, 2026)
+## 📸 Screenshots (Feb 10, 2026)
 
-### Top Panel - Sun, QTH & Band Conditions
-![OE3LCR Dashboard - Header](screenshot-header-2026-02-10.jpg)
+### Top Panel – Sun, QTH & Band Conditions
+![OE3LCR Dashboard – Header](screenshot-header-2026-02-10.jpg)
 
-**Top Panel Features:**
-- ✅ Dual Time Display (LOC + UTC) with live clock
-- ✅ NASA SDO Live Sun Image (450px, real-time solar data)
-- ✅ QTH Information (Sunrise/Sunset/Moonrise/Set times)
-- ✅ 🛰️ Satellite Antenna Icon (Favicon visible in tab)
-- ✅ Band Conditions (13 Bands with Neon Green Design)
-  - Real NOAA K-Index Data (ITU-R calculated)
-  - GOOD/FAIR/POOR Status Indicators
-  - Accurate propagation forecasting
-
-### Bottom Panels - Complete Dashboard
-![OE3LCR Dashboard - Full View](screenshot-lower-2026-02-10.jpg)
-
-**Features Visible:**
-- ✅ **Weather & Space Weather** - Combined dual-panel
-  - Local: Temperature, Humidity, Wind (4.3°C, 87%, 6 km/h)
-  - Space: K-Index=2, Solar Flux=95, Sunspots=63, Aurora=Quiet
-- ✅ **Active Satellites** - Real-time tracking (ISS, NOAA-20/21, Meteor-M N2-3/4)
-  - Live Az/El/Distance calculations
-  - Visibility status (Under Horizon / Visible)
-  - TLE data from CelesTrak (updated regularly)
-- ✅ **DX Cluster Spots** - Real-time DX activity (NOAA, WOBUI, W5XYZ, ZS6WX, IZ0UDF callsigns)
-  - Frequency and location information
-  - Direct QRZ.com lookup integration
-- ✅ **System Status** - Live server metrics
-  - CPU Usage (0%)
-  - RAM Usage (13.9%)
-  - Disk Usage (33.6%)
-  - Uptime (4 days, 5 hours, 8 minutes)
-  - Status: 🟢 Online
+### Bottom Panels – Full Dashboard
+![OE3LCR Dashboard – Full View](screenshot-lower-2026-02-10.jpg)
 
 ---
 
-## ✨ Core Features
+## ✨ Features
 
-### 📊 Real-Time Data
-- **☀️ NASA SDO Live Image** - Solar Dynamics Observatory (15 min updates)
-- **🌙 Moon Phase & Rise/Set** - Astronomical precision for your QTH
-- **🛰️ Active Satellites** - ISS, NOAA-20/21, Meteor-M N2-3/4, Hubble
-  - Real-time Az/El/Distance
-  - 10-second Updates
-  
-- **🌍 DX Cluster Spots** - Interactive with QRZ.com Lookup
-  - Real-time Updates (60-second)
-  - Modal Popup with Band/Frequency Info
+### 📡 Ham Radio
+| Feature | Details |
+|---------|---------|
+| **Band Conditions** | 13 Bands (160m–2m), N0NBH/HamQSL API, GOOD/FAIR/POOR, Day/Night |
+| **Space Weather** | K-Index, Solar Flux (SFI), Sunspot Number, A-Index, Aurora, MUF |
+| **DX Cluster** | Real-time spots, QRZ.com modal lookup |
+| **Satellite Tracking** | ISS, NOAA-20/21, Meteor-M N2-3/4, SGP4 algorithm, TLE from CelesTrak |
 
-### 📡 Ham Radio Intelligence
-- **📊 Band Conditions** - 13 Bands (160m to 2m)
-  - Real NOAA SWPC K-Index Data
-  - Neon Glow Design (GOOD=Green, FAIR=Orange, POOR=Red)
-  
-- **⚡ Space Weather Panel**
-  - Solar Flux Index (SFI)
-  - K-Index (Geomagnetic Activity)
-  - Space Weather Status
-  
-- **🌤️ Combined Weather Box**
-  - Local Weather (Open-Meteo API)
-  - Temperature, Humidity, Wind Speed
-  - Updates every 10 minutes
+### ☀️ Astronomy (via USNO API)
+| Feature | Details |
+|---------|---------|
+| **Sunrise / Sunset** | Precise times from US Naval Observatory API |
+| **Day Length** | Calculated daily for your QTH |
+| **Moonrise / Moonset** | Exact times from USNO |
+| **Moon Phase** | Name + illumination % (DE + EN), daily from USNO |
+| **NASA SDO** | Live solar image (450px, EUV false-colour, 15 min refresh) |
 
-### 👤 User Settings & Personalization
-- **⚙️ Setup Modal** - First-visit Configuration
-  - Callsign (e.g., OE3LCR)
-  - Maidenhead Locator (auto-calculated)
-  - Language Selection (Deutsch / English)
-  
-- **💾 LocalStorage-Based** - Settings persist across sessions
-- **🌐 Auto-Detect Language** - Based on browser locale
-- **🎯 Dynamic QTH Personalization** - Callsign + Locator auto-calculation
+### 🌤️ Weather
+| Feature | Details |
+|---------|---------|
+| **Local Weather** | Open-Meteo API, WMO codes, temp / humidity / wind |
+| **Weather Icon** | Day/Night aware (cloud/rain/snow icons) |
 
-### 🌍 Bilingual Interface
-- **Deutsch (German)** - Austrian German (Östereichisch)
-- **English** - Technical terms, callsigns, internationals
-- Auto-detect from browser language
-- Manual toggle via Settings
+### 💻 System
+| Feature | Details |
+|---------|---------|
+| **Live Metrics** | CPU, RAM, Disk (progress bars), Uptime – 10 sec refresh |
+| **Daily Email** | System report at 22:00 UTC via Brevo SMTP |
+
+### 🎨 UI / UX
+| Feature | Details |
+|---------|---------|
+| **Bilingual** | Deutsch + English, auto-detect + manual toggle |
+| **User Settings** | Callsign, Maidenhead Locator, Language (localStorage) |
+| **📺 Fullscreen / Kiosk** | Auto-rotating 7 sec (Top: Sun+QTH+Bands / Bottom: Sat+DX+System+Weather) |
+| **Timezone** | Derived from Maidenhead locator longitude |
+| **SEO** | robots.txt, sitemap.xml, meta tags, bilingual keywords |
+
+---
+
+## 🗂️ File Structure
+
+```
+HamClock/
+├── index.html                  # Main dashboard
+├── info.html                   # Legende / Scientific documentation (DE + EN)
+├── js/
+│   ├── user-settings.js        # Settings manager + modals
+│   ├── translations.js         # Bilingual strings
+│   └── band-conditions.js      # N0NBH band conditions processor
+├── data/
+│   └── solar-data.json         # Cached NOAA solar data
+├── fetch-solar-data.php        # NOAA SWPC K-Index / SFI fetcher
+├── fetch-n0nbh.php             # N0NBH HamQSL band conditions proxy (1h cache)
+├── fetch-sun-moon.php          # USNO sunrise/sunset/moonrise/moonset (1h cache)
+├── fetch-tle.php               # CelesTrak TLE fetcher
+├── get-system-stats.php        # Live CPU/RAM/Disk/Uptime endpoint
+├── send-email.php              # Brevo SMTP module
+├── send-daily-status-v5.php    # Daily email report (22:00 UTC)
+├── robots.txt                  # SEO crawler rules
+├── favicon.png                 # Satellite antenna favicon
+├── README.md                   # This file
+├── DEPLOY.md                   # Pre-deployment checklist
+└── screenshots/
+    └── dashboard-2026-02-08.jpg
+```
+
+**NOT included (local/private):**
+- `.env` – API keys (protected by .gitignore)
+- `MEMORY.md`, `memory/` – Personal workspace
+- Private images
 
 ---
 
 ## 🚀 Installation
 
 ### Prerequisites
-- Apache2 web server with mod_rewrite
-- PHP 7.4+ with cURL support
-- HTTPS enabled (Let's Encrypt)
-- Brevo SMTP account (for email reports)
-- ElevenLabs API key (optional, for TTS)
+- Apache2 + PHP 7.4+ with cURL
+- HTTPS (Let's Encrypt)
+- Brevo account (free tier: 300 emails/day)
 
-### Step-by-Step Setup
+### Quick Setup
 
-#### 1. Clone Repository
 ```bash
+# 1. Clone
 git clone https://github.com/RaithChr/HamClock.git
 cd HamClock
-```
 
-#### 2. Copy Production Files
-```bash
-sudo cp -r index.html info.html js/ data/ fetch-*.php send-*.php /var/www/html/
+# 2. Deploy
+sudo cp -r index.html info.html js/ data/ *.php favicon.png robots.txt /var/www/html/
 sudo chown -R www-data:www-data /var/www/html/
-sudo chmod 755 /var/www/html
-```
 
-#### 3. Create Data Directory
-```bash
+# 3. Create data dir
 mkdir -p /var/www/html/data
 sudo chown www-data:www-data /var/www/html/data
-sudo chmod 775 /var/www/html/data
-```
 
-#### 4. Configure API Keys (.env)
-Create `/var/www/html/.env` with your API keys:
-```bash
-# Brevo Email Service
+# 4. API keys
+cat > /var/www/html/.env << 'EOF'
 BREVO_API_KEY=xkeysib-...
-BREVO_EMAIL=your-email@domain.com
+BREVO_EMAIL=your@email.com
 BREVO_SENDER_NAME=YourName
+ELEVENLABS_API_KEY=sk_...   # optional
+EOF
 
-# ElevenLabs TTS (optional)
-ELEVENLABS_API_KEY=sk_...
-
-# Hugging Face (for image generation tools)
-HUGGING_FACE_TOKEN=hf_...
-```
-
-**Note:** `.env` is protected by `.gitignore` and never pushed to GitHub.
-
-#### 5. Setup Cron Jobs
-
-**Solar Data Update (2x Daily - 03:00 & 15:00 UTC):**
-```bash
+# 5. Cron jobs
 (crontab -l 2>/dev/null; echo "0 3,15 * * * /usr/bin/php /var/www/html/fetch-solar-data.php") | crontab -
-```
-
-**Daily Email Report (22:00 UTC):**
-```bash
 (crontab -l 2>/dev/null; echo "0 22 * * * /usr/bin/php /var/www/html/send-daily-status-v5.php") | crontab -
 ```
 
-#### 6. Verify Installation
-```bash
-curl https://craith.cloud
-```
+---
+
+## 🔌 APIs & Data Sources
+
+| Data | Source | Refresh |
+|------|--------|---------|
+| Band Conditions | [N0NBH / HamQSL](https://www.hamqsl.com/solarxml.php) | 3h (1h cache) |
+| Sunrise/Sunset/Moon | [US Naval Observatory](https://aa.usno.navy.mil/api/) | Daily (1h cache) |
+| Space Weather | [NOAA SWPC](https://services.swpc.noaa.gov/) | 2× daily |
+| Sun Image | [NASA SDO](https://sdo.gsfc.nasa.gov/) | 15 min |
+| Satellite TLE | [CelesTrak](https://celestrak.org/) | Manual / daily |
+| Weather | [Open-Meteo](https://open-meteo.com/) | 10 min |
+| Operator Lookup | [QRZ.com](https://www.qrz.com/) | On demand |
 
 ---
 
-## 📁 File Structure
+## 📺 Fullscreen / Kiosk Mode
+
+Perfect for dedicated ham radio monitors:
 
 ```
-HamClock/
-├── index.html                  # Main dashboard (1400+ lines)
-├── info.html                   # Legende/Documentation page
-├── js/
-│   ├── user-settings.js        # Settings manager + modals
-│   └── translations.js         # Bilingual support
-├── data/
-│   └── solar-data.json         # Cached NOAA solar data
-├── fetch-solar-data.php        # NOAA SWPC K-Index fetcher
-├── fetch-tle.php               # CelesTrak TLE fetcher
-├── send-email.php              # Brevo SMTP module
-├── send-daily-status-v5.php    # Daily email reports
-├── README.md                   # This file
-├── DEPLOY.md                   # Pre-deployment checklist
-├── SECURITY_NOTE.md            # Security guidelines
-├── AGENTS.md                   # Workspace templates
-├── TOOLS.md                    # Tool documentation
-└── screenshots/
-    └── dashboard-2026-02-08.jpg
+Click 📺 Fullscreen → Auto-rotates every 7 seconds
+
+View 1 (7s):  ☀️ NASA SDO Sun  |  📍 QTH + Moon/Sun times  |  📡 Band Conditions
+View 2 (7s):  🛰️ Satellites     |  🌍 DX Cluster             |  💻 System  |  🌤️ Weather
+
+Exit: ESC key or click Fullscreen again
 ```
-
-**NOT included (local/private):**
-- `.env` - API keys (protected by .gitignore)
-- `avatars/` - Private images
-- `MEMORY.md` - Personal workspace memory
-- `memory/` - Session logs
-
----
-
-## 🔧 Backend Services
-
-### fetch-solar-data.php
-- **Purpose:** Fetch real-time NOAA SWPC K-Index, SFI, A-Index
-- **Source:** https://services.swpc.noaa.gov/json/
-- **Schedule:** Cron 2x daily (03:00 & 15:00 UTC)
-- **Output:** `/var/www/html/data/solar-data.json`
-- **Rate Limit:** 1 request per 5 minutes (recommended)
-
-### send-daily-status-v5.php
-- **Purpose:** Send daily email report with system metrics
-- **Provider:** Brevo SMTP (300/day free tier)
-- **Schedule:** Cron daily at 22:00 UTC
-- **Content:** System stats, solar data, satellite info
-- **Template:** HTML email with styling
-
-### send-email.php
-- **Purpose:** Brevo SMTP email module
-- **API:** Brevo Transactional Email API
-- **Usage:** Called by send-daily-status-v5.php
-- **Required .env:** `BREVO_API_KEY`, `BREVO_EMAIL`, `BREVO_SENDER_NAME`
-
-### fetch-tle.php
-- **Purpose:** Fetch TLE data from CelesTrak
-- **Source:** https://celestrak.org/
-- **Schedule:** Manual or scheduled cron (3-4x daily max)
-- **Note:** Rate limited - do not fetch more than 4x per day
 
 ---
 
 ## 🛡️ Security
 
-### What's Protected
-- **✅ `.env` file** - API keys (git-ignored)
-- **✅ `avatars/` folder** - Private images (git-ignored)
-- **✅ `MEMORY.md`** - Personal workspace (git-ignored)
-
-### GitHub Safety
-- ✅ Zero API keys in repository
-- ✅ Zero hardcoded credentials
-- ✅ `.gitignore` prevents accidental pushes
-- ✅ Pre-deployment checklist (DEPLOY.md)
-
-**See SECURITY_NOTE.md for full guidelines.**
+- ✅ Zero credentials in repository
+- ✅ `.gitignore` protects `.env`, `avatars/`, `memory/`, `MEMORY.md`
+- ✅ Pre-deployment checklist: `DEPLOY.md`
 
 ---
 
-## 📊 Data Sources
-
-| Data | Source | Update |
-|------|--------|--------|
-| Sun Image | NASA SDO | 15 min |
-| K-Index | NOAA SWPC | 5 min |
-| Satellites | CelesTrak | Variable |
-| Weather | Open-Meteo | 10 min |
-| DX Cluster | RBN/Telnet | 60 sec |
-
----
-
-## 🌐 Browser Support
-
-- ✅ Chrome/Edge 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
----
-
-## 📝 Configuration
-
-### User Settings (LocalStorage)
-Edit in browser via **Setup Modal** or manually:
-```json
-{
-  "callsign": "OE3LCR",
-  "locator": "JN87ct",
-  "language": "de"
-}
-```
-
-### Band Conditions Logic
-```
-K-Index < 3:  Mid/High Bands GOOD (20m, 15m, 10m)
-K-Index 3-5:  Mixed propagation
-K-Index > 5:  Low Bands GOOD (160m, 80m, 40m)
-```
-
----
-
-## 🚀 Deployment
-
-**Before pushing to production:**
-1. Run pre-deployment checklist (DEPLOY.md)
-2. Verify `.env` is NOT in git
-3. Test email functionality
-4. Check cron job scheduling
-5. Verify HTTPS certificate
-
-See **DEPLOY.md** for comprehensive security checklist.
-
----
-
-## 📧 Support & Donations
-
-If you find this dashboard useful:
+## 📧 Support
 
 ☕ **[Buy Me A Coffee](https://www.buymeacoffee.com/christianraith)**  
 💳 **[PayPal](https://paypal.me/christianraith151)**
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** - see LICENSE file for details.
-
----
-
 ## 🙋 Author
 
-**Christian Raith (OE3LCR)**
-- 📡 Callsign: OE3LCR
-- 🇦🇹 QTH: JN87ct (Vienna, Austria)
-- 🌐 Website: https://craith.cloud
-- 📧 Contact: via callsign lookup
+**Christian Raith (OE3LCR)**  
+📡 JN87ct · Vienna, Austria · https://craith.cloud
 
 ---
 
-## 🔗 Related Resources
+## 🔗 Resources
 
-- **CelesTrak** - https://celestrak.org/ (Satellite TLE Data)
-- **NOAA SWPC** - https://www.swpc.noaa.gov/ (Space Weather)
-- **NASA SDO** - https://sdo.gsfc.nasa.gov/ (Solar Data)
-- **Open-Meteo** - https://open-meteo.com/ (Weather API)
-- **QRZ.com** - https://www.qrz.com/ (Operator Lookup)
+- [CelesTrak](https://celestrak.org/) – Satellite TLE Data
+- [NOAA SWPC](https://www.swpc.noaa.gov/) – Space Weather
+- [NASA SDO](https://sdo.gsfc.nasa.gov/) – Solar Imagery
+- [HamQSL / N0NBH](https://www.hamqsl.com/) – Band Conditions
+- [USNO API](https://aa.usno.navy.mil/api/) – Astronomical Data
+- [Open-Meteo](https://open-meteo.com/) – Weather
 
 ---
 
-**Version:** 1.2.0  
-**Last Updated:** Feb 8, 2026  
-**Status:** ✅ Production Ready
+**Version:** 1.4.0 · **Updated:** Feb 10, 2026 · **Status:** ✅ Production Ready
