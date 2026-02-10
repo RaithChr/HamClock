@@ -148,12 +148,24 @@
         body.kiosk-mode.view-bottom #kiosk-qth,
         body.kiosk-mode.view-bottom #kiosk-bands { display: none !important; }
         
-        /* Bottom view - reorder: Satellites, DX, System, Weather */
-        body.kiosk-mode.view-bottom #kiosk-satellites { order: 1; }
-        body.kiosk-mode.view-bottom #kiosk-dx { order: 2; }
-        body.kiosk-mode.view-bottom #kiosk-system { order: 3; }
-        body.kiosk-mode.view-bottom #kiosk-weather { order: 4; }
-        body.kiosk-mode.view-bottom .grid-3 { display: flex; flex-direction: column; }
+        
+
+
+        /* Bottom view - Grid layout for even spacing */
+        body.kiosk-mode.view-bottom .grid-3 { 
+            display: grid !important; 
+            grid-template-columns: 1fr 1fr 1fr !important;
+            grid-template-rows: auto auto !important;
+            gap: 20px !important;
+        }
+        
+        /* First row: Satellites, DX, System (equal width) */
+        body.kiosk-mode.view-bottom #kiosk-satellites { grid-column: 1; grid-row: 1; }
+        body.kiosk-mode.view-bottom #kiosk-dx { grid-column: 2; grid-row: 1; }
+        body.kiosk-mode.view-bottom #kiosk-system { grid-column: 3; grid-row: 1; }
+        
+        /* Second row: Weather (full width) */
+        body.kiosk-mode.view-bottom #kiosk-weather { grid-column: 1 / -1; grid-row: 2; }
 
 </style>
     <script src="/js/user-settings.js"></script>
