@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OE3LCR - Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px; margin-bottom: 40px;
+            background: rgba(20, 20, 35, 0.8);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em; font-weight: 700;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+        .back-link {
+            text-decoration: none;
+            color: #00ff88;
+            padding: 8px 16px;
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+        .content {
+            background: rgba(20, 20, 35, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .support-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8em;
+            color: #ff4757;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .support-heading .heart {
+            font-size: 1.2em;
+        }
+        .support-text {
+            font-size: 1.1em;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .btn-coffee {
+            background: #6f5644;
+            color: #fff;
+        }
+        .btn-coffee:hover {
+            background: #7d6450;
+        }
+        .btn-support {
+            background: #ffc107;
+            color: #000;
+        }
+        .btn-support:hover {
+            background: #ffb300;
+        }
+        .btn-paypal {
+            background: #0070ba;
+            color: #fff;
+        }
+        .btn-paypal:hover {
+            background: #005a94;
+        }
+        .btn-donate {
+            background: #1f9cf0;
+            color: #fff;
+        }
+        .btn-donate:hover {
+            background: #1a7fa8;
+        }
+        .icon {
+            font-size: 1.3em;
+        }
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 40px 0;
+        }
+        .info-section {
+            margin-top: 30px;
+        }
+        .info-section h3 {
+            color: #ffa502;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #ffa502;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .contact-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .contact-box strong {
+            color: #00ff88;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">🍯 Support OE3LCR</div>
+            <a href="index.html" class="back-link">← Dashboard</a>
+        </div>
+
+        <div class="content">
+            <!-- Support Section -->
+            <div class="support-heading">
+                <span class="heart">❤️</span>
+                Support
+            </div>
+
+            <p class="support-text">
+                Wenn dir dieses Projekt gefällt, unterstütze mich gerne:
+            </p>
+
+            <!-- Buttons -->
+            <div class="buttons-container">
+                <a href="https://www.buymeacoffee.com/christianraith" class="btn btn-coffee" target="_blank">
+                    <span class="icon">☕</span>
+                    Buy Me A Coffee
+                </a>
+                <a href="https://buymeacoffee.com/christianraith" class="btn btn-support" target="_blank">
+                    Support
+                </a>
+                <a href="https://paypal.me/christianraith151" class="btn btn-paypal" target="_blank">
+                    <span class="icon">🅿️</span>
+                    PayPal
+                </a>
+                <a href="https://paypal.me/christianraith151" class="btn btn-donate" target="_blank">
+                    Donate
+                </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <h3>💡 Warum Unterstützung?</h3>
+                <div class="info-box">
+                    💻 <strong>Entwicklung:</strong> Stundenlange Arbeit an neuen Features, Bug-Fixes und Optimierungen
+                </div>
+                <div class="info-box">
+                    ☁️ <strong>Server & Hosting:</strong> craith.cloud läuft 24/7 - das kostet Geld!
+                </div>
+                <div class="info-box">
+                    🔧 <strong>Maintenance:</strong> Regelmäßige Updates, Sicherheits-Patches und Verbesserungen
+                </div>
+                <div class="info-box">
+                    🎓 <strong>Wissenstransfer:</strong> Dokumentation, Tutorials und Community-Support
+                </div>
+            </div>
+
+            <!-- Alternative Support -->
+            <div class="info-section">
+                <h3>🌟 Andere Wege zu Unterstützen</h3>
+                <div class="info-box">
+                    ⭐ <strong>GitHub Star:</strong> Gib dem Projekt einen Star auf <a href="https://github.com/RaithChr/craith.cloud" target="_blank" style="color: #00ff88; text-decoration: none;">GitHub</a>
+                </div>
+                <div class="info-box">
+                    🔀 <strong>Fork & Contribute:</strong> Erstelle PRs für neue Features oder Bug-Fixes
+                </div>
+                <div class="info-box">
+                    📢 <strong>Share:</strong> Teile das Projekt mit anderen Funkamateuren und Entwicklern
+                </div>
+                <div class="info-box">
+                    🐛 <strong>Bug Reports:</strong> Melde Bugs über <a href="https://github.com/RaithChr/craith.cloud/issues" target="_blank" style="color: #00ff88; text-decoration: none;">GitHub Issues</a>
+                </div>
+            </div>
+

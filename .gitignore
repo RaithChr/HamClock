@@ -57,3 +57,23 @@ debug.log
 # - Personal notes
 # - Credentials or tokens
 .sudo_pass
+
+# Private production files
+logout.html
+logout.php
+test.html
+count_images.php
+/var/www/html/.env
+
+# Workspace-only files (personal)
+MEMORY.md
+SOUL.md
+USER.md
+IDENTITY.md
+AGENTS.md
+HEARTBEAT.md
+GWEN_PERFORMANCE.md
+BOOTSTRAP.md
+TOOLS.md
+TODO.md
+memory/
