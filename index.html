@@ -626,23 +626,20 @@ document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement
 window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
 
 // Continuously enforce equal widths in kiosk bottom view
+
+// Enforce equal widths in kiosk bottom view
 if(typeof kioskWidthObserver==='undefined'){
-const kioskWidthObserver=setInterval(()=>{
+var kioskWidthObserver=setInterval(()=>{
 if(document.body.classList.contains('kiosk-mode')&&document.body.classList.contains('view-bottom')){
 const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
 if(s&&d&&y){
 const w='33.333%';
-[s,d,y].forEach(el=>{
-el.style.cssText=`flex:0 0 ${w}!important;width:${w}!important;min-width:${w}!important;max-width:${w}!important;box-sizing:border-box!important;`;
-});
+[s,d,y].forEach(el=>{el.style.cssText='flex:0 0 '+w+'!important;width:'+w+'!important;min-width:'+w+'!important;max-width:'+w+'!important;box-sizing:border-box!important;';});
 }
 }
+},200);
 }
 </script>
 
 </body>
 </html>
-,200);
-}
-
-
