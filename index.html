@@ -198,7 +198,7 @@
         // ============================================
         const translations = {
             de: {
-                settings_btn: '⚙️ Einstellungen', support_btn: '❤️ Support', legend_btn: 'ℹ️ Legende',
+                settings_btn: '⚙️ Einstellungen', support_btn: '❤️ Support', legend_btn: 'ℹ️ Legende', fullscreen_btn: '📺 Vollbild',
                 modal_callsign: 'Rufzeichen:', modal_locator: 'Maidenhead Locator:', modal_language: 'Sprache:',
                 modal_setup_title: 'Willkommen zu OE3LCR Dashboard', modal_setup_desc: 'Willkommen! Gib deine Daten ein:',
                 weather_quiet: 'Ruhig', weather_active: 'Aktiv', weather_storm: '⚠️ Sturm',
@@ -220,7 +220,7 @@
                 moon_waxing: 'zunehmend', moon_waning: 'abnehmend',
             },
             en: {
-                settings_btn: '⚙️ Settings', support_btn: '❤️ Support', legend_btn: 'ℹ️ Legend',
+                settings_btn: '⚙️ Settings', support_btn: '❤️ Support', legend_btn: 'ℹ️ Legend', fullscreen_btn: '📺 Fullscreen',
                 modal_callsign: 'Callsign:', modal_locator: 'Maidenhead Locator:', modal_language: 'Language:',
                 modal_setup_title: 'Welcome to OE3LCR Dashboard', modal_setup_desc: 'Welcome! Enter your details:',
                 weather_quiet: 'Quiet', weather_active: 'Active', weather_storm: '⚠️ Storm',
@@ -288,7 +288,7 @@
             </div>
             <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
                 <div style="display:flex; gap:10px;">
-                    <button id="kiosk-btn" onclick="toggleKioskMode()">📺 Vollbild</button>
+                    <button id="kiosk-btn" onclick="toggleKioskMode()" data-i18n="fullscreen_btn">📺 Vollbild</button>
                     <button id="settings-btn" data-i18n="settings_btn">⚙️ Einstellungen</button>
                 </div>
                 <div style="display:flex; gap:30px; align-items:flex-start;">
