@@ -425,7 +425,7 @@
     function getViennaTime(now) { return new Intl.DateTimeFormat('de-AT',{timeZone:TIMEZONE,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now); }
     function getViennaDate(now) { return new Intl.DateTimeFormat('de-AT',{timeZone:TIMEZONE,weekday:'long',year:'numeric',month:'2-digit',day:'2-digit'}).format(now); }
 
-    function getMoonPhase(d) { return Math.round((((((d-new Date(2026,0,29))/864e5)%29.53)+29.53)%29.53)/29.53*8)%8; }
+    function getMoonPhase(d) { return Math.round((((((d-new Date(2026,0,25))/864e5)%29.53)+29.53)%29.53)/29.53*8)%8; }
     function getMoonRiseSet(d) {
         const p=getMoonPhase(d), h=(6+p*3)%24, s=(h+12)%24, v=(d.getDate()*50)%60;
         return {rise:String(h).padStart(2,'0')+':'+String(v).padStart(2,'0'), set:String(s).padStart(2,'0')+':'+String((v+30)%60).padStart(2,'0')};
@@ -623,3 +623,19 @@ window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
 
 </body>
 </html>
+// Continuously enforce equal widths in kiosk bottom view
+if(typeof kioskWidthObserver==='undefined'){
+const kioskWidthObserver=setInterval(()=>{
+if(document.body.classList.contains('kiosk-mode')&&document.body.classList.contains('view-bottom')){
+const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
+if(s&&d&&y){
+const w='33.333%';
+[s,d,y].forEach(el=>{
+el.style.cssText=`flex:0 0 ${w}!important;width:${w}!important;min-width:${w}!important;max-width:${w}!important;box-sizing:border-box!important;`;
+});
+}
+}
+},200);
+}
+
+
