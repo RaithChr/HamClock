@@ -352,13 +352,7 @@
         let st=t('weather_quiet'); if(kI>5)st=t('weather_active'); if(kI>7)st=t('weather_storm');
         const u={kIndexCombined:kI,solarFluxCombined:sfi,sunspotsCombined:ssn,aIndexCombined:aI,auroraCombined:kI>4?'Visible':'Quiet',mufCombined:estimateMUF(sfi)+' MHz',spaceWeatherCombined:st};
         for(const[id,v]of Object.entries(u)){if($(id))$(id).textContent=v;}
-        const cm={good:{c:'good',t:'GOOD'},fair:{c:'fair',t:'FAIR'},poor:{c:'poor',t:'POOR'}};
-        ['160','80','60','40','30','20','17','15','12','11','10','6','2'].forEach(b=>{
-            const box=$(`band${b}-box`); if(!box)return;
-            let cond; if(realSolarData?.success&&realSolarData.conditions?.[b]){cond=realSolarData.conditions[b];}
-            else{if(b==='160'||b==='80')cond=kI>5?'poor':kI>2?'fair':'good'; else if(['60','40','30','20','17','15','12','11','10'].includes(b))cond=kI>7?'poor':kI>4?'fair':'good'; else cond=kI>4?'poor':kI>2?'fair':'good';}
-            box.className=`band-box ${cm[cond].c}`; box.querySelector('.band-condition').textContent=cm[cond].t;
-        });
+        
     }
 
     // === REAL SATELLITE TRACKING with satellite.js ===
