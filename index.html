@@ -311,7 +311,8 @@
                         <div class="grid-square" id="qth-locator">JN87ct</div>
                         <div class="coords" id="qth-coords">47.8125°N 16.2083°E</div>
                         <div class="celestial-times">
-                            <div class="celestial-row sun-row"><span class="celestial-label" data-i18n="sunrise_sunset">☀️ Sunrise/Sunset</span><span class="celestial-times-text" id="sunTimes">07:15 / 16:45</span></div>
+                            <div class="celestial-row sun-row"><span class="celestial-label" data-i18n="sunrise_sunset">☀️ Sunrise/Sunset</span><span class="celestial-times-text" id="sunTimes">07:10 / 17:07</span></div>
+                            <div class="celestial-row" style="font-size:0.85em; color:#aaa;"><span class="celestial-label">⏱️ Tageslänge</span><span class="celestial-times-text" id="dayLength">9h 57m</span></div>
                             <div class="celestial-row moon-row"><span class="celestial-label"><span class="moon-phase" id="moonEmoji">🌕</span><span data-i18n="moonrise_set">Moonrise/set</span></span><span class="celestial-times-text" id="moonTimes">--:-- / --:--</span></div>
                         </div>
                     </div>
@@ -434,6 +435,27 @@ return phase;
     function getMoonRiseSet(d) {
         const p=getMoonPhase(d), h=(6+p*3)%24, s=(h+12)%24, v=(d.getDate()*50)%60;
         return {rise:String(h).padStart(2,'0')+':'+String(v).padStart(2,'0'), set:String(s).padStart(2,'0')+':'+String((v+30)%60).padStart(2,'0')};
+    }
+
+
+    // === SUN/MOON TIMES (Precise API) ===
+    let sunData = null;
+    async function fetchSunData() {
+        try {
+            const s = UserSettings.load();
+            const c = locatorToCoords(s.locator || 'JN87ct');
+            const r = await fetch(`/fetch-sun-moon.php?lat=${c.lat}&lng=${c.lon}`);
+            if (!r.ok) throw 0;
+            sunData = await r.json();
+            if ($('sunTimes') && sunData.sunrise) {
+                $('sunTimes').textContent = sunData.sunrise + ' / ' + sunData.sunset;
+            }
+            if ($('dayLength') && sunData.day_length) {
+                $('dayLength').textContent = sunData.day_length;
+            }
+        } catch(e) {
+            console.warn('Sun data fetch failed:', e);
+        }
     }
 
     function updateTime() {
@@ -583,13 +605,14 @@ return phase;
     async function init(){
         personalizeHomepage(); updateTime();
         await solarP; updateSolarData(); if(window.updateAllBandConditions)updateAllBandConditions();
-        fetchLocalWeather(); updateDXCluster(); refreshSDOImage(); loadSystemStats(); loadTLEData(); updatePageTranslations();
+        fetchLocalWeather(); fetchSunData(); updateDXCluster(); refreshSDOImage(); loadSystemStats(); loadTLEData(); updatePageTranslations();
     }
     if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
 
     setInterval(updateTime,1000);
     setInterval(()=>{fetch('/data/solar-data.json?t='+Date.now()).then(r=>r.json()).then(d=>{realSolarData=d;updateSolarData();}).catch(()=>{});},300000);
     setInterval(fetchLocalWeather,600000);
+    setInterval(fetchSunData,1800000);
     setInterval(updateDXCluster,60000);
     setInterval(updateSatellites,7000); // Real tracking: every 5 sec
     setInterval(refreshSDOImage,300000);
