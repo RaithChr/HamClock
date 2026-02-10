@@ -14,32 +14,41 @@
 
 ---
 
-## 📸 Production Screenshots (Feb 8, 2026)
+## 📸 Production Screenshots (Feb 10, 2026)
 
 ### Top Panel - Sun, QTH & Band Conditions
-![OE3LCR Dashboard - Top](screenshot-top-2026-02-08.png)
+![OE3LCR Dashboard - Header](screenshot-header-2026-02-10.jpg)
 
 **Top Panel Features:**
-- ✅ Dual Time Display (LOC + UTC)
-- ✅ NASA SDO Live Sun Image (450px, stunning quality)
-- ✅ QTH Information (Sunrise/Sunset/Moonrise/Set)
+- ✅ Dual Time Display (LOC + UTC) with live clock
+- ✅ NASA SDO Live Sun Image (450px, real-time solar data)
+- ✅ QTH Information (Sunrise/Sunset/Moonrise/Set times)
+- ✅ 🛰️ Satellite Antenna Icon (Favicon visible in tab)
 - ✅ Band Conditions (13 Bands with Neon Green Design)
-  - Real NOAA K-Index Data
+  - Real NOAA K-Index Data (ITU-R calculated)
   - GOOD/FAIR/POOR Status Indicators
+  - Accurate propagation forecasting
 
-### Bottom Panel - Weather, Solar, Satellites & System
-![OE3LCR Dashboard - Bottom](screenshot-bottom-2026-02-08.png)
+### Bottom Panels - Complete Dashboard
+![OE3LCR Dashboard - Full View](screenshot-lower-2026-02-10.jpg)
 
-**Bottom Panel Features:**
-- ✅ Combined Weather Box (Local + Space Weather)
-  - Local: 6°C, 85% Humidity, 7 km/h Wind (with Moon icon for night)
-  - Space Weather: K-Index=2, Solar Flux=95, A-Index=31, Status=Quiet
-- ✅ Solar Activity Panel (K-Index, SFI, Sunspots, Space Weather)
-- ✅ Propagation Panel (SSN, R-Index, Aurora, MUF)
-- ✅ Moon Phase Panel (Accurate lunar cycle tracking)
-- ✅ Active Satellites Panel (ISS, NOAA-20/21, Meteor-M N2-3 with Az/El/Distance)
-- ✅ DX Cluster Spots (Real-time with callsigns and bands)
-- ✅ System Status Panel (Live CPU/RAM/Disk metrics + Uptime)
+**Features Visible:**
+- ✅ **Weather & Space Weather** - Combined dual-panel
+  - Local: Temperature, Humidity, Wind (4.3°C, 87%, 6 km/h)
+  - Space: K-Index=2, Solar Flux=95, Sunspots=63, Aurora=Quiet
+- ✅ **Active Satellites** - Real-time tracking (ISS, NOAA-20/21, Meteor-M N2-3/4)
+  - Live Az/El/Distance calculations
+  - Visibility status (Under Horizon / Visible)
+  - TLE data from CelesTrak (updated regularly)
+- ✅ **DX Cluster Spots** - Real-time DX activity (NOAA, WOBUI, W5XYZ, ZS6WX, IZ0UDF callsigns)
+  - Frequency and location information
+  - Direct QRZ.com lookup integration
+- ✅ **System Status** - Live server metrics
+  - CPU Usage (0%)
+  - RAM Usage (13.9%)
+  - Disk Usage (33.6%)
+  - Uptime (4 days, 5 hours, 8 minutes)
+  - Status: 🟢 Online
 
 ---
 
@@ -182,7 +191,6 @@ HamClock/
 
 **NOT included (local/private):**
 - `.env` - API keys (protected by .gitignore)
-- `myhoney/` - Password-protected gallery
 - `avatars/` - Private images
 - `MEMORY.md` - Personal workspace memory
 - `memory/` - Session logs
@@ -223,7 +231,6 @@ HamClock/
 
 ### What's Protected
 - **✅ `.env` file** - API keys (git-ignored)
-- **✅ `myhoney/` gallery** - Password-protected web directory
 - **✅ `avatars/` folder** - Private images (git-ignored)
 - **✅ `MEMORY.md`** - Personal workspace (git-ignored)
 
