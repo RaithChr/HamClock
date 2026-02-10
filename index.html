@@ -625,10 +625,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&kioskMode)disableKi
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&kioskMode)disableKioskMode();});
 window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
 
-// Continuously enforce equal widths in kiosk bottom view
 
-,200);
-}
 
 // BRUTAL width enforcement for kiosk mode
 function enforceKioskWidths(){
