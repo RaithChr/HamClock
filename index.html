@@ -451,7 +451,9 @@ return phase;
         try {
             const s = UserSettings.load();
             const c = locatorToCoords(s.locator || 'JN87ct');
-            const r = await fetch(`/fetch-sun-moon.php?lat=${c.lat}&lng=${c.lon}`);
+            // Calculate timezone offset from longitude (15° = 1h)
+            const tzOffset = Math.round(c.lon / 15);
+            const r = await fetch(`/fetch-sun-moon.php?lat=${c.lat}&lng=${c.lon}&tz=${tzOffset}`);
             if (!r.ok) throw 0;
             sunData = await r.json();
             // Sun times
