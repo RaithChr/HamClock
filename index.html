@@ -152,42 +152,35 @@
 
 
         
-        /* Bottom view - Force equal width cards */
-        body.kiosk-mode.view-bottom .container { max-width: 100vw !important; }
-        body.kiosk-mode.view-bottom .grid-3 { 
-            display: grid !important; 
-            grid-template-columns: repeat(3, 1fr) !important;
-            grid-template-rows: auto auto !important;
-            gap: 15px !important;
-        }
         
-        /* Row 1: Three equal cards */
-        body.kiosk-mode.view-bottom #kiosk-satellites { 
-            grid-column: 1 !important; 
-            grid-row: 1 !important;
-            width: 100% !important;
-            max-width: none !important;
-        }
-        body.kiosk-mode.view-bottom #kiosk-dx { 
-            grid-column: 2 !important; 
-            grid-row: 1 !important;
-            width: 100% !important;
-            max-width: none !important;
-        }
-        body.kiosk-mode.view-bottom #kiosk-system { 
-            grid-column: 3 !important; 
-            grid-row: 1 !important;
-            width: 100% !important;
-            max-width: none !important;
-        }
-        
-        /* Row 2: Weather full width */
-        body.kiosk-mode.view-bottom #kiosk-weather { 
-            grid-column: 1 / -1 !important; 
-            grid-row: 2 !important;
-            width: 100% !important;
-        }
 
+
+
+        /* Kiosk Bottom View - Flexbox Layout (ROBUST) */
+        body.kiosk-mode.view-bottom .main-content { display: flex !important; flex-direction: column !important; }
+        body.kiosk-mode.view-bottom .grid-3 { 
+            display: flex !important; 
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            gap: 15px !important;
+            width: 100% !important;
+        }
+        
+        /* First row: 3 equal cards */
+        body.kiosk-mode.view-bottom #kiosk-satellites,
+        body.kiosk-mode.view-bottom #kiosk-dx,
+        body.kiosk-mode.view-bottom #kiosk-system { 
+            flex: 1 1 calc(33.333% - 15px) !important;
+            min-width: calc(33.333% - 15px) !important;
+            max-width: calc(33.333% - 15px) !important;
+        }
+        
+        /* Second row: Weather full width */
+        body.kiosk-mode.view-bottom #kiosk-weather { 
+            flex: 1 1 100% !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
 
 </style>
     <script src="/js/user-settings.js"></script>
