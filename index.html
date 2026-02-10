@@ -117,17 +117,20 @@
         body.kiosk-mode .card-header { font-size: 1.3em; }
 
 
-        /* Kiosk Mode - Correct splitting before Weather box */
-        body.kiosk-mode .container > .grid-3 > div:first-child { display: contents; }
         
-        /* Top view - show Sun grid + first 2 cards (QTH, Band Conditions) */
-        body.kiosk-mode.view-top .card:nth-child(n+3) { display: none !important; }
+
+
+        /* Kiosk Mode - Simpler approach using IDs */
+        body.kiosk-mode { overflow: hidden; }
+        body.kiosk-mode .container { padding: 10px !important; max-width: 100vw !important; }
+        body.kiosk-mode .card { transition: opacity 0.3s ease-in-out; }
         
-        /* Bottom view - hide Sun grid + first 2 cards */
-        body.kiosk-mode.view-bottom .container > .grid-3 > div:first-child { display: none !important; }
-        body.kiosk-mode.view-bottom .card:nth-child(1),
-        body.kiosk-mode.view-bottom .card:nth-child(2) { display: none !important; }
+        /* Top view - show Sun + QTH + Band Conditions */
+        body.kiosk-mode.view-top > .container > .grid-3 .card:nth-of-type(n+3) { display: none !important; }
+        
+        /* Bottom view - hide Sun + first 2 cards (QTH, Band) */
         body.kiosk-mode.view-bottom .sun-display { display: none !important; }
+        body.kiosk-mode.view-bottom > .container > .grid-3 .card:nth-of-type(-n+2) { display: none !important; }
 
 </style>
     <script src="/js/user-settings.js"></script>
