@@ -314,6 +314,7 @@
                             <div class="celestial-row sun-row"><span class="celestial-label" data-i18n="sunrise_sunset">☀️ Sunrise/Sunset</span><span class="celestial-times-text" id="sunTimes">07:10 / 17:07</span></div>
                             <div class="celestial-row" style="font-size:0.85em; color:#aaa;"><span class="celestial-label">⏱️ Tageslänge</span><span class="celestial-times-text" id="dayLength">9h 57m</span></div>
                             <div class="celestial-row moon-row"><span class="celestial-label"><span class="moon-phase" id="moonEmoji">🌕</span><span data-i18n="moonrise_set">Moonrise/set</span></span><span class="celestial-times-text" id="moonTimes">--:-- / --:--</span></div>
+                            <div class="celestial-row" style="font-size:0.85em;color:#aaa;margin-top:4px;"><span class="celestial-label">🌕 Mondphase</span><span class="celestial-times-text" id="moonPhaseName">...</span></div>
                         </div>
                     </div>
                 </div>
@@ -438,8 +439,14 @@ return phase;
     }
 
 
-    // === SUN/MOON TIMES (Precise API) ===
+    // === SUN/MOON TIMES (US Naval Observatory API) ===
     let sunData = null;
+    const MOON_PHASE_DE = {
+        'New Moon':'Neumond','Waxing Crescent':'Zunehmende Sichel',
+        'First Quarter':'Erstes Viertel','Waxing Gibbous':'Zunehmender Mond',
+        'Full Moon':'Vollmond','Waning Gibbous':'Abnehmender Mond',
+        'Last Quarter':'Letztes Viertel','Waning Crescent':'Abnehmende Sichel'
+    };
     async function fetchSunData() {
         try {
             const s = UserSettings.load();
@@ -447,14 +454,25 @@ return phase;
             const r = await fetch(`/fetch-sun-moon.php?lat=${c.lat}&lng=${c.lon}`);
             if (!r.ok) throw 0;
             sunData = await r.json();
-            if ($('sunTimes') && sunData.sunrise) {
+            // Sun times
+            if ($('sunTimes') && sunData.sunrise)
                 $('sunTimes').textContent = sunData.sunrise + ' / ' + sunData.sunset;
-            }
-            if ($('dayLength') && sunData.day_length) {
+            // Day length
+            if ($('dayLength') && sunData.day_length)
                 $('dayLength').textContent = sunData.day_length;
+            // Moon rise/set
+            if ($('moonTimes') && sunData.moonrise)
+                $('moonTimes').textContent = sunData.moonrise + ' / ' + sunData.moonset;
+            // Moon phase text in QTH panel
+            if ($('moonPhaseName') && sunData.moon_phase) {
+                const lang = UserSettings.load().language || 'de';
+                const phaseName = lang === 'de'
+                    ? (MOON_PHASE_DE[sunData.moon_phase] || sunData.moon_phase)
+                    : sunData.moon_phase;
+                $('moonPhaseName').textContent = phaseName + ' (' + (sunData.moon_illum||'') + ')';
             }
         } catch(e) {
-            console.warn('Sun data fetch failed:', e);
+            console.warn('Sun/Moon data fetch failed:', e);
         }
     }
 
