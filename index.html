@@ -94,6 +94,7 @@
         @media (max-width: 480px) { .band-conditions-grid { grid-template-columns: repeat(3, 1fr); gap: 3px; } .band-name { font-size: 0.75em; } .band-condition { font-size: 0.5em; } }
     </style>
     <script src="/js/user-settings.js"></script>
+    <script src="/js/band-conditions.js"></script>
     <script>
         // ============================================
         // FULL TRANSLATIONS (DE + EN)
@@ -347,7 +348,7 @@
 
     function updateSolarData() {
         let sfi=95,ssn=63,kI=2,aI=24;
-        if(realSolarData?.success){kI=realSolarData.kIndex||2;sfi=realSolarData.sfi||95;aI=realSolarData.aIndex||kI*12;ssn=Math.round(sfi/1.5);}
+        if(realSolarData?.success){kI=realSolarData.kIndex||2;sfi=realSolarData.sfi||95;if(window.updateAllBandConditions)updateAllBandConditions(kI,sfi);aI=realSolarData.aIndex||kI*12;ssn=Math.round(sfi/1.5);}
         let st=t('weather_quiet'); if(kI>5)st=t('weather_active'); if(kI>7)st=t('weather_storm');
         const u={kIndexCombined:kI,solarFluxCombined:sfi,sunspotsCombined:ssn,aIndexCombined:aI,auroraCombined:kI>4?'Visible':'Quiet',mufCombined:estimateMUF(sfi)+' MHz',spaceWeatherCombined:st};
         for(const[id,v]of Object.entries(u)){if($(id))$(id).textContent=v;}
