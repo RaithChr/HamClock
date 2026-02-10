@@ -624,10 +624,7 @@ function stopAutoRotate(){if(rotateInterval){clearInterval(rotateInterval);rotat
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&kioskMode)disableKioskMode();});
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&kioskMode)disableKioskMode();});
 window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
-</script>
 
-</body>
-</html>
 // Continuously enforce equal widths in kiosk bottom view
 if(typeof kioskWidthObserver==='undefined'){
 const kioskWidthObserver=setInterval(()=>{
@@ -640,7 +637,12 @@ el.style.cssText=`flex:0 0 ${w}!important;width:${w}!important;min-width:${w}!im
 });
 }
 }
-},200);
+}
+</script>
+
+</body>
+</html>
+,200);
 }
 
 
