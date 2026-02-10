@@ -600,12 +600,19 @@ function saveKioskState(e){localStorage.setItem('kioskMode',e?'true':'false');}
 function enableKioskMode(){if(kioskMode)return;kioskMode=true;saveKioskState(true);const e=document.documentElement;if(e.requestFullscreen)e.requestFullscreen();else if(e.webkitRequestFullscreen)e.webkitRequestFullscreen();document.body.classList.add('kiosk-mode');startAutoRotate();showView('top');}
 function disableKioskMode(){if(!kioskMode)return;kioskMode=false;saveKioskState(false);if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();document.body.classList.remove('kiosk-mode','view-top','view-bottom');stopAutoRotate();}
 function toggleKioskMode(){kioskMode?disableKioskMode():enableKioskMode();}
-function showView(v){currentView=v;document.body.classList.remove('view-top','view-bottom');document.body.classList.add('view-'+v);
+function showView(v){
+currentView=v;
+document.body.classList.remove('view-top','view-bottom');
+document.body.classList.add('view-'+v);
+console.log('[Kiosk] View changed to:', v);
 if(v==='bottom'){
+setTimeout(()=>{
 const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
-if(s){s.style.flex='0 0 33.333%';s.style.width='33.333%';s.style.maxWidth='33.333%';}
-if(d){d.style.flex='0 0 33.333%';d.style.width='33.333%';d.style.maxWidth='33.333%';}
-if(y){y.style.flex='0 0 33.333%';y.style.width='33.333%';y.style.maxWidth='33.333%';}
+console.log('[Kiosk] Setting equal widths...');
+if(s){s.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('Sat:',s.style.width);}
+if(d){d.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('DX:',d.style.width);}
+if(y){y.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('Sys:',y.style.width);}
+},100);
 }}
 function startAutoRotate(){stopAutoRotate();rotateInterval=setInterval(()=>{currentView=currentView==='top'?'bottom':'top';showView(currentView);},7000);}
 function stopAutoRotate(){if(rotateInterval){clearInterval(rotateInterval);rotateInterval=null;}}
