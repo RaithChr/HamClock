@@ -1,20 +1,22 @@
-<div class="card" id="widget-clock-inner">
-    <div class="card-header">
-        <span class="icon">🕐</span>
-        <span class="card-title">Zeit / Time</span>
+<div class="card" id="widget-clock-inner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:0; padding:15px 10px;">
+
+    <!-- LOC -->
+    <div style="text-align:center; width:100%;">
+        <div style="font-size:0.7em; font-weight:700; letter-spacing:3px; color:#ff6b35; opacity:0.8; margin-bottom:4px;">LOC</div>
+        <div id="time" style="font-size:clamp(1.6em, 4vw, 3em); font-weight:800; color:#ff6b35; font-variant-numeric:tabular-nums; font-family:'Inter',monospace; letter-spacing:2px; line-height:1;">00:00:00</div>
     </div>
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:calc(100% - 50px); gap:10px; padding:10px;">
-        <div style="display:flex; gap:24px; align-items:flex-start;">
-            <div style="text-align:center;">
-                <div style="font-size:0.75em; font-weight:700; letter-spacing:2px; color:#ff6b35; margin-bottom:4px;">LOC</div>
-                <div class="time" id="time" style="font-size:1.8em; font-weight:700; color:#ff6b35; font-variant-numeric:tabular-nums; font-family:'Inter',monospace;">00:00:00</div>
-            </div>
-            <div style="color:#444; font-size:1.8em; padding-top:22px;">·</div>
-            <div style="text-align:center;">
-                <div style="font-size:0.75em; font-weight:700; letter-spacing:2px; color:#70a1ff; margin-bottom:4px;">UTC</div>
-                <div class="time" id="time-utc" style="font-size:1.8em; font-weight:700; color:#70a1ff; font-variant-numeric:tabular-nums; font-family:'Inter',monospace;">00:00:00</div>
-            </div>
-        </div>
-        <div class="date" id="date" style="font-size:1em; color:#888; margin-top:4px;">--.--.----</div>
+
+    <div style="width:60%; height:1px; background:rgba(255,255,255,0.08); margin:12px auto;"></div>
+
+    <!-- UTC -->
+    <div style="text-align:center; width:100%;">
+        <div style="font-size:0.7em; font-weight:700; letter-spacing:3px; color:#70a1ff; opacity:0.8; margin-bottom:4px;">UTC</div>
+        <div id="time-utc" style="font-size:clamp(1.6em, 4vw, 3em); font-weight:800; color:#70a1ff; font-variant-numeric:tabular-nums; font-family:'Inter',monospace; letter-spacing:2px; line-height:1;">00:00:00</div>
     </div>
+
+    <div style="width:60%; height:1px; background:rgba(255,255,255,0.08); margin:12px auto;"></div>
+
+    <!-- Datum -->
+    <div id="date" style="font-size:clamp(0.85em, 1.5vw, 1.1em); color:#888; font-weight:600; text-align:center; letter-spacing:1px;">--.--.----</div>
+
 </div>
