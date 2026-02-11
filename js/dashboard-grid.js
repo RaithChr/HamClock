@@ -14,9 +14,10 @@ const DEFAULT_LAYOUT = [
 ];
 
 let grid = null;
+window.grid = null;  // für kiosk.js zugänglich
 
 function initGrid() {
-    grid = GridStack.init({
+    grid = window.grid = GridStack.init({
         column: 12,
         cellHeight: 80,
         animate: false,
