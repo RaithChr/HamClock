@@ -31,7 +31,7 @@
         @media (max-width: 1000px) { .main-content { grid-template-columns: 1fr; } }
 
         /* COMPACT Band Conditions */
-        .band-conditions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 5px; margin-top: 10px; }
+        .band-conditions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
         .band-box { padding: 6px 3px; border-radius: 8px; text-align: center; font-weight: 700; border: 1.5px solid; transition: all 0.3s; cursor: pointer; }
         .band-box:hover { transform: translateY(-2px); }
         .band-box.good { background: rgba(0,255,100,0.08); border-color: #00ff64; color: #00ff88; box-shadow: 0 0 8px rgba(0,255,136,0.3); }
