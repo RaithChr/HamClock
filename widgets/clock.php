@@ -1,5 +1,9 @@
-<div class="card" id="widget-clock-inner"
-     style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:0; padding:15px 10px; overflow:hidden;">
+<div class="card" id="widget-clock-inner" style="display:flex; flex-direction:column; height:100%;">
+    <div class="card-header" style="padding:4px 8px; min-height:0;">
+        <span class="icon">🕐</span>
+        <span class="card-title" style="font-size:0.75em;">Uhrzeit</span>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; gap:0; padding:8px 10px; overflow:hidden;">
 
     <div style="text-align:center; width:100%;">
         <div style="font-size:0.65em; font-weight:700; letter-spacing:3px; color:#ff6b35; opacity:0.7; margin-bottom:6px;">LOC</div>
@@ -25,6 +29,7 @@
         --.--.----
     </div>
 
+    </div>
 </div>
 <script>
 (function(){
