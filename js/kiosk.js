@@ -67,11 +67,12 @@ function initPageBadges() {
 
         const header = item.querySelector('.card-header');
         if (header) {
+            // Normal: rechts im Card-Header
             header.appendChild(badge);
         } else {
-            badge.style.cssText += 'position:absolute; top:6px; right:6px; z-index:50;';
-            const card = item.querySelector('.card');
-            if (card) { card.style.position = 'relative'; card.appendChild(badge); }
+            // Fallback: direkt auf .grid-stack-item (position:absolute, kein overflow-Clip)
+            badge.style.cssText += 'position:absolute; top:6px; right:6px; z-index:100;';
+            item.appendChild(badge);
         }
     });
 }
