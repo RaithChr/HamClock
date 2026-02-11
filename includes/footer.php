@@ -154,17 +154,26 @@ return phase;
 
     // === DX CLUSTER ===
     function updateDXCluster() {
-        const calls=['N0BUI','IZ0UDF','ZS6WX','VK2RZA','JA1XYZ','W5XYZ','G3XYZ','CE3XYZ'];
-        const freqs=['3.525','7.035','7.065','10.135','14.150','14.250','21.200','21.290'];
-        const now=new Date();
-        for(let i=1;i<=8;i++){
-            const ci=Math.floor(Math.random()*calls.length),fi=Math.floor(Math.random()*freqs.length);
-            const st=new Date(now.getTime()-(2+Math.floor(Math.random()*5))*60000);
-            if($(`dx${i}`))$(`dx${i}`).textContent=`${calls[ci]} ${freqs[fi]}`;
-            if($(`dx${i}-time`))$(`dx${i}-time`).textContent=String(st.getUTCHours()).padStart(2,'0')+':'+String(st.getUTCMinutes()).padStart(2,'0')+' UTC';
+        const calls = ['OE3LCR','DL1ABC','VK2XYZ','JA7QVI','W5NZ','ZS6WX','RA3ABC',
+            'OH2ABC','SP5XYZ','PA3GCV','G4ABC','K9YZ','VU2ABC','UA9XYZ','LU3XYZ',
+            'HB9ABC','SM5XYZ','IT9ABC','EA5ABC','F5XYZ'];
+        const freqs = ['14.225','7.085','21.290','3.795','14.150','10.135','7.035',
+            '21.200','14.195','28.450','3.525','18.140','14.275','7.095','21.310',
+            '14.155','7.055','21.225','14.235','3.760'];
+        const regions = ['EU','EU','OC','AS','NA','AF','EU','EU','EU','EU',
+            'EU','NA','AS','AS','SA','EU','EU','EU','EU','EU'];
+        const now = new Date();
+        for (let i = 1; i <= 20; i++) {
+            const el = document.getElementById('dx-row-' + i);
+            if (!el) continue;
+            const idx = (i - 1) % calls.length;
+            const st = new Date(now - (i * 180000));
+            const t = String(st.getUTCHours()).padStart(2,'0') + ':' + String(st.getUTCMinutes()).padStart(2,'0') + ' UTC';
+            el.style.display = 'block';
+            el.innerHTML = `<strong onclick="openQRZModal('${calls[idx]}','${freqs[idx]}')">${calls[idx]} ${freqs[idx]}</strong> - ${regions[idx]}<br><span class="dx-time">${t}</span>`;
         }
+        if (typeof checkDXScroll === 'function') setTimeout(checkDXScroll, 100);
     }
-
     // === LOCATOR ===
     function locatorToCoords(loc) {
         if(!loc||loc.length<4)return{lat:47.8125,lon:16.2083,display:'47.8125°N 16.2083°E'};
