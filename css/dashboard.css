@@ -31,14 +31,14 @@
         @media (max-width: 1000px) { .main-content { grid-template-columns: 1fr; } }
 
         /* COMPACT Band Conditions */
-        .band-conditions-grid { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; overflow:hidden; min-width:0; }
-        .band-box { width:52px; min-width:0; flex-shrink:1; padding:5px 2px; border-radius:8px; text-align:center; font-weight:700; border:1.5px solid; transition:all 0.3s; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:42px; box-sizing:border-box; }
+        .band-conditions-grid { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:4px; margin-top:10px; width:100%; min-width:0; }
+        .band-box { width:100%; padding:4px 2px; border-radius:6px; text-align:center; font-weight:700; border:1.5px solid; transition:all 0.3s; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:38px; box-sizing:border-box; overflow:hidden; }
         .band-box:hover { transform: translateY(-2px); }
         .band-box.good { background: rgba(0,255,100,0.08); border-color: #00ff64; color: #00ff88; box-shadow: 0 0 8px rgba(0,255,136,0.3); }
         .band-box.fair { background: rgba(255,165,0,0.08); border-color: #ffa502; color: #ffb020; box-shadow: 0 0 8px rgba(255,165,2,0.3); }
         .band-box.poor { background: rgba(255,100,130,0.08); border-color: #ff6482; color: #ff7b9c; box-shadow: 0 0 8px rgba(255,100,130,0.3); }
-        .band-name { font-size: 0.85em; font-weight: 800; margin-bottom: 1px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .band-condition { font-size: 0.55em; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; opacity: 0.9; }
+        .band-name { font-size:clamp(0.45em,1.2vw,0.8em); white-space:nowrap; overflow:hidden; }
+        .band-condition { font-size:clamp(0.35em,0.9vw,0.6em); letter-spacing:0.5px; white-space:nowrap; overflow:hidden; }
 
         .metric-bar-bg { height: 8px; border-radius: 4px; overflow: hidden; }
         .metric-bar { height: 100%; width: 0%; transition: width 0.3s ease; }
@@ -85,8 +85,8 @@
 
         /* auto-fill handles responsive columns */
         
-        @media (max-width: 768px) { .modal-content, .settings-modal-content { padding: 30px 20px; max-width: 90vw; } .modal-header { font-size: 1.4em; } .form-group input, .form-group select { padding: 14px; font-size: 16px; } .modal-buttons { flex-direction: column; } #settings-btn { padding: 10px 12px; font-size: 0.85em; } .band-conditions-grid { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; overflow:hidden; min-width:0; } }
-        @media (max-width: 480px) { .band-conditions-grid { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; overflow:hidden; min-width:0; } .band-name { font-size: 0.75em; } .band-condition { font-size: 0.5em; } }
+        @media (max-width: 768px) { .modal-content, .settings-modal-content { padding: 30px 20px; max-width: 90vw; } .modal-header { font-size: 1.4em; } .form-group input, .form-group select { padding: 14px; font-size: 16px; } .modal-buttons { flex-direction: column; } #settings-btn { padding: 10px 12px; font-size: 0.85em; } .band-conditions-grid { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:4px; margin-top:10px; width:100%; min-width:0; } }
+        @media (max-width: 480px) { .band-conditions-grid { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:4px; margin-top:10px; width:100%; min-width:0; } .band-name { font-size:clamp(0.45em,1.2vw,0.8em); white-space:nowrap; overflow:hidden; } .band-condition { font-size:clamp(0.35em,0.9vw,0.6em); letter-spacing:0.5px; white-space:nowrap; overflow:hidden; } }
     
         /* Kiosk Mode - Card-based splitting */
         
