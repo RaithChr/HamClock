@@ -1,4 +1,3 @@
-// dashboard-grid.js – Gridstack v12.4.2 | OE3LCR
 const GRID_STORAGE_KEY = 'gwen_grid_layout';
 
 const DEFAULT_LAYOUT = [
@@ -27,33 +26,34 @@ function initGrid() {
         oneColumnSize: 768,
     });
 
-    // Layout laden: grid.update() pro Widget (sicher bei float:true)
     const saved = localStorage.getItem(GRID_STORAGE_KEY);
     if (saved) {
         try {
-            const items = JSON.parse(saved);
-            items.forEach(item => {
+            JSON.parse(saved).forEach(item => {
                 const el = document.getElementById(item.id);
                 if (el) grid.update(el, {x:item.x, y:item.y, w:item.w, h:item.h});
             });
-            console.log('[Grid] ✅ Layout aus localStorage geladen');
+            console.log('[Grid] ✅ Layout geladen');
         } catch(e) {
-            console.warn('[Grid] Fehler beim Laden:', e);
+            console.warn('[Grid] Ladefehler:', e);
             applyDefaultLayout();
         }
     } else {
         applyDefaultLayout();
     }
 
-    // Nur beim Loslassen speichern
     grid.on('dragstop resizestop', saveLayout);
 }
 
 function saveLayout() {
-    const items = grid.save(false).map(n => ({
-        id: n.id, x: n.x, y: n.y, w: n.w, h: n.h
-    }));
+    const items = [];
+    // DOM-id statt gs-id verwenden (zuverlässiger)
+    grid.getGridItems().forEach(el => {
+        const n = el.gridstackNode;
+        if (n && el.id) items.push({id:el.id, x:n.x, y:n.y, w:n.w, h:n.h});
+    });
     localStorage.setItem(GRID_STORAGE_KEY, JSON.stringify(items));
+    console.log('[Grid] 💾 Layout gespeichert', items.length, 'Widgets');
 }
 
 function applyDefaultLayout() {
@@ -66,7 +66,6 @@ function applyDefaultLayout() {
 function resetGridLayout() {
     localStorage.removeItem(GRID_STORAGE_KEY);
     applyDefaultLayout();
-    console.log('[Grid] Layout zurückgesetzt');
 }
 
 function setGridKioskMode(active) {

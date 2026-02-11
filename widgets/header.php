@@ -30,18 +30,20 @@
 // Rufzeichen: ResizeObserver für dynamische Schriftgröße
 (function(){
     function scaleCallsign() {
-        const inner = document.getElementById('widget-header-inner');
-        const cs    = document.getElementById('header-callsign');
-        if (!inner || !cs) return;
-        const w = inner.offsetWidth;
-        cs.style.fontSize = Math.max(Math.min(w * 0.04, 32), 14) + 'px';
+        // Äußeres Widget beobachten (widget-header = Gridstack-Item)
+        const widget = document.getElementById('widget-header');
+        const cs = document.getElementById('header-callsign');
+        if (!widget || !cs) return;
+        const w = widget.offsetWidth;
+        const size = Math.max(Math.min(w * 0.035, 36), 13);
+        cs.style.fontSize = size + 'px';
     }
-    window.addEventListener('DOMContentLoaded', () => setTimeout(scaleCallsign, 300));
+    window.addEventListener('DOMContentLoaded', () => setTimeout(scaleCallsign, 400));
     if (window.ResizeObserver) {
         const ro = new ResizeObserver(scaleCallsign);
         document.addEventListener('DOMContentLoaded', () => {
-            const el = document.getElementById('widget-header-inner');
-            if (el) ro.observe(el);
+            const el = document.getElementById('widget-header');
+            if (el) { ro.observe(el); }
         });
     }
 })();
