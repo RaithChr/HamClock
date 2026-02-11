@@ -51,20 +51,21 @@
         el.style.textShadow = '0 0 20px ' + c.shadow;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function initColor() {
         const cs = document.getElementById('header-callsign');
-        if (!cs) return;
-
-        // Gespeicherte Farbe anwenden
+        if (!cs) { setTimeout(initColor, 100); return; }
         applyColor(cs);
-
-        // Klick → nächste Farbe
         cs.addEventListener('click', () => {
             colorIdx = (colorIdx + 1) % COLORS.length;
             localStorage.setItem('callsign_color', colorIdx);
             applyColor(cs);
         });
-    });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initColor);
+    } else {
+        setTimeout(initColor, 100);
+    }
 
     // === Dynamische Schriftgröße ===
     function scaleCallsign() {
@@ -77,13 +78,20 @@
         cs.style.fontSize = size + 'px';
     }
 
-    document.addEventListener('DOMContentLoaded', () => setTimeout(scaleCallsign, 400));
+    function initScale() {
+        const el = document.getElementById('widget-header');
+        if (!el) { setTimeout(initScale, 100); return; }
+        scaleCallsign();
+        if (window.ResizeObserver) new ResizeObserver(scaleCallsign).observe(el);
+        // Auch bei Gridstack resize
+        document.querySelector('.grid-stack')?.addEventListener('resizestop', scaleCallsign);
+    }
 
-    if (window.ResizeObserver) {
-        document.addEventListener('DOMContentLoaded', () => {
-            const el = document.getElementById('widget-header');
-            if (el) new ResizeObserver(scaleCallsign).observe(el);
-        });
+    // readyState prüfen — DOMContentLoaded könnte schon gefeuert sein
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(initScale, 300));
+    } else {
+        setTimeout(initScale, 300);
     }
 })();
 </script>
