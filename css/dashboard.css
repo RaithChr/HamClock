@@ -31,7 +31,7 @@
         @media (max-width: 1000px) { .main-content { grid-template-columns: 1fr; } }
 
         /* COMPACT Band Conditions */
-        .band-conditions-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 15px; }
+        .band-conditions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 5px; margin-top: 10px; }
         .band-box { padding: 6px 3px; border-radius: 8px; text-align: center; font-weight: 700; border: 1.5px solid; transition: all 0.3s; cursor: pointer; }
         .band-box:hover { transform: translateY(-2px); }
         .band-box.good { background: rgba(0,255,100,0.08); border-color: #00ff64; color: #00ff88; box-shadow: 0 0 8px rgba(0,255,136,0.3); }
@@ -83,8 +83,8 @@
         body.kiosk-mode.view-bottom .top-section { display: none; }
         .top-section, .bottom-section { transition: opacity 0.5s ease-in-out; }
 
-        @media (max-width: 1200px) { .band-conditions-grid { grid-template-columns: repeat(5, 1fr); } }
-        @media (max-width: 900px) { .band-conditions-grid { grid-template-columns: repeat(4, 1fr); } }
+        /* auto-fill handles responsive columns */
+        
         @media (max-width: 768px) { .modal-content, .settings-modal-content { padding: 30px 20px; max-width: 90vw; } .modal-header { font-size: 1.4em; } .form-group input, .form-group select { padding: 14px; font-size: 16px; } .modal-buttons { flex-direction: column; } #settings-btn { padding: 10px 12px; font-size: 0.85em; } .band-conditions-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; } }
         @media (max-width: 480px) { .band-conditions-grid { grid-template-columns: repeat(3, 1fr); gap: 3px; } .band-name { font-size: 0.75em; } .band-condition { font-size: 0.5em; } }
     
