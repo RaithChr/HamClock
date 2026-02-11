@@ -202,7 +202,7 @@ return phase;
     // === SYSTEM STATS ===
     async function loadSystemStats(){try{const d=await(await fetch('/get-system-stats.php')).json();if($('cpu-value')){$('cpu-value').textContent=d.cpu_percent+'%';$('cpu-bar').style.width=d.cpu_percent+'%';}if($('ram-value')){$('ram-value').textContent=d.ram_percent+'%';$('ram-bar').style.width=d.ram_percent+'%';}if($('disk-value')){$('disk-value').textContent=d.disk_percent+'%';$('disk-bar').style.width=d.disk_percent+'%';}if($('uptime-value'))$('uptime-value').textContent=d.uptime;}catch(e){}}
 
-    function refreshSDOImage(){if($('sdo-image'))$('sdo-image').src='https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_211193171.jpg?t='+Date.now();}
+    function refreshSDOImage(){if($('sdo-image'))$('sdo-image').src='/get-sdo-image.php?t='+Date.now();}
 
     // === INIT ===
     async function init(){
