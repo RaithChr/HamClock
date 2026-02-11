@@ -4,10 +4,7 @@
 
     <!-- Rufzeichen: klickbar, Farbe wechselt, Größe dynamisch -->
     <div id="header-callsign"
-         style="font-weight:800; white-space:nowrap; cursor:pointer;
-                color:#00ff88; letter-spacing:2px; flex-shrink:0;
-                transition:color 0.3s, text-shadow 0.3s;
-                text-shadow:0 0 20px currentColor;"
+         style="font-weight:800; white-space:nowrap; cursor:pointer; letter-spacing:2px; flex-shrink:0; transition:color 0.3s, text-shadow 0.3s; text-shadow:0 0 20px currentColor;"
          title="Farbe wechseln">
         🎙️ OE3LCR
     </div>

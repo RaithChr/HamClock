@@ -297,3 +297,9 @@
 .grid-stack-item.ui-draggable-dragging * { transition: none !important; }
 .grid-stack-item.ui-resizable-resizing * { transition: none !important; }
 .grid-stack-item.ui-draggable-dragging { will-change: transform; z-index: 1000; }
+
+/* Container Queries für Rufzeichen */
+#widget-header { container-type: inline-size; container-name: header-widget; }
+@container header-widget (min-width: 1px) {
+    #header-callsign { font-size: clamp(13px, 3.5cqw, 60px) !important; }
+}

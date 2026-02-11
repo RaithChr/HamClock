@@ -43,8 +43,6 @@ function initGrid() {
     }
 
     grid.on('dragstop resizestop', saveLayout);
-    grid.on('resizestop', scaleCallsign);
-    setTimeout(scaleCallsign, 500);
 }
 
 function saveLayout() {
@@ -76,13 +74,6 @@ function setGridKioskMode(active) {
 }
 
 
-// === Rufzeichen dynamische Schriftgröße ===
-function scaleCallsign() {
-    const widget = document.getElementById('widget-header');
-    const cs     = document.getElementById('header-callsign');
-    if (!widget || !cs) return;
-    const size = Math.max(Math.min(widget.offsetWidth * 0.04, widget.offsetHeight * 0.5, 38), 13);
-    cs.style.fontSize = size + 'px';
-}
+
 
 document.addEventListener('DOMContentLoaded', initGrid);
