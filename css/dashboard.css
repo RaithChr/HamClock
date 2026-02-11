@@ -257,7 +257,7 @@
     max-width: 100%;
     min-height: calc(100vh - 70px);
 }
-.grid-stack-item { will-change: transform; }
+.grid-stack-item { will-change: transform; clip-path: inset(0); }
 .grid-stack-item-content {
     height: 100% !important;
     overflow: hidden;
@@ -296,4 +296,4 @@
 /* Performance: Drag */
 .grid-stack-item.ui-draggable-dragging * { transition: none !important; }
 .grid-stack-item.ui-resizable-resizing * { transition: none !important; }
-.grid-stack-item.ui-draggable-dragging { will-change: transform; z-index: 1000; }
+.grid-stack-item.ui-draggable-dragging { will-change: transform; z-index: 1000; clip-path: none; }
