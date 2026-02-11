@@ -77,25 +77,39 @@ function initPageBadges() {
     });
 }
 
-// === Kiosk Seiten-Filter mit Compact ===
+// === Kiosk Seiten-Filter ===
 function showKioskPage(n) {
     currentPage = n;
 
-    // Widgets ein/ausblenden (display:none → kein Grid-Platz)
+    const hidden = [];
+    const visible = [];
+
     document.querySelectorAll('.grid-stack-item').forEach(item => {
         const page = getWidgetPage(item.id);
         const show = page === 'both' || page === 'p' + n;
         if (show) {
-            item.style.removeProperty('display');
+            visible.push(item);
         } else {
-            item.style.display = 'none';
+            hidden.push(item);
         }
     });
 
-    // Nach oben kompaktieren
-    if (window.grid) {
-        setTimeout(() => window.grid.compact(), 50);
-    }
+    // Ausgeblendete: aus Grid temporär entfernen (removeWidget behält DOM)
+    hidden.forEach(item => {
+        item.style.visibility = 'hidden';
+        item.style.opacity    = '0';
+        item.style.pointerEvents = 'none';
+        if (window.grid) window.grid.removeWidget(item, false); // false = DOM bleibt
+    });
+
+    // Sichtbare: einblenden + nach oben kompaktieren
+    visible.forEach(item => {
+        item.style.visibility = '';
+        item.style.opacity    = '';
+        item.style.pointerEvents = '';
+    });
+
+    if (window.grid) setTimeout(() => window.grid.compact(), 50);
 
     const btn = document.getElementById('kiosk-page-btn');
     if (btn) btn.textContent = '▶ S' + n;
@@ -132,9 +146,11 @@ window.toggleKioskMode = function() {
 
     } else {
         stopRotateTimer();
-        // Alle Widgets wieder einblenden
+        // Alle Widgets wieder einblenden + zum Grid hinzufügen
         document.querySelectorAll('.grid-stack-item').forEach(item => {
-            item.style.removeProperty('display');
+            item.style.visibility = '';
+            item.style.opacity    = '';
+            item.style.pointerEvents = '';
         });
         // Original-Layout wiederherstellen
         if (kioskSavedLayout && window.grid) {
