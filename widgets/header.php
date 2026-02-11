@@ -1,11 +1,14 @@
 <div class="card" id="widget-header-inner"
      style="display:flex; align-items:center; justify-content:space-between;
-            padding:10px 20px; gap:15px; flex-wrap:wrap; overflow:hidden;">
+            padding:10px 20px; gap:15px; flex-wrap:wrap; height:100%; box-sizing:border-box;">
 
-    <!-- Callsign: dynamische Schriftgröße -->
+    <!-- Rufzeichen: klickbar, Farbe wechselt, Größe dynamisch -->
     <div id="header-callsign"
-         style="font-weight:800; color:#00ff88; white-space:nowrap;
-                font-size:clamp(1em, 3vw, 2em); letter-spacing:2px; flex-shrink:0;">
+         style="font-weight:800; white-space:nowrap; cursor:pointer;
+                color:#00ff88; letter-spacing:2px; flex-shrink:0;
+                transition:color 0.3s, text-shadow 0.3s;
+                text-shadow:0 0 20px currentColor;"
+         title="Farbe wechseln">
         🎙️ OE3LCR
     </div>
 
@@ -27,23 +30,59 @@
 </div>
 
 <script>
-// Rufzeichen: ResizeObserver für dynamische Schriftgröße
 (function(){
+    // === Farbwechsel beim Klick ===
+    const COLORS = [
+        { color:'#ffe066', shadow:'rgba(255,224,102,0.6)' },  // Gelb
+        { color:'#ff9500', shadow:'rgba(255,149,0,0.6)' },    // Orange
+        { color:'#ff4757', shadow:'rgba(255,71,87,0.6)' },    // Rot
+        { color:'#00ff88', shadow:'rgba(0,255,136,0.6)' },    // Grün
+        { color:'#70a1ff', shadow:'rgba(112,161,255,0.6)' },  // Blau
+    ];
+    let colorIdx = 3; // Start: Grün
+
+    // Gespeicherte Farbe laden
+    const savedColor = localStorage.getItem('callsign_color');
+    if (savedColor !== null) colorIdx = parseInt(savedColor);
+
+    function applyColor(el) {
+        const c = COLORS[colorIdx % COLORS.length];
+        el.style.color = c.color;
+        el.style.textShadow = '0 0 20px ' + c.shadow;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const cs = document.getElementById('header-callsign');
+        if (!cs) return;
+
+        // Gespeicherte Farbe anwenden
+        applyColor(cs);
+
+        // Klick → nächste Farbe
+        cs.addEventListener('click', () => {
+            colorIdx = (colorIdx + 1) % COLORS.length;
+            localStorage.setItem('callsign_color', colorIdx);
+            applyColor(cs);
+        });
+    });
+
+    // === Dynamische Schriftgröße ===
     function scaleCallsign() {
-        // Äußeres Widget beobachten (widget-header = Gridstack-Item)
         const widget = document.getElementById('widget-header');
         const cs = document.getElementById('header-callsign');
         if (!widget || !cs) return;
         const w = widget.offsetWidth;
-        const size = Math.max(Math.min(w * 0.035, 36), 13);
+        const h = widget.offsetHeight;
+        const size = Math.max(Math.min(w * 0.04, h * 0.45, 38), 13);
         cs.style.fontSize = size + 'px';
     }
-    window.addEventListener('DOMContentLoaded', () => setTimeout(scaleCallsign, 400));
+
+    document.addEventListener('DOMContentLoaded', () => setTimeout(scaleCallsign, 400));
+
     if (window.ResizeObserver) {
-        const ro = new ResizeObserver(scaleCallsign);
         document.addEventListener('DOMContentLoaded', () => {
             const el = document.getElementById('widget-header');
-            if (el) { ro.observe(el); }
+            if (el) new ResizeObserver(scaleCallsign).observe(el);
         });
     }
 })();
