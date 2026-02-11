@@ -1,4 +1,4 @@
-                <div class="card" id="kiosk-bands">
+                <div class="card" id="kiosk-bands" style="overflow:hidden; min-width:0;">
                     <div class="card-header"><span class="icon">📡</span><span class="card-title" data-i18n="card_bands">Band Conditions</span></div>
                     <div class="band-conditions-grid">
                         <div id="band160-box" class="band-box poor"><div class="band-name">160m</div><div class="band-condition">POOR</div></div>
