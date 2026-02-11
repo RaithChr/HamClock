@@ -19,6 +19,9 @@
         </a>
         <button class="hdr-btn btn-kiosk" id="kiosk-btn" onclick="toggleKioskMode()" data-i18n="fullscreen_btn">📺 Vollbild</button>
         <button class="hdr-btn btn-settings" id="settings-btn" data-i18n="settings_btn">⚙️ Einstellungen</button>
+        <button id="kiosk-page-btn" class="hdr-btn" onclick="nextKioskPage()"
+                style="display:none; background:rgba(0,255,136,0.15); border:1px solid #00ff88; color:#00ff88;"
+                title="Nächste Seite">▶ S1</button>
         <button class="hdr-btn" onclick="resetGridLayout()"
                 style="background:rgba(255,165,0,0.15); border:1px solid #ffa502; color:#ffa502;"
                 title="Layout zurücksetzen">🔄 Reset</button>
