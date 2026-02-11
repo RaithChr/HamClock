@@ -75,12 +75,16 @@ function initPageBadges() {
             // Normal: am Card-Header anhängen
             header.appendChild(badge);
         } else {
-            // Fallback: absolut positioniert oben rechts
+            // Fallback: absolut innerhalb der .card div
             badge.style.cssText += `
                 position:absolute; top:6px; right:6px; z-index:50;
             `;
-            const content = item.querySelector('.grid-stack-item-content');
-            if (content) content.appendChild(badge);
+            // .card hat position:relative, daher Badge korrekt platziert
+            const card = item.querySelector('.card');
+            if (card) {
+                card.style.position = 'relative';
+                card.appendChild(badge);
+            }
         }
     });
 }
