@@ -257,11 +257,11 @@
     max-width: 100%;
     min-height: calc(100vh - 70px);
 }
-.grid-stack-item { overflow: hidden !important; will-change: transform; }
+.grid-stack-item { will-change: transform; }
 .grid-stack-item-content {
     height: 100% !important;
-    overflow: hidden !important;
-    min-width: 0 !important;
+    overflow: hidden;
+    min-width: 0;
     display: flex;
     flex-direction: column;
 }
