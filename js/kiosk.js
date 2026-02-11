@@ -63,6 +63,8 @@ function initPageBadges() {
             const next = CYCLE[getWidgetPage(id)] || 'p1';
             savePage(id, next);
             applyBadge(badge, next);
+            // Kiosk aktiv → sofort neu anwenden
+            if (kioskActive) showKioskPage(currentPage);
         });
 
         const header = item.querySelector('.card-header');
