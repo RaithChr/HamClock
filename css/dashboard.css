@@ -31,7 +31,7 @@
         @media (max-width: 1000px) { .main-content { grid-template-columns: 1fr; } }
 
         /* COMPACT Band Conditions */
-        .band-conditions-grid { display:grid; grid-template-columns:repeat(auto-fill,58px); gap:6px; margin-top:10px; justify-content:center; max-width:378px; margin-left:auto; margin-right:auto; }
+        .band-conditions-grid { display:grid; grid-template-columns:repeat(auto-fill,58px); gap:6px; margin-top:10px; justify-content:start; }
         .band-box { width:58px; height:48px; padding:4px 2px; border-radius:8px; text-align:center; font-weight:700; border:1.5px solid; transition:all 0.3s; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; }
         .band-box:hover { transform: translateY(-2px); }
         .band-box.good { background: rgba(0,255,100,0.08); border-color: #00ff64; color: #00ff88; box-shadow: 0 0 8px rgba(0,255,136,0.3); }
@@ -85,8 +85,8 @@
 
         /* auto-fill handles responsive columns */
         
-        @media (max-width: 768px) { .modal-content, .settings-modal-content { padding: 30px 20px; max-width: 90vw; } .modal-header { font-size: 1.4em; } .form-group input, .form-group select { padding: 14px; font-size: 16px; } .modal-buttons { flex-direction: column; } #settings-btn { padding: 10px 12px; font-size: 0.85em; } .band-conditions-grid { display:grid; grid-template-columns:repeat(auto-fill,58px); gap:6px; margin-top:10px; justify-content:center; max-width:378px; margin-left:auto; margin-right:auto; } }
-        @media (max-width: 480px) { .band-conditions-grid { display:grid; grid-template-columns:repeat(auto-fill,58px); gap:6px; margin-top:10px; justify-content:center; max-width:378px; margin-left:auto; margin-right:auto; } .band-name { font-size: 0.75em; } .band-condition { font-size: 0.5em; } }
+        @media (max-width: 768px) { .modal-content, .settings-modal-content { padding: 30px 20px; max-width: 90vw; } .modal-header { font-size: 1.4em; } .form-group input, .form-group select { padding: 14px; font-size: 16px; } .modal-buttons { flex-direction: column; } #settings-btn { padding: 10px 12px; font-size: 0.85em; } .band-conditions-grid { display:grid; grid-template-columns:repeat(auto-fill,58px); gap:6px; margin-top:10px; justify-content:start; } }
+        @media (max-width: 480px) { .band-conditions-grid { display:grid; grid-template-columns:repeat(auto-fill,58px); gap:6px; margin-top:10px; justify-content:start; } .band-name { font-size: 0.75em; } .band-condition { font-size: 0.5em; } }
     
         /* Kiosk Mode - Card-based splitting */
         
