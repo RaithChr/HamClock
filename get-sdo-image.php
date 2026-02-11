@@ -1,6 +1,6 @@
 <?php
-// PHP-Proxy für NASA/SOHO Sonnenbild (umgeht Browser-Blocks)
-$cache_file = '/tmp/sdo_cache.jpg';
+// PHP-Proxy für Sonnenbild — hohe Auflösung (1024px)
+$cache_file = '/tmp/sdo_cache_hq.jpg';
 $cache_time = 300; // 5 Minuten
 
 if (file_exists($cache_file) && (time() - filemtime($cache_file)) < $cache_time) {
@@ -10,11 +10,15 @@ if (file_exists($cache_file) && (time() - filemtime($cache_file)) < $cache_time)
     exit;
 }
 
-// SDO direkt versuchen, dann SOHO als Fallback
 $urls = [
-    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_211193171.jpg',
+    // SDO NASA direkt (1024px, manchmal erreichbar)
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/f_211_193_171_1024.jpg',
+    // SOHO EIT 304 — 1024px, hochauflösend, orange/rot ✅
+    'https://soho.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
+    // SOHO HMI — 1024px Magnetogramm ✅
+    'https://soho.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg',
+    // Fallback 512px
     'https://soho.nascom.nasa.gov/data/realtime/eit_304/512/latest.jpg',
-    'https://soho.nascom.nasa.gov/data/realtime/hmi_igr/512/latest.jpg',
 ];
 
 $img = false;
@@ -24,7 +28,7 @@ foreach ($urls as $url) {
         'header' => "User-Agent: Mozilla/5.0 (craith.cloud Ham Dashboard)\r\n",
     ]]);
     $data = @file_get_contents($url, false, $ctx);
-    if ($data && strlen($data) > 10000) {
+    if ($data && strlen($data) > 50000) {
         $img = $data;
         break;
     }
@@ -37,5 +41,4 @@ if ($img) {
     echo $img;
 } else {
     http_response_code(503);
-    echo 'Image unavailable';
 }
