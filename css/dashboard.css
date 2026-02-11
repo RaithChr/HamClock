@@ -32,7 +32,7 @@
 
         /* COMPACT Band Conditions */
         .band-conditions-grid { display:flex; flex-wrap:wrap; gap:5px; padding:5px 2px; overflow:hidden; width:100%; box-sizing:border-box; align-content:flex-start; }
-        .band-box { width:56px; height:46px; flex-shrink:0; flex-grow:0; padding:3px 2px; border-radius:8px; text-align:center; font-weight:700; border:1.5px solid; transition:all 0.3s; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; box-sizing:border-box; }
+        .band-box { width:56px; height:46px; flex-shrink:0; flex-grow:0; padding:3px 2px; border-radius:8px; text-align:center; font-weight:700; border:1.5px solid; transition:border-color 0.2s, box-shadow 0.2s; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; box-sizing:border-box; }
         .band-box:hover { transform: translateY(-2px); }
         .band-box.good { background: rgba(0,255,100,0.08); border-color: #00ff64; color: #00ff88; box-shadow: 0 0 8px rgba(0,255,136,0.3); }
         .band-box.fair { background: rgba(255,165,0,0.08); border-color: #ffa502; color: #ffb020; box-shadow: 0 0 8px rgba(255,165,2,0.3); }
@@ -52,10 +52,10 @@
         .modal-subtitle { color: #aaa; text-align: center; margin-bottom: 30px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; color: #00ff88; font-weight: 600; font-size: 0.95em; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(0,255,136,0.3); border-radius: 8px; color: #e0e0e0; font-size: 1em; font-family: 'Inter', sans-serif; transition: all 0.3s; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(0,255,136,0.3); border-radius: 8px; color: #e0e0e0; font-size: 1em; font-family: 'Inter', sans-serif; transition: border-color 0.2s, box-shadow 0.2s; }
         .form-group input:focus, .form-group select:focus { outline: none; border-color: #00ff88; background: rgba(0,255,136,0.1); box-shadow: 0 0 20px rgba(0,255,136,0.2); }
         .modal-buttons { display: flex; gap: 15px; margin-top: 30px; }
-        .btn-primary { flex: 1; padding: 12px 20px; background: linear-gradient(135deg, #00ff88, #00cc6a); color: #000; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { flex: 1; padding: 12px 20px; background: linear-gradient(135deg, #00ff88, #00cc6a); color: #000; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,255,136,0.4); }
 
         /* Settings Modal (dynamically created by user-settings.js) */
@@ -68,15 +68,15 @@
         .settings-info { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; color: #ccc; }
         .settings-info p { margin: 5px 0; font-size: 0.95em; }
         .settings-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn-save { padding: 10px; background: linear-gradient(135deg, #00ff88, #00cc6a); color: #000; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-save { padding: 10px; background: linear-gradient(135deg, #00ff88, #00cc6a); color: #000; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
         .btn-save:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,255,136,0.3); }
-        .btn-reset { padding: 10px; background: rgba(255,71,87,0.2); color: #ff4757; border: 1px solid #ff4757; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-reset { padding: 10px; background: rgba(255,71,87,0.2); color: #ff4757; border: 1px solid #ff4757; border-radius: 8px; font-weight: 600; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
         .btn-reset:hover { background: rgba(255,71,87,0.3); }
-        .btn-cancel { padding: 10px; background: rgba(255,255,255,0.1); color: #aaa; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; grid-column: 1 / -1; }
+        .btn-cancel { padding: 10px; background: rgba(255,255,255,0.1); color: #aaa; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-weight: 600; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; grid-column: 1 / -1; }
         .btn-cancel:hover { background: rgba(255,255,255,0.15); }
-        #settings-btn { background: rgba(255,165,2,0.2); border: 1px solid rgba(255,165,2,0.4); color: #ffa502; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-size: 0.9em; }
+        #settings-btn { background: rgba(255,165,2,0.2); border: 1px solid rgba(255,165,2,0.4); color: #ffa502; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: border-color 0.2s, box-shadow 0.2s; font-size: 0.9em; }
         #settings-btn:hover { background: rgba(255,165,2,0.3); box-shadow: 0 0 20px rgba(255,165,2,0.2); }
-        #kiosk-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9em; transition: all 0.3s; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3); }
+        #kiosk-btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9em; transition: border-color 0.2s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3); }
         #kiosk-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5); }
         body.kiosk-mode { overflow: hidden; }
         body.kiosk-mode.view-top .bottom-section { display: none; }
@@ -257,7 +257,7 @@
     max-width: 100%;
     min-height: calc(100vh - 70px);
 }
-.grid-stack-item { overflow: hidden !important; }
+.grid-stack-item { overflow: hidden !important; will-change: transform; }
 .grid-stack-item-content {
     height: 100% !important;
     overflow: hidden !important;
@@ -292,3 +292,8 @@
 .card ::-webkit-scrollbar-track { background: transparent; }
 .card ::-webkit-scrollbar-thumb { background: rgba(0,255,136,0.3); border-radius: 4px; }
 .card ::-webkit-scrollbar-thumb:hover { background: rgba(0,255,136,0.6); }
+
+/* Performance: Drag */
+.grid-stack-item.ui-draggable-dragging * { transition: none !important; }
+.grid-stack-item.ui-resizable-resizing * { transition: none !important; }
+.grid-stack-item.ui-draggable-dragging { will-change: transform; z-index: 1000; }

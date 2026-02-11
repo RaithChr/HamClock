@@ -14,7 +14,7 @@ const DEFAULT_LAYOUT = [
 let grid = null;
 function initGrid() {
     grid = GridStack.init({
-        column:12, cellHeight:80, animate:true, float:false,
+        column:12, cellHeight:80, animate:false, float:false,
         resizable:{handles:'se,sw'}, draggable:{handle:'.card-header'},
         oneColumnSize:768,
     });
