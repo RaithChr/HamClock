@@ -10,10 +10,7 @@
         overflow-y:auto;
         flex:1;
         min-height:0;
-        scrollbar-width:none;
-        -ms-overflow-style:none;
     "></div>
-    <style>#satellite-container::-webkit-scrollbar{display:none;}</style>
     <div style="margin-top:8px; font-size:0.7em; color:#555; text-align:center; flex-shrink:0;">
         <span data-i18n="tle_source">TLE Quelle:</span> CelesTrak •
         <span data-i18n="tle_updated">TLE aktualisiert:</span>
