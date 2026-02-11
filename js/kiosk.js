@@ -53,12 +53,13 @@ function applyBadge(badge, page) {
 
 function initPageBadges() {
     document.querySelectorAll('.grid-stack-item').forEach(item => {
-        const header = item.querySelector('.card-header');
-        if (!header || header.querySelector('.page-badge')) return;
-        const id     = item.id;
+        const id = item.id;
         if (!id) return;
 
-        const badge  = document.createElement('span');
+        // Schon ein Badge? Überspringen
+        if (item.querySelector('.page-badge')) return;
+
+        const badge = document.createElement('span');
         badge.className = 'page-badge';
         applyBadge(badge, getWidgetPage(id));
 
@@ -69,7 +70,18 @@ function initPageBadges() {
             applyBadge(badge, next);
         });
 
-        header.appendChild(badge);
+        const header = item.querySelector('.card-header');
+        if (header) {
+            // Normal: am Card-Header anhängen
+            header.appendChild(badge);
+        } else {
+            // Fallback: absolut positioniert oben rechts
+            badge.style.cssText += `
+                position:absolute; top:6px; right:6px; z-index:50;
+            `;
+            const content = item.querySelector('.grid-stack-item-content');
+            if (content) content.appendChild(badge);
+        }
     });
 }
 
