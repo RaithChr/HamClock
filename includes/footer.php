@@ -1,0 +1,283 @@
+    <script>
+    // ============================================
+    // MAIN APPLICATION v4
+    // ============================================
+    const TIMEZONE = 'Europe/Vienna';
+    const MOON_EMOJIS = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
+    const $ = (id) => document.getElementById(id);
+
+    // === TIMEZONE ===
+    function getViennaTime(now) { return new Intl.DateTimeFormat('de-AT',{timeZone:TIMEZONE,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now); }
+    function getViennaDate(now) { return new Intl.DateTimeFormat('de-AT',{timeZone:TIMEZONE,weekday:'long',year:'numeric',month:'2-digit',day:'2-digit'}).format(now); }
+
+    function getMoonPhase(d) {
+const newMoon=new Date(2026,0,29,12,0,0).getTime();
+const age=((d.getTime()-newMoon)/86400000%29.53059+29.53059)%29.53059;
+const phase=Math.round(age/29.53059*8)%8;
+return phase;
+}
+    function getMoonRiseSet(d) {
+        const p=getMoonPhase(d), h=(6+p*3)%24, s=(h+12)%24, v=(d.getDate()*50)%60;
+        return {rise:String(h).padStart(2,'0')+':'+String(v).padStart(2,'0'), set:String(s).padStart(2,'0')+':'+String((v+30)%60).padStart(2,'0')};
+    }
+
+
+    // === SUN/MOON TIMES (US Naval Observatory API) ===
+    let sunData = null;
+    const MOON_PHASE_DE = {
+        'New Moon':'Neumond','Waxing Crescent':'Zunehmende Sichel',
+        'First Quarter':'Erstes Viertel','Waxing Gibbous':'Zunehmender Mond',
+        'Full Moon':'Vollmond','Waning Gibbous':'Abnehmender Mond',
+        'Last Quarter':'Letztes Viertel','Waning Crescent':'Abnehmende Sichel'
+    };
+    async function fetchSunData() {
+        try {
+            const s = UserSettings.load();
+            const c = locatorToCoords(s.locator || 'JN87ct');
+            // Calculate timezone offset from longitude (15° = 1h)
+            const tzOffset = Math.round(c.lon / 15);
+            const r = await fetch(`/fetch-sun-moon.php?lat=${c.lat}&lng=${c.lon}&tz=${tzOffset}`);
+            if (!r.ok) throw 0;
+            sunData = await r.json();
+            // Sun times
+            if ($('sunTimes') && sunData.sunrise)
+                $('sunTimes').textContent = sunData.sunrise + ' / ' + sunData.sunset;
+            // Day length
+            if ($('dayLength') && sunData.day_length)
+                $('dayLength').textContent = sunData.day_length;
+            // Moon rise/set
+            if ($('moonTimes') && sunData.moonrise)
+                $('moonTimes').textContent = sunData.moonrise + ' / ' + sunData.moonset;
+            // Moon phase text in QTH panel
+            if ($('moonPhaseName') && sunData.moon_phase) {
+                const lang = UserSettings.load().language || 'de';
+                const phaseName = lang === 'de'
+                    ? (MOON_PHASE_DE[sunData.moon_phase] || sunData.moon_phase)
+                    : sunData.moon_phase;
+                $('moonPhaseName').textContent = phaseName + ' (' + (sunData.moon_illum||'') + ')';
+            }
+        } catch(e) {
+            console.warn('Sun/Moon data fetch failed:', e);
+        }
+    }
+
+    function updateTime() {
+        const now=new Date();
+        if($('time'))$('time').textContent=getViennaTime(now);
+        if($('time-utc'))$('time-utc').textContent=[now.getUTCHours(),now.getUTCMinutes(),now.getUTCSeconds()].map(v=>String(v).padStart(2,'0')).join(':');
+        if($('date'))$('date').textContent=getViennaDate(now);
+        if($('footer-time'))$('footer-time').textContent=getViennaTime(now);
+        if($('moonEmoji'))$('moonEmoji').textContent=MOON_EMOJIS[getMoonPhase(now)];
+        const m=getMoonRiseSet(now);
+        if($('moonTimes'))$('moonTimes').textContent=`${m.rise} / ${m.set}`;
+    }
+
+    // === SOLAR DATA (parallel load) ===
+    let realSolarData = null;
+    const solarP = fetch('/data/solar-data.json?t='+Date.now()).then(r=>r.ok?r.json():null).then(d=>{realSolarData=d;}).catch(()=>{});
+
+    function estimateMUF(sfi) { return Math.max(10,Math.round((Math.sqrt(sfi)*2.5+Math.sin((new Date().getUTCHours()-6)*Math.PI/12)*3)*10)/10); }
+
+    function updateSolarData() {
+        let sfi=95,ssn=63,kI=2,aI=24;
+        if(realSolarData?.success){kI=realSolarData.kIndex||2;sfi=realSolarData.sfi||95;if(window.updateAllBandConditions)updateAllBandConditions();aI=realSolarData.aIndex||kI*12;ssn=Math.round(sfi/1.5);}
+        let st=t('weather_quiet'); if(kI>5)st=t('weather_active'); if(kI>7)st=t('weather_storm');
+        const u={kIndexCombined:kI,solarFluxCombined:sfi,sunspotsCombined:ssn,aIndexCombined:aI,auroraCombined:kI>4?'Visible':'Quiet',mufCombined:estimateMUF(sfi)+' MHz',spaceWeatherCombined:st};
+        for(const[id,v]of Object.entries(u)){if($(id))$(id).textContent=v;}
+        
+    }
+
+    // === REAL SATELLITE TRACKING with satellite.js ===
+    let satRecords = {}; // {name: {satrec, color}}
+    let tleData = null;
+
+    async function loadTLEData() {
+        try {
+            const r = await fetch('/satellite-data.json?t='+Date.now());
+            tleData = await r.json();
+            if ($('tle-updated')) $('tle-updated').textContent = tleData.updated_at || '--';
+            const sats = tleData.satellites;
+            for (const [name, data] of Object.entries(sats)) {
+                try {
+                    const satrec = satellite.twoline2satrec(data.tle1, data.tle2);
+                    satRecords[name] = { satrec, color: data.color || '#fff' };
+                } catch(e) {}
+            }
+            updateSatellites();
+        } catch(e) {
+            if ($('satellite-container')) $('satellite-container').innerHTML = '<div style="color:#ff4757; padding:10px;">TLE data unavailable</div>';
+        }
+    }
+
+    function updateSatellites() {
+        const container = $('satellite-container');
+        if (!container) return;
+
+        // Observer position from TLE data (OE3LCR QTH)
+        const obsLat = 47.8125 * Math.PI / 180;
+        const obsLon = 16.2083 * Math.PI / 180;
+        const obsAlt = 0.2; // km
+
+        const now = new Date();
+        const gmst = satellite.gstime(now);
+        let html = '';
+
+        for (const [name, {satrec, color}] of Object.entries(satRecords)) {
+            try {
+                const posVel = satellite.propagate(satrec, now);
+                if (!posVel.position) { html += `<div style="padding:8px; color:${color}; border-bottom:1px solid rgba(255,255,255,0.1);"><strong>${name}</strong><div style="color:#ff4757; font-size:0.8em;">Propagation error</div></div>`; continue; }
+
+                const eciPos = posVel.position;
+                const ecfPos = satellite.eciToEcf(eciPos, gmst);
+                const lookAngles = satellite.ecfToLookAngles({latitude:obsLat, longitude:obsLon, height:obsAlt}, ecfPos);
+
+                const azDeg = lookAngles.azimuth * 180 / Math.PI;
+                const elDeg = lookAngles.elevation * 180 / Math.PI;
+                const distKm = lookAngles.rangeSat;
+
+                const isVisible = elDeg > 0;
+                const statusText = isVisible ? t('sat_visible') : t('sat_below');
+                const elColor = isVisible ? '#00ff88' : '#666';
+
+                html += `<div style="padding:8px; color:${color}; border-bottom:1px solid rgba(255,255,255,0.1);">` +
+                    `<div><strong>${name}</strong></div>` +
+                    `<div style="color:#aaa; font-size:0.8em; font-variant-numeric:tabular-nums;">Az: ${azDeg.toFixed(1).padStart(5)}° El: <span style="color:${elColor}">${elDeg.toFixed(1).padStart(5)}°</span> Dist: ${Math.round(distKm)} km</div>` +
+                    `<div style="color:${isVisible?'#00ff88':'#666'}; font-size:0.75em; margin-top:2px;">${statusText}</div>` +
+                    `</div>`;
+            } catch(e) {
+                html += `<div style="padding:8px; color:${color}; border-bottom:1px solid rgba(255,255,255,0.1);"><strong>${name}</strong><div style="color:#ff4757; font-size:0.8em;">Calc error</div></div>`;
+            }
+        }
+
+        container.innerHTML = html || `<div style="color:#888; padding:10px;">${t('sat_loading')}</div>`;
+    }
+
+    // === DX CLUSTER ===
+    function updateDXCluster() {
+        const calls=['N0BUI','IZ0UDF','ZS6WX','VK2RZA','JA1XYZ','W5XYZ','G3XYZ','CE3XYZ'];
+        const freqs=['3.525','7.035','7.065','10.135','14.150','14.250','21.200','21.290'];
+        const now=new Date();
+        for(let i=1;i<=8;i++){
+            const ci=Math.floor(Math.random()*calls.length),fi=Math.floor(Math.random()*freqs.length);
+            const st=new Date(now.getTime()-(2+Math.floor(Math.random()*5))*60000);
+            if($(`dx${i}`))$(`dx${i}`).textContent=`${calls[ci]} ${freqs[fi]}`;
+            if($(`dx${i}-time`))$(`dx${i}-time`).textContent=String(st.getUTCHours()).padStart(2,'0')+':'+String(st.getUTCMinutes()).padStart(2,'0')+' UTC';
+        }
+    }
+
+    // === LOCATOR ===
+    function locatorToCoords(loc) {
+        if(!loc||loc.length<4)return{lat:47.8125,lon:16.2083,display:'47.8125°N 16.2083°E'};
+        loc=loc.toUpperCase();
+        try{let lo=(loc.charCodeAt(0)-65)*20-180,la=(loc.charCodeAt(1)-65)*10-90;if(loc.length>=4){lo+=parseInt(loc[2])*2;la+=parseInt(loc[3]);}if(loc.length>=6){lo+=(loc.charCodeAt(4)-65)*(2/24)+(1/24);la+=(loc.charCodeAt(5)-65)*(1/24)+(1/48);}lo=Math.max(-180,Math.min(180,lo));la=Math.max(-90,Math.min(90,la));return{lat:la,lon:lo,display:`${Math.abs(la).toFixed(4)}°${la>=0?'N':'S'} ${Math.abs(lo).toFixed(4)}°${lo>=0?'E':'W'}`};}
+        catch(e){return{lat:47.8125,lon:16.2083,display:'47.8125°N 16.2083°E'};}
+    }
+    function formatLocator(l){if(!l)return'JN87ct';l=l.toUpperCase();return l.length===6?l.substring(0,4)+l.substring(4,6).toLowerCase():l;}
+
+    // === PERSONALIZATION ===
+    function personalizeHomepage() {
+        const s=UserSettings.load(), call=(s.callsign||'OE3LCR').toUpperCase(), loc=formatLocator(s.locator||'JN87ct');
+        if($('header-callsign'))$('header-callsign').textContent=`🎙️ ${call}`;
+        if($('qth-locator'))$('qth-locator').textContent=loc;
+        if($('qth-coords'))$('qth-coords').textContent=locatorToCoords(loc).display;
+        document.title=`${call} - Ham Radio Dashboard`;
+    }
+    window.addEventListener('settingsChanged',()=>{personalizeHomepage();fetchLocalWeather();updatePageTranslations();updateSatellites();});
+    window.addEventListener('storage',(e)=>{if(e.key==='gwen_hp_settings')personalizeHomepage();});
+
+    // === WEATHER ===
+    async function fetchLocalWeather() {
+        try{const c=locatorToCoords(UserSettings.load().locator||'JN87ct'),r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,is_day&timezone=auto`);if(!r.ok)throw 0;const d=await r.json(),v=d.current;if(!v)throw 0;const isDay=v.is_day===1;
+        const wC={0:{d:'☀️',n:'🌙',k:'w_clear'},1:{d:'🌤️',n:'🌙',k:'w_mostly_clear'},2:{d:'⛅',n:'☁️',k:'w_partly_cloudy'},3:{d:'☁️',n:'☁️',k:'w_overcast'},45:{d:'🌫️',n:'🌫️',k:'w_fog'},48:{d:'🌫️',n:'🌫️',k:'w_fog'},51:{d:'🌦️',n:'🌧️',k:'w_light_rain'},53:{d:'🌧️',n:'🌧️',k:'w_mod_rain'},55:{d:'⛈️',n:'⛈️',k:'w_heavy_rain'},61:{d:'🌧️',n:'🌧️',k:'w_rain'},63:{d:'🌧️',n:'🌧️',k:'w_mod_rain'},65:{d:'⛈️',n:'⛈️',k:'w_heavy_rain'},71:{d:'🌨️',n:'🌨️',k:'w_snow'},73:{d:'🌨️',n:'🌨️',k:'w_snow'},75:{d:'🌨️',n:'🌨️',k:'w_heavy_snow'},80:{d:'🌧️',n:'🌧️',k:'w_rain'},81:{d:'🌧️',n:'🌧️',k:'w_rain'},82:{d:'⛈️',n:'⛈️',k:'w_heavy_rain'},85:{d:'🌨️',n:'🌨️',k:'w_snow'},86:{d:'🌨️',n:'🌨️',k:'w_heavy_snow'}};
+        const w=wC[v.weather_code]||{d:'❓',n:'❓',k:'w_unknown'},icon=isDay?w.d:w.n;
+        if($('localTemp'))$('localTemp').textContent=`${v.temperature_2m}°C`;if($('localHumidity'))$('localHumidity').textContent=`${v.relative_humidity_2m}%`;if($('localWind'))$('localWind').textContent=`${Math.round(v.wind_speed_10m)} km/h`;if($('localWeatherIcon'))$('localWeatherIcon').textContent=icon;if($('localWeather'))$('localWeather').textContent=t(w.k);
+        }catch(e){if($('localTemp'))$('localTemp').textContent='--°C';if($('localWeather'))$('localWeather').textContent='❌ API Error';if($('localWeatherIcon'))$('localWeatherIcon').textContent='❓';}
+    }
+
+    // === QRZ ===
+    function openQRZModal(cs,f){$('qrz-callsign').textContent=cs;$('qrz-frequency').textContent=f+' MHz';$('qrz-link').href=`https://www.qrz.com/lookup/${encodeURIComponent(cs)}`;$('qrz-modal').style.display='flex';}
+    function closeQRZModal(){$('qrz-modal').style.display='none';}
+    document.addEventListener('click',(e)=>{if(e.target===$('qrz-modal'))closeQRZModal();});
+
+    // === SYSTEM STATS ===
+    async function loadSystemStats(){try{const d=await(await fetch('/get-system-stats.php')).json();if($('cpu-value')){$('cpu-value').textContent=d.cpu_percent+'%';$('cpu-bar').style.width=d.cpu_percent+'%';}if($('ram-value')){$('ram-value').textContent=d.ram_percent+'%';$('ram-bar').style.width=d.ram_percent+'%';}if($('disk-value')){$('disk-value').textContent=d.disk_percent+'%';$('disk-bar').style.width=d.disk_percent+'%';}if($('uptime-value'))$('uptime-value').textContent=d.uptime;}catch(e){}}
+
+    function refreshSDOImage(){if($('sdo-image'))$('sdo-image').src='https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_211193171.jpg?t='+Date.now();}
+
+    // === INIT ===
+    async function init(){
+        personalizeHomepage(); updateTime();
+        await solarP; updateSolarData(); if(window.updateAllBandConditions)updateAllBandConditions();
+        fetchLocalWeather(); fetchSunData(); updateDXCluster(); refreshSDOImage(); loadSystemStats(); loadTLEData(); updatePageTranslations();
+    }
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+
+    setInterval(updateTime,1000);
+    setInterval(()=>{fetch('/data/solar-data.json?t='+Date.now()).then(r=>r.json()).then(d=>{realSolarData=d;updateSolarData();}).catch(()=>{});},300000);
+    setInterval(fetchLocalWeather,600000);
+    setInterval(fetchSunData,1800000);
+    setInterval(updateDXCluster,60000);
+    setInterval(updateSatellites,7000); // Real tracking: every 5 sec
+    setInterval(refreshSDOImage,300000);
+    setInterval(loadSystemStats,10000);
+    setInterval(loadTLEData,3600000); // Reload TLE every hour
+    </script>
+
+<script>
+// Kiosk Mode with Auto-Rotate
+let kioskMode=false,currentView='top',rotateInterval=null;
+function loadKioskState(){const s=localStorage.getItem('kioskMode');if(s==='true')enableKioskMode();}
+function saveKioskState(e){localStorage.setItem('kioskMode',e?'true':'false');}
+function enableKioskMode(){if(kioskMode)return;kioskMode=true;saveKioskState(true);const e=document.documentElement;if(e.requestFullscreen)e.requestFullscreen();else if(e.webkitRequestFullscreen)e.webkitRequestFullscreen();document.body.classList.add('kiosk-mode');startAutoRotate();showView('top');}
+function disableKioskMode(){if(!kioskMode)return;kioskMode=false;saveKioskState(false);if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();document.body.classList.remove('kiosk-mode','view-top','view-bottom');stopAutoRotate();}
+function toggleKioskMode(){kioskMode?disableKioskMode():enableKioskMode();}
+function showView(v){
+currentView=v;
+document.body.classList.remove('view-top','view-bottom');
+document.body.classList.add('view-'+v);
+console.log('[Kiosk] View changed to:', v);
+if(v==='bottom'){
+setTimeout(()=>{
+const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
+console.log('[Kiosk] Setting equal widths...');
+if(s){s.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('Sat:',s.style.width);}
+if(d){d.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('DX:',d.style.width);}
+if(y){y.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('Sys:',y.style.width);}
+},100);
+}}
+function startAutoRotate(){stopAutoRotate();rotateInterval=setInterval(()=>{currentView=currentView==='top'?'bottom':'top';showView(currentView);},7000);}
+function stopAutoRotate(){if(rotateInterval){clearInterval(rotateInterval);rotateInterval=null;}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&kioskMode)disableKioskMode();});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&kioskMode)disableKioskMode();});
+window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
+
+
+
+// BRUTAL width enforcement for kiosk mode
+function enforceKioskWidths(){
+if(!document.body.classList.contains('kiosk-mode')||!document.body.classList.contains('view-bottom'))return;
+const container=document.querySelector('.grid-3');
+if(!container)return;
+const containerWidth=container.offsetWidth;
+const panelWidth=Math.floor(containerWidth/3);
+const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
+if(s){s.style.width=panelWidth+'px';s.style.flex='none';s.style.maxWidth=panelWidth+'px';s.style.minWidth=panelWidth+'px';}
+if(d){d.style.width=panelWidth+'px';d.style.flex='none';d.style.maxWidth=panelWidth+'px';d.style.minWidth=panelWidth+'px';}
+if(y){y.style.width=panelWidth+'px';y.style.flex='none';y.style.maxWidth=panelWidth+'px';y.style.minWidth=panelWidth+'px';}
+}
+setInterval(enforceKioskWidths,100);
+window.addEventListener('resize',enforceKioskWidths);
+
+</script>
+
+    <script src="/js/gridstack.min.js"></script>
+    <script src="/js/dashboard-grid.js"></script>
+    <!-- Kiosk grid hook -->
+    <script>
+    const _origEnable = window.enableKioskMode;
+    window.enableKioskMode = function() { if(typeof _origEnable==="function") _origEnable(); setGridKioskMode(true); };
+    const _origDisable = window.disableKioskMode;
+    window.disableKioskMode = function() { if(typeof _origDisable==="function") _origDisable(); setGridKioskMode(false); };
+    </script>
+</body>
+</html>

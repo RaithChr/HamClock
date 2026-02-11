@@ -1,0 +1,13 @@
+                        <div class="card">
+                <div class="card-header"><span class="icon">🌍</span><span class="card-title" data-i18n="card_dx">DX Cluster Spots</span></div>
+                <div style="font-size:0.9em; line-height:1.8; max-height:300px; overflow-y:auto;">
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('N0BUI','14.250')"><strong id="dx1">N0BUI 14.250</strong> - EU<br><span style="color:#888; font-size:0.85em;" id="dx1-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('IZ0UDF','7.065')"><strong id="dx2">IZ0UDF 7.065</strong> - Asia<br><span style="color:#888; font-size:0.85em;" id="dx2-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('ZS6WX','21.290')"><strong id="dx3">ZS6WX 21.290</strong> - Africa<br><span style="color:#888; font-size:0.85em;" id="dx3-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('VK2RZA','3.525')"><strong id="dx4">VK2RZA 3.525</strong> - Oceania<br><span style="color:#888; font-size:0.85em;" id="dx4-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('JA1XYZ','10.135')"><strong id="dx5">JA1XYZ 10.135</strong> - Asia<br><span style="color:#888; font-size:0.85em;" id="dx5-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('W5XYZ','14.150')"><strong id="dx6">W5XYZ 14.150</strong> - NA<br><span style="color:#888; font-size:0.85em;" id="dx6-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; border-bottom:1px solid rgba(255,255,255,0.1); cursor:pointer;" onclick="openQRZModal('G3XYZ','7.035')"><strong id="dx7">G3XYZ 7.035</strong> - EU<br><span style="color:#888; font-size:0.85em;" id="dx7-time">--:-- UTC</span></div>
+                    <div style="padding:8px; color:#ffa502; cursor:pointer;" onclick="openQRZModal('CE3XYZ','21.200')"><strong id="dx8">CE3XYZ 21.200</strong> - SA<br><span style="color:#888; font-size:0.85em;" id="dx8-time">--:-- UTC</span></div>
+                </div>
+            </div>
