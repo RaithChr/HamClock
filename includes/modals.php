@@ -19,23 +19,3 @@
             <div style="text-align:center; margin-top:20px;"><button onclick="closeQRZModal()" style="background:rgba(255,100,130,0.3); border:1px solid #ff6482; color:#ff6482; padding:10px 24px; border-radius:8px; cursor:pointer; font-weight:600;">Close</button></div>
         </div>
     </div>
-
-    <div class="container">
-        <div class="header">
-            <div style="display:flex; align-items:center; gap:20px;">
-                <div class="callsign" id="header-callsign">🎙️ OE3LCR</div>
-                <a href="support.html" style="text-decoration:none;"><button style="background:rgba(255,100,130,0.2); border:1px solid #ff6482; color:#ff6482; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; transition:all 0.3s;" data-i18n="support_btn">❤️ Support</button></a>
-                <a href="info.html" style="text-decoration:none;"><button style="background:rgba(0,255,136,0.2); border:1px solid #00ff88; color:#00ff88; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; transition:all 0.3s;" data-i18n="legend_btn">ℹ️ Legende</button></a>
-            </div>
-            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
-                <div style="display:flex; gap:10px;">
-                    <button id="kiosk-btn" onclick="toggleKioskMode()" data-i18n="fullscreen_btn">📺 Vollbild</button>
-                    <button id="settings-btn" data-i18n="settings_btn">⚙️ Einstellungen</button>
-                </div>
-                <div style="display:flex; gap:30px; align-items:flex-start;">
-                    <div style="text-align:right;"><div style="font-size:0.85em; color:#ff6b35; font-weight:600; margin-bottom:3px;">LOC</div><div class="time" id="time">00:00:00</div></div>
-                    <div style="text-align:right;"><div style="font-size:0.85em; color:#70a1ff; font-weight:600; margin-bottom:3px;">UTC</div><div class="time" id="time-utc" style="color:#70a1ff;">00:00:00</div></div>
-                </div>
-                <div class="date" id="date">--.--.----</div>
-            </div>
-        </div>

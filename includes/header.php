@@ -1,14 +1,17 @@
 <header class="site-header">
+
+    <!-- LEFT: Callsign -->
     <div class="header-left">
         <div class="callsign" id="header-callsign">🎙️ OE3LCR</div>
     </div>
 
+    <!-- CENTER: Clock Box -->
     <div class="header-center">
         <div class="clock-box">
             <div class="clock-row">
                 <span class="clock-label loc-label">LOC</span>
                 <span class="clock-time loc-time" id="time">00:00:00</span>
-                <span class="clock-sep">·</span>
+                <span class="clock-sep"> · </span>
                 <span class="clock-label utc-label">UTC</span>
                 <span class="clock-time utc-time" id="time-utc">00:00:00</span>
             </div>
@@ -16,6 +19,7 @@
         </div>
     </div>
 
+    <!-- RIGHT: Button Box -->
     <div class="header-right">
         <div class="btn-box">
             <a href="support.html" style="text-decoration:none;">
@@ -28,4 +32,5 @@
             <button class="hdr-btn btn-settings" id="settings-btn" data-i18n="settings_btn">⚙️ Einstellungen</button>
         </div>
     </div>
+
 </header>
