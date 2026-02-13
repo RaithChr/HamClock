@@ -17,10 +17,10 @@
 ## 📸 Screenshots (Feb 10, 2026)
 
 ### Top Panel – Sun, QTH & Band Conditions
-![OE3LCR Dashboard – Header](screenshot-header-2026-02-10.jpg)
+![OE3LCR Dashboard – Header](screenshot-header-2026-02-13.jpg)
 
 ### Bottom Panels – Full Dashboard
-![OE3LCR Dashboard – Full View](screenshot-lower-2026-02-10.jpg)
+![OE3LCR Dashboard – Full View](screenshot-lower-2026-02-13.jpg)
 
 ---
 
