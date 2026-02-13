@@ -16,11 +16,36 @@
 <div class="container">
     <div class="header">
         <div class="title" id="page-title">ℹ️ Legende</div>
-        <a href="index.html" class="back-link">← Dashboard</a>
+        <a href="/" class="back-link">← Dashboard</a>
     </div>
     <div class="content">
 <!-- ===== DEUTSCH ===== -->
 <div id="content-de">
+<div class="section"><div class="section-title blue">🖥️ Dashboard-Funktionen</div>
+
+<div class="info-box blue"><strong>🖱️ Fenster verschieben:</strong> Jedes Widget kann per Drag &amp; Drop verschoben werden. Ziehe am <em>farbigen Titelbalken</em> (card-header) und lasse das Fenster an der gewünschten Position los. Das Layout rastet automatisch im 12-Spalten-Raster ein.</div>
+
+<div class="info-box blue"><strong>↔️ Fenstergröße ändern:</strong> Jedes Widget ist in der Größe veränderbar. Ziehe den <em>Anfasser unten rechts</em> (▼ Pfeil-Cursor) um das Fenster breiter oder höher zu machen. Minimale Breite: 2 Spalten.</div>
+
+<div class="info-box blue"><strong>💾 Layout speichern &amp; laden:</strong> Das Layout wird automatisch gespeichert sobald du ein Fenster verschoben oder vergrößert hast — kein manuelles Speichern nötig. Der letzte Stand wird beim nächsten Aufruf wiederhergestellt (localStorage). Mit dem <strong>🔄 Reset</strong>-Button oben rechts kannst du das Standard-Layout jederzeit wiederherstellen.</div>
+
+<div class="info-box blue"><strong>🏷️ Seiten-Badges (P1 / P2 / 1+2):</strong> Jedes Widget hat oben rechts im Titelbalken einen Badge der angibt, auf welcher Kiosk-Seite es erscheint:<br>
+• <span style="background:#22c55e;color:#fff;border-radius:4px;padding:1px 6px;font-size:0.85em;font-weight:700">P1</span> Seite 1 (grün) — Solar, QTH, Band Conditions, System<br>
+• <span style="background:#3b82f6;color:#fff;border-radius:4px;padding:1px 6px;font-size:0.85em;font-weight:700">P2</span> Seite 2 (blau) — Wetter, Satelliten, DX Cluster<br>
+• <span style="background:#f97316;color:#fff;border-radius:4px;padding:1px 6px;font-size:0.85em;font-weight:700">1+2</span> beide Seiten (orange) — Header &amp; Uhrzeit<br>
+Die Badges klären, für welche Kiosk-Ansicht das Widget vorgesehen ist.</div>
+
+<div class="info-box blue"><strong>📺 Kiosk-Modus (Vollbild):</strong> Ideal für Monitor-Präsentation ohne Tastatur. Aktivierung über den <strong>📺 Vollbild</strong>-Button oben rechts.<br><br>
+Im Kiosk-Modus rotiert die Ansicht automatisch alle <strong>30 Sekunden</strong> zwischen Seite 1 und Seite 2. Mit dem <strong>▶ S1/S2</strong>-Button kann manuell zur nächsten Seite gewechselt werden.<br><br>
+• Seite 1: Sonne (NASA SDO) + QTH-Info + Band Conditions + System<br>
+• Seite 2: Wetter (lokal &amp; Weltraum) + Satelliten + DX Cluster<br><br>
+Beenden mit <strong>ESC</strong> oder erneutem Klick auf den Vollbild-Button. Der Zustand bleibt nach Browser-Neustart erhalten.</div>
+
+<div class="info-box blue"><strong>🎨 Rufzeichen-Farbe:</strong> Klicke auf das Rufzeichen oben links um die Farbe zu wechseln — 5 Farben: Gelb → Orange → Rot → Grün → Blau. Reine Optik, kein Funktionseinfluss.</div>
+
+<div class="info-box blue"><strong>⚙️ Einstellungen:</strong> Über den <strong>⚙️ Einstellungen</strong>-Button können Rufzeichen, Maidenhead-Locator und Sprache (DE/EN) angepasst werden. Die Eingaben beeinflussen Wetter-API, Sonnenzeiten und die angezeigte Callsign. Gespeichert in localStorage.</div>
+
+</div>
 <div class="section"><div class="section-title green">📍 QTH – Standort</div>
 <div class="info-box green"><strong>Maidenhead Locator:</strong> Teilt die Erdoberfläche in ein hierarchisches Raster. Der 6-stellige Code (z.B. JN87ct) gibt deinen Standort auf ca. 5 × 2.5 km genau an.<div class="sci">🔬 Standardisiert 1980 auf der IARU Region 1 Konferenz in Maidenhead (England). Basiert auf einer äquidistanten zylindrischen Projektion (Plate Carrée): 18 Felder (A–R) × 10 Unterfelder (0–9) × 24 Sub-Unterfelder (a–x). Jedes Großfeld umfasst 20° Länge × 10° Breite.</div></div>
 <div class="info-box green"><strong>Sunrise / Sunset &amp; Tageslänge:</strong> Sonnenauf-/-untergangszeiten und Tageslänge für deinen QTH-Standort – berechnet aus dem Maidenhead Locator.<div class="sci">🔬 Datenquelle: US Naval Observatory (USNO) Astronomical Applications API v4.0 — präziseste frei verfügbare Lösung. Berücksichtigt atmosphärische Refraktion (~0.833°): geometrische Sonnenmitte steht bei Auf-/Untergang 50 Bogenminuten unter dem Horizont. Zeitzone wird aus dem Längengrad des Locators berechnet: UTC-Offset ≈ round(lon / 15°). Tägliche Neuberechnung, 1h Cache.</div></div>
@@ -62,6 +87,31 @@
 </div>
 <!-- ===== ENGLISH ===== -->
 <div id="content-en" class="lang-hidden">
+<div class="section"><div class="section-title blue">🖥️ Dashboard Functions</div>
+
+<div class="info-box blue"><strong>🖱️ Move Windows:</strong> Every widget can be repositioned via drag &amp; drop. Grab the <em>coloured title bar</em> (card-header) and drop the window where you want it. The layout automatically snaps to a 12-column grid.</div>
+
+<div class="info-box blue"><strong>↔️ Resize Windows:</strong> Every widget is resizable. Drag the <em>handle at the bottom-right</em> (▼ resize cursor) to make the window wider or taller. Minimum width: 2 columns.</div>
+
+<div class="info-box blue"><strong>💾 Save &amp; Restore Layout:</strong> The layout is saved automatically whenever you move or resize a widget — no manual save required. Your last arrangement is restored on the next visit (localStorage). Use the <strong>🔄 Reset</strong> button (top right) to revert to the default layout at any time.</div>
+
+<div class="info-box blue"><strong>🏷️ Page Badges (P1 / P2 / 1+2):</strong> Each widget shows a badge in its title bar indicating which kiosk page it appears on:<br>
+• <span style="background:#22c55e;color:#fff;border-radius:4px;padding:1px 6px;font-size:0.85em;font-weight:700">P1</span> Page 1 (green) — Solar, QTH, Band Conditions, System<br>
+• <span style="background:#3b82f6;color:#fff;border-radius:4px;padding:1px 6px;font-size:0.85em;font-weight:700">P2</span> Page 2 (blue) — Weather, Satellites, DX Cluster<br>
+• <span style="background:#f97316;color:#fff;border-radius:4px;padding:1px 6px;font-size:0.85em;font-weight:700">1+2</span> Both pages (orange) — Header &amp; Clock<br>
+Badges show which kiosk view a widget belongs to.</div>
+
+<div class="info-box blue"><strong>📺 Kiosk Mode (Fullscreen):</strong> Perfect for monitor display without keyboard access. Activate via the <strong>📺 Fullscreen</strong> button (top right).<br><br>
+In kiosk mode, the view automatically rotates every <strong>30 seconds</strong> between page 1 and page 2. Use the <strong>▶ S1/S2</strong> button to advance manually.<br><br>
+• Page 1: Sun (NASA SDO) + QTH Info + Band Conditions + System<br>
+• Page 2: Weather (local &amp; space) + Satellites + DX Cluster<br><br>
+Exit with <strong>ESC</strong> or by clicking the fullscreen button again. Kiosk state persists after browser restart.</div>
+
+<div class="info-box blue"><strong>🎨 Callsign Colour:</strong> Click the callsign (top left) to cycle through 5 colours: Yellow → Orange → Red → Green → Blue. Purely cosmetic.</div>
+
+<div class="info-box blue"><strong>⚙️ Settings:</strong> Use the <strong>⚙️ Settings</strong> button to change your callsign, Maidenhead locator, and language (DE/EN). These affect the weather API, sunrise/sunset times and the displayed callsign. Stored in localStorage.</div>
+
+</div>
 <div class="section"><div class="section-title green">📍 QTH – Location</div>
 <div class="info-box green"><strong>Maidenhead Locator:</strong> Divides the Earth's surface into a hierarchical grid. The 6-character code (e.g. JN87ct) pinpoints your location to approx. 5 × 2.5 km.<div class="sci">🔬 Standardized in 1980 at the IARU Region 1 conference in Maidenhead, England. Based on an equidistant cylindrical projection (Plate Carrée): 18 fields (A–R) × 10 subfields (0–9) × 24 sub-subfields (a–x). Each major field spans 20° longitude × 10° latitude.</div></div>
 <div class="info-box green"><strong>Sunrise / Sunset &amp; Day Length:</strong> Solar times and day length calculated from your Maidenhead locator coordinates.<div class="sci">🔬 Data source: US Naval Observatory (USNO) Astronomical Applications API v4.0 — most precise freely available solution. Accounts for atmospheric refraction (~0.833°): the geometric center of the sun is 50 arcminutes below the horizon at rise/set. Timezone derived from locator longitude: UTC offset ≈ round(lon / 15°). Recalculated daily with 1-hour cache.</div></div>
@@ -102,7 +152,7 @@
 </div></div>
 </div>
     </div><!-- /content -->
-    <div class="footer"><p>🍯 Powered by Gwen • OE3LCR Dashboard • <a href="index.html" style="color:#00ff88; text-decoration:none;">← Dashboard</a></p></div>
+    <div class="footer"><p>🍯 Powered by Gwen • OE3LCR Dashboard • <a href="/" style="color:#00ff88; text-decoration:none;">← Dashboard</a></p></div>
 </div><!-- /container -->
 
 <script>
