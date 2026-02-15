@@ -1,241 +1,285 @@
-# 🎙️ OE3LCR Ham Radio Dashboard
+# 🎙️ HamClock - Amateur Radio Dashboard
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Status](https://img.shields.io/badge/status-Active-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/version-1.0-blue.svg)]()
-[![Made with](https://img.shields.io/badge/made%20with-HTML5%20%7C%20CSS3%20%7C%20JS-orange.svg)]()
+[![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen.svg)]()
+[![Stack](https://img.shields.io/badge/stack-PHP%20%7C%20JS%20%7C%20Gridstack.js-orange.svg)]()
+[![Hosted](https://img.shields.io/badge/hosted-craith.cloud-green.svg)](https://craith.cloud)
+[![Language](https://img.shields.io/badge/language-Deutsch%20%7C%20English-blue.svg)]()
 
-Ein vollständiges Amateur Radio Dashboard mit **Echtzeit-Sonne/Mond-Tracking**, **Satellit-Positionen**, **Band Conditions** und **DX Cluster Spots**.
+🎙️ **Professional Amateur Radio Dashboard** — Real-time Sun/Moon tracking, satellite positions, band conditions, local & space weather, DX Cluster integration — with a fully draggable, resizable, kiosk-capable layout.
 
----
-
-## ✨ Features
-
-- **☀️ NASA SDO Live-Bild** - Echtzeit Solar Dynamics Observatory
-- **🌙 Mondphase & Auf-/Untergang** - Präzise astronomische Berechnungen
-- **🛰️ Active Satellites** - ISS, NOAA, Hubble mit Az/El/Distance (10s Updates)
-- **📊 Band Conditions** - Echtzeit Propagation Forecast (80m bis 6m)
-- **☀️ Solar Activity** - SFI, K-Index, Space Weather Status
-- **🌍 DX Cluster** - Live Spots von der ganzen Welt
-- **📡 Propagation Indices** - SSN, R-Index, Aurora Activity
-- **📍 QTH Information** - Maidenhead Locator, Koordinaten
-- **ℹ️ Legenden & Erklärungen** - Vollständige Dokumentation aller Parameter
+**✨ Live Demo:** https://craith.cloud  
+**🇦🇹 QTH:** JN87ct (Vienna, Austria)  
+**📡 Callsign:** OE3LCR
 
 ---
 
-## 📍 Standort (QTH)
+## ✨ Features Overview
 
-| Parameter | Wert |
-|-----------|------|
-| **Maidenhead** | JN87ct |
-| **Koordinaten** | 47.8125°N 16.2083°E |
-| **Callsign** | OE3LCR |
-| **Land** | Österreich 🇦🇹 |
+### 📐 Drag & Drop Layout (Gridstack.js v12.4.2)
+- **10 independent widgets** — drag by header, resize from corner
+- **Layout persistence** via localStorage (`gwen_grid_layout`)
+- **🔄 Reset button** in header — restores default layout instantly
+- Per-widget **P1 / P2 / 1+2 badge** to assign pages for Kiosk Mode
+
+### 📺 Kiosk Mode (2-Page Auto-Rotate)
+- **Full-screen** via `📺 Vollbild` button or `▶ S1/S2` manual toggle
+- **Page 1** — Ham radio essentials (Sun, QTH, Bands, Clock, System)
+- **Page 2** — Weather + satellite tracking (Local Weather, Space Weather, DX, Satellites)
+- **Auto-rotate** every 30 seconds
+- **Per-page layout saving** — positions saved separately (`gwen_kiosk_layout_p1` / `_p2`)
+- **Horizontal gap correction** — P2 widgets auto-reposition to fill left-to-right without gaps
+- Reset clears both normal and kiosk layouts
+
+### 📊 Real-Time Widgets
+
+| Widget | Data Source | Update |
+|--------|-------------|--------|
+| ☀️ Solar Image | NASA/SOHO EIT 304 (PHP proxy) | 5 min |
+| 📍 QTH / Sun-Moon | USNO Navy API (PHP proxy) | 30 min |
+| 📡 Band Conditions | N0NBH HamQSL XML (PHP proxy) | 1 h |
+| 🕐 Clock | Local JS | 1 sec |
+| 🌤️ Local Weather | OpenWeatherMap One Call 3.0 | 10 min |
+| ⚡ Space Weather | NOAA SWPC (cron cached) | 5 h |
+| 🛰️ Satellites | CelesTrak TLE + satellite.js | 7 sec |
+| 🌍 DX Cluster | HamQTH.com CSV | 60 sec |
+| 💻 System Stats | PHP backend (CPU/RAM/Disk) | 10 sec |
+| 🎙️ Header | Static + buttons | — |
+
+### 📡 Ham Radio Intelligence
+- **Band Conditions** — 13 bands (160m → 2m), real NOAA K-Index, GOOD/FAIR/POOR neon indicators
+- **Space Weather** — K-Index, Solar Flux (SFI), Sunspot Number, A-Index, Aurora status, MUF estimate
+- **Satellite Tracking** — ISS, NOAA-20/21, Meteor-M N2-3/4, Hubble — real-time Az/El/Distance/Visibility
+- **DX Cluster** — 20 spots, band color-coded, QRZ.com popup, auto-scroll
+
+### 🌤️ Weather
+- **Local:** Temperature, Humidity, Wind speed + compass direction (e.g. `12 km/h NW`)
+- **Source:** OpenWeatherMap One Call API 3.0 via PHP server-side proxy (API key never exposed)
+- **10-minute server cache**
+
+### 👤 User Personalization
+- **⚙️ Settings Modal** — Callsign, Maidenhead Locator, Language
+- **Auto-detect language** from browser locale (DE/EN)
+- **All settings in localStorage** — persist across sessions
 
 ---
 
-## 🖼️ Screenshots
+## 🏗️ Architecture
 
-![OE3LCR Dashboard](https://craith.cloud/dashboard-screenshot.jpg)
+### Stack
+- **Server:** Apache2 + PHP 7.4+ (Ubuntu)
+- **Frontend:** Vanilla JS + CSS3
+- **Layout:** [Gridstack.js v12.4.2](https://gridstackjs.com/)
+- **Satellite Math:** [satellite.js](https://github.com/shashwatak/satellite-js)
+- **HTTPS:** Let's Encrypt
+- **Email:** Brevo SMTP (300/day free tier)
 
-*Live Dashboard mit NASA SDO Sonne, Band Conditions, Active Satellites und DX Cluster*
+### Modular PHP Structure
+```
+index.php               ← Entry point, loads includes/ + widgets/
+includes/
+├── head.php            ← CSS, meta, external scripts
+├── modals.php          ← QRZ lookup, Settings, Support modals
+└── footer.php          ← Main application JS (init, weather, DX, satellites…)
+widgets/
+├── header.php          ← 🎙️ Callsign + control buttons (Vollbild, Einstellungen, Reset)
+├── sun.php             ← ☀️ NASA/SOHO solar image
+├── qth.php             ← 📍 QTH info, Sunrise/Sunset, Moon phase
+├── bands.php           ← 📡 Band conditions (13 bands)
+├── clock.php           ← 🕐 LOC + UTC live clock
+├── weather-local.php   ← 🌤️ Local weather display
+├── weather-space.php   ← ⚡ Space weather display
+├── satellites.php      ← 🛰️ Satellite tracking list
+├── dx.php              ← 🌍 DX Cluster spots
+└── system.php          ← 💻 CPU / RAM / Disk / Uptime
+```
+
+### JavaScript Modules
+```
+js/
+├── gridstack.min.js    ← Gridstack v12.4.2 (layout engine)
+├── dashboard-grid.js   ← Grid init, drag/resize save, reset
+├── kiosk.js            ← Kiosk mode, page system, per-page layout save
+├── band-conditions.js  ← Band condition calculation logic
+└── user-settings.js    ← Settings manager + i18n translations
+```
+
+### PHP Backend Proxies
+```
+fetch-weather.php       ← OpenWeatherMap One Call 3.0 (10-min cache)
+fetch-n0nbh.php         ← HamQSL band data (1h cache)
+fetch-sun-moon.php      ← USNO Navy sun/moon times (1h cache)
+get-sdo-image.php       ← SOHO EIT 304 solar image (5-min cache)
+get-system-stats.php    ← Live CPU / RAM / Disk / Uptime
+fetch-solar-data.php    ← NOAA SWPC K-Index / SFI (cron triggered)
+fetch-tle.php           ← CelesTrak TLE satellite data
+send-daily-status-v5.php ← Daily HTML email report (22:00 UTC)
+send-email.php          ← Brevo SMTP module
+```
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Installation
 
-| Komponente | Details |
-|-----------|---------|
-| **Frontend** | HTML5, CSS3, Vanilla JavaScript |
-| **APIs** | NASA SDO, Satellite.js (TLE) |
-| **Hosting** | Apache2 on Linux VPS |
-| **Deployment** | craith.cloud |
+### Prerequisites
+- Ubuntu / Debian server
+- Apache2 with `mod_rewrite` + HTTPS (Let's Encrypt)
+- PHP 7.4+ with `curl`, `json` extensions
+- OpenWeatherMap API key ([One Call by Call plan](https://openweathermap.org/price) — 1000 calls/day free)
+- Brevo account for daily email reports (optional)
 
----
-
-## 📁 Dateien
-
-| Datei | Beschreibung |
-|-------|-------------|
-| `index.html` | Main Dashboard (Echtzeit) |
-| `info.html` | Legenden & Erklärungen |
-| `README.md` | Diese Datei |
-| `LICENSE` | MIT License |
-| `.gitignore` | Security Config |
-
----
-
-## 🚀 Schnellstart
-
-### 1. Repository klonen
+### Step 1 — Clone
 ```bash
-git clone git@github.com:RaithChr/craith.cloud.git
-cd craith.cloud
+git clone https://github.com/RaithChr/HamClock.git
+cd HamClock
 ```
 
-### 2. Lokal öffnen
+### Step 2 — Deploy to Web Root
 ```bash
-# Einfach im Browser öffnen
-open index.html
-
-# Oder auf einem Webserver
-python3 -m http.server 8000
-# Dann: http://localhost:8000
+sudo rsync -av --exclude='.git' --exclude='.env' . /var/www/html/
+sudo chown -R www-data:www-data /var/www/html/
+sudo chmod 755 /var/www/html
 ```
 
-### 3. Auf VPS deployen
+### Step 3 — Configure API Keys
+Create `/var/www/html/.env`:
 ```bash
-cp index.html info.html /var/www/html/
-# Done! Verfügbar unter craith.cloud
+# OpenWeatherMap (One Call API 3.0)
+OWM_API_KEY=your_key_here
+
+# Brevo SMTP (daily email reports)
+BREVO_API_KEY=xkeysib-...
+BREVO_EMAIL=your@email.com
+BREVO_SENDER_NAME=YourName
+```
+> ⚠️ `.env` is git-ignored — never commit API keys!
+
+Also set your OWM key in `fetch-weather.php`:
+```php
+$apiKey = 'your_owm_key_here';
+```
+
+### Step 4 — Set Up Cron Jobs
+```bash
+# Solar data (2x daily)
+(crontab -l 2>/dev/null; echo "0 3,15 * * * /usr/bin/php /var/www/html/fetch-solar-data.php") | crontab -
+
+# Daily email report (22:00 UTC)
+(crontab -l 2>/dev/null; echo "0 22 * * * /usr/bin/php /var/www/html/send-daily-status-v5.php") | crontab -
+```
+
+### Step 5 — Verify
+```bash
+curl -I https://your-domain.com
 ```
 
 ---
 
-## 🔒 Sicherheit
+## ⚙️ Configuration
 
-- ✅ **Keine API Keys** im Code
-- ✅ **Keine Credentials** hardcodiert
-- ✅ **Client-Side Berechnung** (keine Server-Last)
-- ✅ **Mobile-responsive** Design
+### User Settings (in-browser)
+Click **⚙️ Einstellungen** in the header:
+- **Callsign** — e.g. `OE3LCR`
+- **Maidenhead Locator** — e.g. `JN87ct` (coordinates auto-calculated)
+- **Language** — Deutsch / English
 
----
+Settings are stored in `localStorage` key `gwen_hp_settings`.
 
-## 📊 Dashboard Übersicht
+### Kiosk Mode — Page Assignment
+Each widget has a **P1 / P2 / 1+2** badge in its header (click to cycle):
 
-### Hauptbereich
-- **NASA SDO Sonne** (Live 400x400px) mit Sonnenflecken & Koronale Aktivität
-- **QTH Daten** - Maidenhead, Koordinaten, Sunrise/Sunset, Moonrise/Set
-- **System Status** - Server, Call, Online Status
+| Badge | Meaning |
+|-------|---------|
+| **P1** (green) | Visible on Kiosk Page 1 only |
+| **P2** (blue) | Visible on Kiosk Page 2 only |
+| **1+2** (orange) | Visible on both pages |
 
-### Mittlerer Bereich
-- **Solar Activity** - SFI, Sunspots, K-Index, Space Weather
-- **Propagation** - SSN, R-Index, Aurora, MUF
-- **Mondphase** - Phase, Emoji, Beleuchtung
+Default assignment:
+- **P1:** Sun, QTH, Bands, System
+- **P2:** Local Weather, Space Weather, DX Cluster, Satellites
+- **1+2:** Header, Clock
 
-### Rechter Bereich
-- **Band Conditions** - 8 Bänder (80m bis 6m) mit Farben:
-  - 🟢 **GREEN** = GOOD
-  - 🟠 **ORANGE** = FAIR
-  - 🔴 **RED** = POOR
-- **Active Satellites** - ISS, NOAA-18/19, Hubble
-  - Azimuth, Elevation, Distance
-  - Visible/Below Status
-- **DX Cluster** - 8 aktuelle Spots weltweit
-
----
-
-## 📖 Verwendung
-
-### Info-Seite
-Klick auf **"ℹ️ Legenden"** um vollständige Erklärungen zu sehen:
-- Band Conditions Bedeutung
-- Solar Activity Indices
-- Satellit-Parameter
-- Propagation Informationen
-- QTH Konzepte
-
-### Echtzeit-Updates
-- ⏰ **Uhrzeit** - Jede Sekunde
-- 🌙 **Mondphase** - Kontinuierlich berechnet
-- 🛰️ **Satelliten** - Alle 10 Sekunden
-- ☀️ **Solar-Daten** - Alle 5 Minuten
-- 🌍 **DX Cluster** - Alle 60 Sekunden
-- 📡 **NASA Sonne** - Alle 5 Minuten
+### localStorage Keys
+| Key | Contents |
+|-----|----------|
+| `gwen_grid_layout` | Normal mode widget positions |
+| `gwen_kiosk_layout_p1` | Kiosk Page 1 positions |
+| `gwen_kiosk_layout_p2` | Kiosk Page 2 positions |
+| `gwen_widget_pages` | Per-widget P1/P2/both assignments |
+| `gwen_hp_settings` | Callsign, Locator, Language |
 
 ---
 
-## 💡 Tipps für Funkamateure
+## 🛡️ Security
 
-- Nutze **Band Conditions** zur Planung von Kontakten
-- Beobachte **K-Index** für Aurora Activity (VHF/UHF)
-- Nutze **Moonrise/Set** Zeiten für EME (Moonbounce)
-- Verfolge **ISS Passes** für SSB/FM Relais-Kontakte
-- Nutze **DX Cluster** um seltene DX-Stationen zu finden
+- ✅ API keys in `.env` — git-ignored, never in repo
+- ✅ All external APIs proxied server-side (keys never exposed to browser)
+- ✅ Input validation in PHP proxies (coordinate bounds, etc.)
+- ✅ HTTPS enforced
 
----
-
-## 📜 Lizenz
-
-**MIT License** - Frei verwendbar, modifizierbar und verteilbar.
-
-```
-Copyright (c) 2026 OE3LCR (Christian Raith)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files...
-```
-
-Siehe [LICENSE](LICENSE) für vollständigen Text.
+**See SECURITY_NOTE.md for full guidelines.**
 
 ---
 
-## 🤝 Support & Kontakt
+## 🌐 Browser Support
 
-| Kategorie | Info |
-|-----------|------|
-| **Issues & Bugs** | [GitHub Issues](https://github.com/RaithChr/craith.cloud/issues) |
-| **Telegram** | @DerDracheChrisu |
-| **Email** | craith@craith.cloud |
-| **QTH** | JN87ct, Österreich 🇦🇹 |
-
----
-
-## 💰 Unterstütze das Projekt
-
-Wenn dir das Dashboard gefällt und du es unterstützen möchtest:
-
-### 🌟 Kostenlos
-- **Star** auf GitHub (⭐ oben rechts)
-- **Fork** das Projekt
-- **Share** mit anderen Funkamateuren
-- **Issues & PRs** sind willkommen!
-
-### 💳 Unterstütze dieses Projekt
-Die Arbeit an diesem Dashboard kostet Zeit & Energie. Falls du es magst und helfen möchtest:
-
-- ☕ **[Buy Me A Coffee](https://www.buymeacoffee.com/christianraith)** - Schnelle kleine Unterstützung
-- 🅿️ **[PayPal](https://paypal.me/christianraith151)** - Spende in jeder Höhe
-
-Jede Unterstützung wird geschätzt! 🙏
+| Browser | Support |
+|---------|---------|
+| Chrome / Edge 90+ | ✅ Full |
+| Firefox 88+ | ✅ Full |
+| Safari 14+ | ✅ Full |
+| Mobile (iOS/Android) | ✅ Responsive |
 
 ---
 
-## 🙏 Danksagungen
+## 📧 Daily Email Report
 
-- **NASA** - Solar Dynamics Observatory (SDO) Live Images
-- **TLE Updates** - Space-Track.org
-- **Satellite.js** - JavaScript Orbital Mechanics Library
-- **Font** - Inter & Orbitron from Google Fonts
-
----
-
-## 🔗 Links
-
-| Link | Beschreibung |
-|------|------------|
-| [craith.cloud](https://craith.cloud) | Live Dashboard |
-| [info.html](https://craith.cloud/info.html) | Legenden & Erklärungen |
-| [QRZ.com OE3LCR](https://www.qrz.com/db/OE3LCR) | Amateur Radio Directory |
+Sent every day at **22:00 UTC** via Brevo SMTP:
+- Current solar data (K-Index, SFI, Aurora)
+- System metrics (CPU, RAM, Disk, Uptime)
+- Satellite TLE update status
+- Server health summary
 
 ---
 
-## 📝 Changelog
+## 🔗 Data Sources & Credits
 
-### v1.0 - 2026-02-05
-- ✅ Initial Release
-- ✅ Live Sun/Moon Tracking
-- ✅ Satellite Positions (ISS, NOAA, Hubble)
-- ✅ Band Conditions
-- ✅ Solar Activity Monitoring
-- ✅ DX Cluster Integration
-- ✅ Info Page & Legends
-
----
-
-**Made with ❤️ & 🍯 (myhoney) by OE3LCR**
-
-*Amateur Radio Dashboard • Real-time Propagation • DX Information*
+| Source | Used For |
+|--------|----------|
+| [NASA/SOHO](https://soho.nascom.nasa.gov/) | Solar EIT 304 image |
+| [NOAA SWPC](https://www.swpc.noaa.gov/) | K-Index, SFI, A-Index |
+| [N0NBH HamQSL](https://www.hamqsl.com/) | Band condition XML |
+| [USNO Navy](https://aa.usno.navy.mil/api/) | Sun/Moon rise/set times |
+| [CelesTrak](https://celestrak.org/) | Satellite TLE data |
+| [HamQTH.com](https://www.hamqth.com/) | DX Cluster spots |
+| [OpenWeatherMap](https://openweathermap.org/) | Local weather + wind |
+| [QRZ.com](https://www.qrz.com/) | Callsign lookup (modal) |
+| [Gridstack.js](https://gridstackjs.com/) | Drag & drop grid layout |
+| [satellite.js](https://github.com/shashwatak/satellite-js) | SGP4 satellite propagation |
 
 ---
 
-*Last Updated: 2026-02-05*
+## 📧 Support
+
+☕ **[Buy Me A Coffee](https://www.buymeacoffee.com/christianraith)**  
+💳 **[PayPal](https://paypal.me/christianraith151)**
+
+---
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## 🙋 Author
+
+**Christian Raith (OE3LCR)**  
+📡 JN87ct — Vienna, Austria  
+🌐 https://craith.cloud
+
+---
+
+**Version:** 2.0.0  
+**Last Updated:** Feb 15, 2026  
+**Status:** ✅ Production Ready
