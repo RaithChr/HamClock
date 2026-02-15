@@ -7,7 +7,7 @@
     <title>OE3LCR - Ham Radio Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23f5f5f5'/%3E%3Cdefs%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='2' result='coloredBlur'/%3E%3CfeMerge%3E%3CfeMergeNode in='coloredBlur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%2300bb77' stroke-width='1.5' opacity='0.4' filter='url(%23glow)'/%3E%3Crect x='85' y='50' width='30' height='20' fill='%2300ff88' rx='3' filter='url(%23glow)'/%3E%3Crect x='55' y='65' width='25' height='10' fill='%2300cc66' rx='2' filter='url(%23glow)'/%3E%3Crect x='120' y='65' width='25' height='10' fill='%2300cc66' rx='2' filter='url(%23glow)'/%3E%3Cline x1='100' y1='50' x2='100' y2='25' stroke='%2300ff88' stroke-width='2' stroke-linecap='round' filter='url(%23glow)'/%3E%3Ccircle cx='100' cy='50' r='3' fill='%2300ff88' filter='url(%23glow)'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <script src="/satellite.min.js"></script>
     <script src="/js/user-settings.js"></script>
     <script src="/js/band-conditions.js"></script>

@@ -1,37 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="192" height="192">
-  <!-- Background -->
-  <rect width="200" height="200" fill="#0a0a0f"/>
-  
-  <!-- Glow effect (defs) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background with slight rounding -->
+  <rect width="32" height="32" fill="#0a0a0f" rx="5"/>
+
   <defs>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="0.8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  
-  <!-- Antenna - Main body (vertical line) -->
-  <line x1="100" y1="30" x2="100" y2="120" stroke="#00ff88" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
-  
-  <!-- Antenna - Left diagonal -->
-  <line x1="100" y1="60" x2="60" y2="100" stroke="#00ff88" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
-  
-  <!-- Antenna - Right diagonal -->
-  <line x1="100" y1="60" x2="140" y2="100" stroke="#00ff88" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
-  
-  <!-- Base - horizontal ground line -->
-  <line x1="40" y1="140" x2="160" y2="140" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-  
-  <!-- Base - left support -->
-  <line x1="60" y1="140" x2="100" y2="120" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-  
-  <!-- Base - right support -->
-  <line x1="140" y1="140" x2="100" y2="120" stroke="#00ff88" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-  
-  <!-- Transmit waves -->
-  <circle cx="100" cy="160" r="15" fill="none" stroke="#00ff88" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
-  <circle cx="100" cy="160" r="25" fill="none" stroke="#00ff88" stroke-width="1.5" opacity="0.3" filter="url(#glow)"/>
+
+  <!-- Left solar panel (3 cells) -->
+  <rect x="1"  y="13" width="10" height="6" fill="#005533" rx="1"/>
+  <line x1="4"  y1="13" x2="4"  y2="19" stroke="#00ff88" stroke-width="0.5" opacity="0.7"/>
+  <line x1="7"  y1="13" x2="7"  y2="19" stroke="#00ff88" stroke-width="0.5" opacity="0.7"/>
+  <rect x="1"  y="13" width="10" height="6" fill="none" stroke="#00ff88" stroke-width="0.8" rx="1" filter="url(#glow)"/>
+
+  <!-- Satellite body -->
+  <rect x="12" y="10" width="8" height="12" fill="#00ff88" rx="2" filter="url(#glow)"/>
+  <!-- Body detail (window/sensor) -->
+  <rect x="14" y="13" width="4" height="3" fill="#0a0a0f" rx="1" opacity="0.6"/>
+
+  <!-- Right solar panel (3 cells) -->
+  <rect x="21" y="13" width="10" height="6" fill="#005533" rx="1"/>
+  <line x1="24" y1="13" x2="24" y2="19" stroke="#00ff88" stroke-width="0.5" opacity="0.7"/>
+  <line x1="27" y1="13" x2="27" y2="19" stroke="#00ff88" stroke-width="0.5" opacity="0.7"/>
+  <rect x="21" y="13" width="10" height="6" fill="none" stroke="#00ff88" stroke-width="0.8" rx="1" filter="url(#glow)"/>
+
+  <!-- Antenna (top) -->
+  <line x1="16" y1="10" x2="16" y2="4" stroke="#00ff88" stroke-width="1.2" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="16" cy="3.5" r="1.5" fill="#00ff88" filter="url(#glow)"/>
+
+  <!-- Signal waves (bottom) -->
+  <circle cx="16" cy="26" r="2.5" fill="none" stroke="#00ff88" stroke-width="0.8" opacity="0.5"/>
+  <circle cx="16" cy="26" r="4.5" fill="none" stroke="#00ff88" stroke-width="0.5" opacity="0.25"/>
 </svg>
