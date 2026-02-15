@@ -1,161 +1,147 @@
 <?php
 /**
- * Fetch Real Solar Data from NOAA Space Weather Prediction Center
- * Updates K-Index, Solar Flux, A-Index for Band Conditions
+ * Fetch Real Solar Data from N0NBH (hamqsl.com) + NOAA SWPC
+ * Replaces bogus rand()-based calculations with real data.
+ * 
+ * Primary source: N0NBH HamQSL XML (K-Index, A-Index, SFI, MUF)
+ * Fallback: Static safe defaults (no random values)
  */
 
-// NOAA API Endpoints
-$noaa_scales = 'https://services.swpc.noaa.gov/products/noaa-scales.json';
-$noaa_forecast = 'https://services.swpc.noaa.gov/products/forecast.json';
+header('Content-Type: application/json');
+header('Cache-Control: public, max-age=600');
 
-// Alternative: Solar.HaiQing API (faster, simpler)
-$solar_haiqi = 'https://www.solarhaiqi.com/api/';
+// 10-minute cache
+$cache_file = '/tmp/solar_data_v2_cache.json';
+$cache_duration = 600;
 
-function fetchNOAAData() {
-    global $noaa_scales;
-    
-    try {
-        $opts = [
-            'http' => [
-                'method' => 'GET',
-                'timeout' => 10,
-                'header' => 'User-Agent: Mozilla/5.0'
-            ]
-        ];
-        
-        $context = stream_context_create($opts);
-        $json = file_get_contents($noaa_scales, false, $context);
-        
-        if (!$json) {
-            return ['error' => 'NOAA API unavailable'];
-        }
-        
-        $data = json_decode($json, true);
-        
-        if (!$data || !isset($data['1'])) {
-            return ['error' => 'Invalid NOAA response'];
-        }
-        
-        // Extract current scales from NOAA (index 1 = today)
-        $current = $data['1'];
-        
-        // Geomagnetic Storm Scale (G) = K-Index equivalent
-        // G0 = quiet, G1-G5 = increasing activity
-        $gIndex = intval($current['G']['Scale'] ?? 0);
-        $gText = $current['G']['Text'] ?? 'none';
-        
-        // Convert G-Index to K-Index approximation
-        // K-Index: 0-9 scale
-        // G-Index: 0-5 scale
-        // Rough conversion: K = G * 2
-        $kIndex = $gIndex * 2;
-        
-        // Solar Flux Index (estimate from G-Index)
-        // Typically: 70-200, higher with more activity
-        $sfi = 70 + ($gIndex * 20) + rand(-10, 10);
-        
-        // A-Index (similar scale to K but daily average)
-        // 0-400 scale
-        $aIndex = ($kIndex * 10) + rand(-20, 20);
-        
-        return [
-            'success' => true,
-            'source' => 'NOAA SWPC',
-            'timestamp' => date('Y-m-d H:i:s UTC'),
-            'kIndex' => $kIndex,
-            'gIndex' => $gIndex,
-            'gText' => $gText,
-            'sfi' => max(70, min(250, $sfi)),
-            'aIndex' => max(0, min(400, $aIndex)),
-            'updated_at' => $current['DateStamp'] ?? date('Y-m-d'),
-            'conditions' => getConditionsFromIndex($kIndex)
-        ];
-        
-    } catch (Exception $e) {
-        return [
-            'error' => 'NOAA fetch failed: ' . $e->getMessage(),
-            'fallback' => true
-        ];
-    }
+if (file_exists($cache_file) && time() - filemtime($cache_file) < $cache_duration) {
+    readfile($cache_file);
+    exit;
 }
 
-function getConditionsFromIndex($kIndex) {
-    // Calculate conditions for each band based on K-Index
-    $bands = [
-        '160' => 'poor',  // 160m: poor at high K-Index
-        '80'  => 'fair',  // 80m: better at high K-Index
-        '60'  => 'good',
-        '40'  => 'good',
-        '30'  => 'good',
-        '20'  => 'good',
-        '17'  => 'good',
-        '15'  => 'good',
-        '12'  => 'good',
-        '11'  => 'good',
-        '10'  => 'good',
-        '6'   => 'good',
-        '2'   => 'good'
-    ];
-    
-    // Adjust based on K-Index
-    if ($kIndex > 7) {
-        // Very active: HF affected, VHF improves
-        $bands['160'] = 'poor';
-        $bands['80']  = 'poor';
-        $bands['60']  = 'fair';
-        $bands['40']  = 'fair';
-        $bands['30']  = 'fair';
-        $bands['20']  = 'fair';
-        $bands['17']  = 'good';
-        $bands['15']  = 'good';
-        $bands['12']  = 'good';
-        $bands['6']   = 'good';
-        $bands['2']   = 'good';
-    } elseif ($kIndex > 4) {
-        // Active: some degradation
-        $bands['160'] = 'fair';
-        $bands['80']  = 'fair';
-        $bands['60']  = 'fair';
-        $bands['40']  = 'good';
-        $bands['30']  = 'good';
-        $bands['20']  = 'good';
-    } elseif ($kIndex > 2) {
-        // Unsettled: good conditions
-        $bands['160'] = 'fair';
-        $bands['80']  = 'good';
-        // Rest good
-    } else {
-        // Quiet: excellent conditions
-        $bands['160'] = 'poor';  // Still poor, needs different propagation
-        $bands['80']  = 'good';
-        // Rest very good
-    }
-    
-    return $bands;
-}
-
-// Main execution
-$solarData = fetchNOAAData();
-
-// If NOAA fails, try Solar.HaiQi as fallback (simple fallback with random data)
-if (isset($solarData['error']) && !isset($solarData['fallback'])) {
-    $solarData = [
-        'success' => false,
-        'source' => 'Fallback (using last known)',
-        'timestamp' => date('Y-m-d H:i:s UTC'),
-        'kIndex' => rand(2, 8),
-        'sfi' => rand(80, 200),
-        'aIndex' => rand(5, 100),
-        'error' => 'Using fallback data - real API may be unavailable'
-    ];
-}
+$solarData = fetchN0NBHData();
 
 // Save to file for homepage to use
 $outputFile = '/var/www/html/data/solar-data.json';
 @mkdir('/var/www/html/data', 0755, true);
 file_put_contents($outputFile, json_encode($solarData, JSON_PRETTY_PRINT));
-chmod($outputFile, 0644);
+@chmod($outputFile, 0644);
 
-// Output for testing
-echo json_encode($solarData, JSON_PRETTY_PRINT);
+$json = json_encode($solarData, JSON_PRETTY_PRINT);
+file_put_contents($cache_file, $json);
+echo $json;
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+function fetchN0NBHData() {
+    $url = 'https://www.hamqsl.com/solarxml.php';
+    $context = stream_context_create([
+        'http' => ['timeout' => 15, 'user_agent' => 'craith.cloud/2.0'],
+        'ssl'  => ['verify_peer' => true]
+    ]);
+
+    $xml = @file_get_contents($url, false, $context);
+
+    if (!$xml) {
+        return fallbackData('N0NBH HamQSL unreachable');
+    }
+
+    // Helper: extract single XML tag value
+    $get = function($tag) use ($xml) {
+        if (preg_match("/<$tag>([^<]*)<\/$tag>/i", $xml, $m)) return trim($m[1]);
+        return null;
+    };
+
+    $kIndex = intval($get('kindex') ?? 2);
+    $aIndex = intval($get('aindex') ?? 7);
+    $sfi    = intval($get('solarflux') ?? 100);
+    $muf    = $get('muf');
+    $ssn    = intval($get('sunspots') ?? 0);
+    $updated = $get('updated') ?? gmdate('Y-m-d H:i') . ' UTC';
+
+    // Sanity-check ranges (no fake values injected)
+    $kIndex = max(0, min(9,   $kIndex));
+    $aIndex = max(0, min(400, $aIndex));
+    $sfi    = max(65, min(300, $sfi));
+
+    return [
+        'success'    => true,
+        'source'     => 'N0NBH HamQSL',
+        'timestamp'  => gmdate('Y-m-d H:i:s') . ' UTC',
+        'kIndex'     => $kIndex,
+        'gIndex'     => kToG($kIndex),
+        'gText'      => kToGText($kIndex),
+        'sfi'        => $sfi,
+        'aIndex'     => $aIndex,
+        'muf'        => $muf,
+        'ssn'        => $ssn,
+        'updated_at' => $updated,
+        'conditions' => getConditionsFromIndex($kIndex)
+    ];
+}
+
+/** Convert K-Index (0–9) to approximate G-Scale (0–5) */
+function kToG($k) {
+    if ($k >= 9) return 5;
+    if ($k >= 8) return 4;
+    if ($k >= 7) return 3;
+    if ($k >= 6) return 2;
+    if ($k >= 5) return 1;
+    return 0;
+}
+
+function kToGText($k) {
+    if ($k >= 9) return 'Extreme';
+    if ($k >= 8) return 'Severe';
+    if ($k >= 7) return 'Strong';
+    if ($k >= 6) return 'Moderate';
+    if ($k >= 5) return 'Minor';
+    return 'None';
+}
+
+/** Static safe fallback — no random values */
+function fallbackData($reason = '') {
+    return [
+        'success'    => false,
+        'source'     => 'Static fallback',
+        'timestamp'  => gmdate('Y-m-d H:i:s') . ' UTC',
+        'kIndex'     => 2,
+        'gIndex'     => 0,
+        'gText'      => 'None',
+        'sfi'        => 100,
+        'aIndex'     => 7,
+        'muf'        => null,
+        'ssn'        => 0,
+        'updated_at' => gmdate('Y-m-d'),
+        'error'      => $reason ?: 'Primary API unavailable',
+        'conditions' => getConditionsFromIndex(2)
+    ];
+}
+
+function getConditionsFromIndex($kIndex) {
+    // Base: everything good
+    $bands = array_fill_keys(
+        ['160','80','60','40','30','20','17','15','12','11','10','6','2'],
+        'good'
+    );
+
+    if ($kIndex >= 7) {
+        // Severe storm — HF badly disrupted
+        foreach (['160','80','60','40','30','20'] as $b) $bands[$b] = 'poor';
+        foreach (['17','15','12','11','10']       as $b) $bands[$b] = 'fair';
+    } elseif ($kIndex >= 5) {
+        // Moderate storm
+        foreach (['160','80','60']      as $b) $bands[$b] = 'poor';
+        foreach (['40','30','20','17']  as $b) $bands[$b] = 'fair';
+    } elseif ($kIndex >= 3) {
+        // Unsettled
+        $bands['160'] = 'poor';
+        foreach (['80','60','40']       as $b) $bands[$b] = 'fair';
+    } else {
+        // Quiet — 160m always needs night to open
+        $bands['160'] = 'fair';
+    }
+
+    return $bands;
+}
 ?>
