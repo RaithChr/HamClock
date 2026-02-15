@@ -152,25 +152,56 @@ return phase;
         container.innerHTML = html || `<div style="color:#888; padding:10px;">${t('sat_loading')}</div>`;
     }
 
-    // === DX CLUSTER ===
-    function updateDXCluster() {
-        const calls = ['OE3LCR','DL1ABC','VK2XYZ','JA7QVI','W5NZ','ZS6WX','RA3ABC',
-            'OH2ABC','SP5XYZ','PA3GCV','G4ABC','K9YZ','VU2ABC','UA9XYZ','LU3XYZ',
-            'HB9ABC','SM5XYZ','IT9ABC','EA5ABC','F5XYZ'];
-        const freqs = ['14.225','7.085','21.290','3.795','14.150','10.135','7.035',
-            '21.200','14.195','28.450','3.525','18.140','14.275','7.095','21.310',
-            '14.155','7.055','21.225','14.235','3.760'];
-        const regions = ['EU','EU','OC','AS','NA','AF','EU','EU','EU','EU',
-            'EU','NA','AS','AS','SA','EU','EU','EU','EU','EU'];
-        const now = new Date();
-        for (let i = 1; i <= 20; i++) {
-            const el = document.getElementById('dx-row-' + i);
-            if (!el) continue;
-            const idx = (i - 1) % calls.length;
-            const st = new Date(now - (i * 180000));
-            const t = String(st.getUTCHours()).padStart(2,'0') + ':' + String(st.getUTCMinutes()).padStart(2,'0') + ' UTC';
-            el.style.display = 'block';
-            el.innerHTML = `<strong onclick="openQRZModal('${calls[idx]}','${freqs[idx]}')">${calls[idx]} ${freqs[idx]}</strong> - ${regions[idx]}<br><span class="dx-time">${t}</span>`;
+    // === DX CLUSTER (Live via HamQTH.com — kein API-Key, CORS *) ===
+    async function updateDXCluster() {
+        try {
+            const r = await fetch('https://www.hamqth.com/dxc_csv.php?limit=20', {
+                headers: { 'User-Agent': 'HamClockDashboard/1.0 OE3LCR' }
+            });
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            const text = await r.text();
+            // CSV: Spotter^FreqKHz^DXCall^Comment^Time Date^^^Continent^Band^Country^DXCC
+            const lines = text.trim().split('\n').filter(l => l.includes('^'));
+            const bandColor = {
+                '160M':'#ff6b6b','80M':'#ffa502','60M':'#eccc68','40M':'#ffdd59',
+                '30M':'#7bed9f','20M':'#2ed573','17M':'#1e90ff','15M':'#70a1ff',
+                '12M':'#5352ed','10M':'#ff4081','6M':'#e84393','2M':'#00d2ff'
+            };
+            let shown = 0;
+            for (let i = 0; i < lines.length && shown < 20; i++) {
+                const p = lines[i].split('^');
+                if (p.length < 9) continue;
+                const spotter = (p[0]||'').trim().toUpperCase();
+                const freqKhz = parseFloat(p[1]) || 0;
+                const dxCall  = (p[2]||'').trim().toUpperCase();
+                const comment = (p[3]||'').trim();
+                const timeStr = (p[4]||'').trim();
+                const cont    = (p[7]||'EU').trim();
+                const band    = (p[8]||'').trim().toUpperCase();
+                if (!dxCall || freqKhz === 0) continue;
+                const freqMhz = (freqKhz / 1000).toFixed(3);
+                const utcTime = timeStr.length >= 4
+                    ? timeStr.substring(0,2)+':'+timeStr.substring(2,4)+' UTC'
+                    : timeStr;
+                const bColor = bandColor[band] || '#ffa502';
+                const el = document.getElementById('dx-row-' + (shown + 1));
+                if (!el) break;
+                el.style.display = 'block';
+                const note = comment ? comment.substring(0,28) : '\u2014';
+                el.innerHTML = `<strong onclick="openQRZModal('${dxCall}','${freqMhz}')" style="color:${bColor}">${dxCall} ${freqMhz}</strong>`
+                    + ` <span style="color:#888;font-size:0.78em">[${band}] ${cont}</span>`
+                    + `<br><span class="dx-time" style="color:#666">${spotter} \u2192 ${note} &nbsp;${utcTime}</span>`;
+                shown++;
+            }
+            for (let j = shown + 1; j <= 20; j++) {
+                const el2 = document.getElementById('dx-row-' + j);
+                if (el2) el2.style.display = 'none';
+            }
+        } catch(e) {
+            console.warn('[DX Cluster] fetch failed:', e);
+            const el = document.getElementById('dx-row-1');
+            if (el) { el.style.display='block'; el.innerHTML='<span style="color:#ff4757">\u26a0\ufe0f DX Cluster nicht erreichbar</span>'; }
+            for (let j = 2; j <= 20; j++) { const e2=document.getElementById('dx-row-'+j); if(e2) e2.style.display='none'; }
         }
         if (typeof checkDXScroll === 'function') setTimeout(checkDXScroll, 100);
     }
@@ -281,7 +312,7 @@ window.addEventListener('resize',enforceKioskWidths);
 
     <script src="/js/gridstack.min.js"></script>
     <script src="/js/dashboard-grid.js"></script>
-    <script src="/js/kiosk.js"></script>
+        <script src="/js/kiosk.js?v=202602122103"></script>
     <!-- Kiosk grid hook -->
     <script>
     const _origEnable = window.enableKioskMode;

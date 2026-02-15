@@ -77,3 +77,6 @@ BOOTSTRAP.md
 TOOLS.md
 TODO.md
 memory/
+data/solar-data.json
+data/dx-cache.txt
+/tmp/
