@@ -38,3 +38,17 @@ Thumbs.db
 *.bak
 *.backup
 ~*
+
+# Runtime / Cache
+data/
+satellite-data.json
+*.json.cache
+
+# Google Verification (optional, aber meist harmlos)
+google*.html
+
+# Backup-Files
+*.old
+
+# Private Counter-Scripts (referenziert myhoney/)
+count_images.php
