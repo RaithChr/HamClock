@@ -29,7 +29,8 @@
 - **Auto-rotate** every 30 seconds
 - **Per-page layout saving** — positions saved separately (`gwen_kiosk_layout_p1` / `_p2`)
 - **Horizontal gap correction** — P2 widgets auto-reposition to fill left-to-right without gaps
-- Reset clears both normal and kiosk layouts
+- **Widget visibility control** — each widget can be individually hidden via the **OFF** badge
+- Reset clears normal layout, kiosk layouts and all badge states
 
 ### 📊 Real-Time Widgets
 
@@ -199,14 +200,27 @@ Default assignment:
 - **P2:** Local Weather, Space Weather, DX Cluster, Satellites
 - **1+2:** Header, Clock
 
+Click cycle per widget: **P1 → P2 → 1+2 → OFF → P1**
+
+| Badge | Colour | Behaviour |
+|-------|--------|-----------|
+| **P1** | 🟢 Green | Visible on Kiosk Page 1 only |
+| **P2** | 🔵 Blue | Visible on Kiosk Page 2 only |
+| **1+2** | 🟠 Orange | Visible on both kiosk pages |
+| **OFF** | 🔴 Red | Hidden in kiosk mode (all pages) |
+
+> **Note:** OFF-widgets remain visible in normal (non-kiosk) mode.
+
 ### localStorage Keys
 | Key | Contents |
 |-----|----------|
 | `gwen_grid_layout` | Normal mode widget positions |
 | `gwen_kiosk_layout_p1` | Kiosk Page 1 positions |
 | `gwen_kiosk_layout_p2` | Kiosk Page 2 positions |
-| `gwen_widget_pages` | Per-widget P1/P2/both assignments |
+| `gwen_widget_pages` | Per-widget P1/P2/1+2/OFF assignments |
 | `gwen_hp_settings` | Callsign, Locator, Language |
+
+All keys are cleared by the **🔄 Reset** button.
 
 ---
 
@@ -280,6 +294,6 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
-**Version:** 2.0.0  
-**Last Updated:** Feb 15, 2026  
+**Version:** 2.1.0  
+**Last Updated:** Feb 15, 2026 (v2.1.0)  
 **Status:** ✅ Production Ready
