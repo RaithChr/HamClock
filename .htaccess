@@ -1,0 +1,13 @@
+DirectoryIndex index.php index.html
+
+# DX Cluster fix: inject JS-patch via prepend (forbidden User-Agent header workaround)
+php_value auto_prepend_file /var/www/html/data/dx-patch.php
+
+# Optional: craith.cloud/ → index.php direkt
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # index.html immer → index.php (auch wenn Datei existiert)
+    RewriteRule ^index\.html$ /index.php [L,R=301]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+</IfModule>
