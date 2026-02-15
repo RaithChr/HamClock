@@ -347,7 +347,7 @@ window.addEventListener('resize',enforceKioskWidths);
 
     <script src="/js/gridstack.min.js"></script>
     <script src="/js/dashboard-grid.js?v=20260215c"></script>
-        <script src="/js/kiosk.js?v=20260215d"></script>
+        <script src="/js/kiosk.js?v=20260215e"></script>
     <!-- Kiosk grid hook -->
     <script>
     const _origEnable = window.enableKioskMode;

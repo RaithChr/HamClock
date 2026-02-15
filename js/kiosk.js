@@ -10,16 +10,16 @@ let kioskPageInited   = false;
 let kioskSavedLayout  = null;
 
 const DEFAULT_PAGES = {
-    'widget-header':        'both',
-    'widget-sun':           'p1',
-    'widget-qth':           'p1',
-    'widget-bands':         'p1',
+    'widget-header':        'both',   // Reset-Default: alle Widgets auf 1+2
+    'widget-sun':           'both',
+    'widget-qth':           'both',
+    'widget-bands':         'both',
     'widget-clock':         'both',
-    'widget-weather-local': 'p2',
-    'widget-weather-space': 'p2',
-    'widget-satellites':    'p2',
-    'widget-dx':            'p2',
-    'widget-system':        'p1',
+    'widget-weather-local': 'both',
+    'widget-weather-space': 'both',
+    'widget-satellites':    'both',
+    'widget-dx':            'both',
+    'widget-system':        'both',
 };
 
 const KIOSK_PAGE_LAYOUTS = {
