@@ -68,8 +68,11 @@ return phase;
         if($('date'))$('date').textContent=getViennaDate(now);
         if($('footer-time'))$('footer-time').textContent=getViennaTime(now);
         if($('moonEmoji'))$('moonEmoji').textContent=MOON_EMOJIS[getMoonPhase(now)];
-        const m=getMoonRiseSet(now);
-        if($('moonTimes'))$('moonTimes').textContent=`${m.rise} / ${m.set}`;
+        // Moon times: nur überschreiben wenn API-Daten noch nicht da (Fallback)
+        if(!sunData) {
+            const m=getMoonRiseSet(now);
+            if($('moonTimes'))$('moonTimes').textContent=`${m.rise} / ${m.set}`;
+        }
     }
 
     // === SOLAR DATA (parallel load) ===
@@ -346,7 +349,7 @@ window.addEventListener('resize',enforceKioskWidths);
 </script>
 
     <script src="/js/gridstack.min.js"></script>
-    <script src="/js/dashboard-grid.js?v=20260215c"></script>
+    <script src="/js/dashboard-grid.js?v=20260215d"></script>
         <script src="/js/kiosk.js?v=20260215e"></script>
     <!-- Kiosk grid hook -->
     <script>
