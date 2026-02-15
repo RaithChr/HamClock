@@ -2,9 +2,29 @@
 
 **OE3LCR — JN87ct (Wien, Austria)**
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live-craith.cloud-brightgreen)](https://craith.cloud)
+[![PHP](https://img.shields.io/badge/PHP-7.4%2B-777bb4)](https://php.net)
+[![Data: N0NBH](https://img.shields.io/badge/Data-N0NBH%20HamQSL-orange)](https://www.hamqsl.com)
+
 Live: [https://craith.cloud](https://craith.cloud)
 
 🎙️ **Professional Amateur Radio Dashboard** with real-time Sun/Moon tracking, satellite positions, band conditions (N0NBH/HamQSL + K-Index degradation), weather, space weather (NOAA GOES), DX Cluster, live system metrics and fullscreen kiosk mode.
+
+---
+
+## ☕ Support the Project
+
+If you like this project and want to support its development:
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-orange?logo=buy-me-a-coffee&logoColor=white)](https://www.buymeacoffee.com/christianraith)
+[![PayPal](https://img.shields.io/badge/PayPal-Donate-blue?logo=paypal&logoColor=white)](https://paypal.me/christianraith151)
+
+- ☕ **Buy Me a Coffee:** https://www.buymeacoffee.com/christianraith
+- 💳 **PayPal:** https://paypal.me/christianraith151
+
+Your support helps maintain and improve this project!
 
 ---
 
@@ -86,6 +106,17 @@ fetch-solar-data.php   ← N0NBH solar data (10min cache, no rand()!)
 fetch-tle.php          ← CelesTrak TLE proxy
 get-system-stats.php   ← CPU/RAM/Disk live stats
 ```
+
+---
+
+## 📄 License
+
+This project is dual-licensed:
+
+- **MIT License** — free to use, modify and distribute with attribution
+- **Apache License 2.0** — includes patent grant and trademark protections
+
+See [LICENSE](LICENSE) for full terms.
 
 ---
 
