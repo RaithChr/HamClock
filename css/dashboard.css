@@ -996,3 +996,30 @@ body.mobile-mode #widget-clock {
     position: relative !important;
     transform: none !important;
 }
+
+/* ============================================
+   MOBILE SINGLE COLUMN FIX - 2026-02-16
+   ============================================ */
+
+/* ALLE Widgets müssen 100% Breite haben */
+body.mobile-mode .grid-stack-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    left: 0 !important;
+    position: relative !important;
+    transform: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Keine Gridstack Verschiebung */
+body.mobile-mode .grid-stack {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Gridstack interne Positionierung zurücksetzen */
+body.mobile-mode .grid-stack-item[style*="translate"] {
+    transform: none !important;
+}
