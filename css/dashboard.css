@@ -702,235 +702,83 @@ body.raspberry-mode #loading-overlay {
 @media (max-width: 380px) {
     }
 
+/* Kein Zwischenraum zwischen Boxen */
+/* Höherer Header */
+/* Resize Handles sichtbar */
+/* Touch-Griffe für Resize */
+/* Gridstack interne Margins entfernen */
+/* Card direkt aneinander */
+/* Erste und letzte Card abrunden */
+/* Nur Header hat etwas Abstand nach oben */
+/* Uhr direkt andocken - kein Abstand */
+/* ALLE Boxen direkt andocken */
+/* Nur erste Box oben abrunden */
+/* Letzte Box unten abrunden */
+/* Gridstack interne Abstände killen */
+/* Übergang Header → Uhr nahtlos */
+
 /* ============================================
-   MOBILE LAYOUT - RESTORED
+   MOBILE LAYOUT - CLEAN START
    ============================================ */
 
 body.mobile-mode {
-    padding: 10px;
+    padding: 5px;
+    margin: 0;
 }
 
+/* Gridstack: Keine internen Abstände */
 body.mobile-mode .grid-stack {
-    display: flex;
-    flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 body.mobile-mode .grid-stack-item {
-    width: 100% !important;
-    max-width: 100% !important;
-    position: relative !important;
-    left: 0 !important;
-    transform: none !important;
-    margin-bottom: 10px;
+    margin: 0 0 1px 0;
+    padding: 0;
+    position: relative;
 }
 
+/* Alle Cards gleich aussehen */
+body.mobile-mode .grid-stack-item .card {
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Erste Card oben rund */
+body.mobile-mode .grid-stack-item:first-child .card {
+    border-radius: 12px 12px 0 0;
+}
+
+/* Letzte Card unten rund */
+body.mobile-mode .grid-stack-item:last-child .card {
+    border-radius: 0 0 12px 12px;
+    border-bottom: none;
+}
+
+/* Header: 180px hoch */
 body.mobile-mode #widget-header .card {
+    min-height: 180px;
+    height: 180px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 15px;
+    justify-content: center;
     gap: 10px;
 }
 
 body.mobile-mode #widget-header #header-callsign {
-    font-size: 1.4em;
+    font-size: 1.6em;
 }
 
 body.mobile-mode #widget-header .btn-box {
     display: flex;
-    gap: 6px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
 }
 
 body.mobile-mode #widget-header .hdr-btn {
-    padding: 6px 10px;
+    padding: 8px 12px;
     font-size: 11px;
-}
-
-/* ============================================
-   MOBILE COMPACT LAYOUT - 2026-02-16
-   ============================================ */
-
-/* Kein Zwischenraum zwischen Boxen */
-body.mobile-mode .grid-stack-item {
-    margin-bottom: 2px !important;
-    margin-top: 0 !important;
-}
-
-/* Höherer Header */
-body.mobile-mode #widget-header {
-    min-height: 80px !important;
-}
-
-body.mobile-mode #widget-header .card {
-    min-height: 70px !important;
-    padding: 20px 15px !important;
-}
-
-/* Resize Handles sichtbar */
-body.mobile-mode .grid-stack-item .ui-resizable-handle,
-body.mobile-mode .grid-stack-item .ui-resizable-se,
-body.mobile-mode .grid-stack-item .ui-resizable-sw {
-    width: 15px !important;
-    height: 15px !important;
-    background: rgba(0,255,136,0.3) !important;
-    border-radius: 50% !important;
-    border: 1px solid rgba(0,255,136,0.5) !important;
-}
-
-/* Touch-Griffe für Resize */
-body.mobile-mode .grid-stack-item {
-    touch-action: none !important;
-}
-
-/* ============================================
-   MOBILE NO GAP - ZERO MARGIN
-   ============================================ */
-
-/* Gridstack interne Margins entfernen */
-body.mobile-mode .grid-stack {
-    margin: 0 !important;
-    padding: 0 !important;
-    gap: 0 !important;
-}
-
-body.mobile-mode .grid-stack-item {
-    margin: 0 !important;
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
-    padding: 0 !important;
-}
-
-body.mobile-mode .grid-stack-item-content {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Card direkt aneinander */
-body.mobile-mode .grid-stack-item .card {
-    margin: 0 !important;
-    border-radius: 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-}
-
-/* Erste und letzte Card abrunden */
-body.mobile-mode .grid-stack-item:first-child .card {
-    border-radius: 15px 15px 0 0 !important;
-}
-
-body.mobile-mode .grid-stack-item:last-child .card {
-    border-radius: 0 0 15px 15px !important;
-    border-bottom: none !important;
-}
-
-/* Nur Header hat etwas Abstand nach oben */
-body.mobile-mode #widget-header {
-    margin-top: 0 !important;
-}
-
-body.mobile-mode #widget-header .card {
-    border-radius: 15px !important;
-    margin-bottom: 2px !important;
-}
-
-/* ============================================
-   MOBILE HEADER 173px + CLOCK ANDOCKEN
-   ============================================ */
-
-body.mobile-mode #widget-header {
-    min-height: 173px !important;
-    height: 173px !important;
-}
-
-body.mobile-mode #widget-header .card {
-    min-height: 173px !important;
-    height: 173px !important;
-    padding: 25px 20px !important;
-}
-
-/* Uhr direkt andocken - kein Abstand */
-body.mobile-mode #widget-clock {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-body.mobile-mode #widget-clock .card {
-    border-top: none !important;
-    margin-top: 0 !important;
-}
-
-/* ============================================
-   MOBILE HEADER 1/3 BILDSCHIRM
-   ============================================ */
-
-body.mobile-mode #widget-header {
-    min-height: 33.33vh !important;
-    height: 33.33vh !important;
-}
-
-body.mobile-mode #widget-header .card {
-    min-height: 33.33vh !important;
-    height: 33.33vh !important;
-}
-
-/* ============================================
-   MOBILE HEADER 180px + BOXEN ANDOCKEN
-   ============================================ */
-
-body.mobile-mode #widget-header {
-    min-height: 180px !important;
-    height: 180px !important;
-}
-
-body.mobile-mode #widget-header .card {
-    min-height: 180px !important;
-    height: 180px !important;
-}
-
-/* ALLE Boxen direkt andocken */
-body.mobile-mode .grid-stack-item {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-body.mobile-mode .grid-stack-item .card {
-    margin: 0 !important;
-    border-radius: 0 !important;
-}
-
-/* Nur erste Box oben abrunden */
-body.mobile-mode .grid-stack-item:first-child .card {
-    border-radius: 12px 12px 0 0 !important;
-}
-
-/* Letzte Box unten abrunden */
-body.mobile-mode .grid-stack-item:last-child .card {
-    border-radius: 0 0 12px 12px !important;
-}
-
-/* ============================================
-   MOBILE REMOVE GAP BETWEEN BOXES
-   ============================================ */
-
-/* Gridstack interne Abstände killen */
-body.mobile-mode .grid-stack .grid-stack-item-content {
-    margin: 0 !important;
-    padding: 0 !important;
-    inset: 0 !important;
-}
-
-body.mobile-mode .grid-stack-item[data-gs-y="0"] {
-    margin-bottom: 0 !important;
-}
-
-/* Übergang Header → Uhr nahtlos */
-body.mobile-mode #widget-header + #widget-clock,
-body.mobile-mode #widget-header ~ #widget-clock {
-    margin-top: -1px !important;
-}
-
-body.mobile-mode #widget-clock .card {
-    border-top: none !important;
-    margin-top: 0 !important;
 }
