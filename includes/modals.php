@@ -6,6 +6,7 @@
             <div class="form-group"><label data-i18n="modal_callsign">Rufzeichen:</label><input type="text" name="callsign" placeholder="z.B. OE3LCR" maxlength="10" required></div>
             <div class="form-group"><label data-i18n="modal_locator">Maidenhead Locator:</label><input type="text" name="locator" placeholder="z.B. JN87ct" maxlength="6" required></div>
             <div class="form-group"><label data-i18n="modal_language">Sprache:</label><select name="language" id="language-select"><option value="de">Deutsch 🇩🇪</option><option value="en">English 🇬🇧</option></select></div>
+            <div class="form-group"><label>📺 Display-Modus:</label><select name="display_profile" id="display-profile-select"><option value="auto">🤖 Automatisch (empfohlen)</option><option value="desktop">🖥️ Desktop (1920×1080)</option><option value="raspberry">📟 Raspberry Pi 7" (1024×600)</option><option value="tablet">📱 Tablet</option><option value="mobile">📲 Smartphone</option></select><small style="color:#888; display:block; margin-top:4px;">Automatisch erkennt die optimale Einstellung für dein Gerät</small></div>
             <div class="modal-buttons"><button type="submit" class="btn-primary">Start</button></div>
         </form>
     </div></div>

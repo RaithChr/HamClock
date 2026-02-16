@@ -219,7 +219,16 @@ return phase;
 
     // === PERSONALIZATION ===
     function personalizeHomepage() {
-        const s=UserSettings.load(), call=(s.callsign||'OE3LCR').toUpperCase(), loc=formatLocator(s.locator||'JN87ct');
+        
+    // Display Profile from settings
+    const savedProfile = localStorage.getItem('gwen_display_profile_override');
+    if (savedProfile && savedProfile !== 'auto') {
+        if (window.DisplayProfile) {
+            window.DisplayProfile.setOverride(savedProfile);
+        }
+    }
+
+    const s=UserSettings.load(), call=(s.callsign||'OE3LCR').toUpperCase(), loc=formatLocator(s.locator||'JN87ct');
         if($('header-callsign'))$('header-callsign').textContent=`🎙️ ${call}`;
         if($('qth-locator'))$('qth-locator').textContent=loc;
         if($('qth-coords'))$('qth-coords').textContent=locatorToCoords(loc).display;
@@ -359,6 +368,6 @@ window.addEventListener('resize',enforceKioskWidths);
     window.disableKioskMode = function() { if(typeof _origDisable==="function") _origDisable(); setGridKioskMode(false); };
     </script>
     <!-- Mobile Mode Handler -->
-    <script src="/js/mobile-handler.js?v=20260215f"></script>
+    <script src="/js/display-profile.js?v=20260215g"></script>
 </body>
 </html>

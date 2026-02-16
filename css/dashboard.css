@@ -466,3 +466,316 @@ body.mobile-mode .modal-close {
     font-size: 24px;
     padding: 10px;
 }
+/**
+ * Raspberry Pi 7" Display Mode (1024×600)
+ * Optimized layout for small touchscreen displays
+ */
+
+/* ============================================
+   RASPBERRY PI 7" MODE
+   ============================================ */
+
+body.raspberry-mode {
+    padding: 4px;
+    overflow-x: hidden;
+}
+
+/* Grid: 4 columns instead of 12 */
+body.raspberry-mode .grid-stack {
+    margin: 0 !important;
+}
+
+body.raspberry-mode .grid-stack-item {
+    transition: none !important; /* Disable animation for performance */
+}
+
+/* ============================================
+   HEADER - Ultra compact
+   ============================================ */
+body.raspberry-mode #widget-header {
+    height: auto !important;
+    min-height: 44px;
+    max-height: 50px;
+}
+
+body.raspberry-mode #widget-header .card {
+    padding: 4px 6px !important;
+    height: auto !important;
+    min-height: 44px;
+}
+
+body.raspberry-mode #widget-header #header-callsign {
+    font-size: clamp(16px, 4vw, 20px);
+    letter-spacing: 1px;
+}
+
+/* Buttons: Icon-only for space saving */
+body.raspberry-mode #widget-header .btn-box {
+    gap: 3px;
+    flex-wrap: nowrap;
+}
+
+body.raspberry-mode #widget-header .hdr-btn {
+    padding: 4px 6px;
+    font-size: 14px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 4px;
+}
+
+/* Hide button text, show only icons */
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="support_btn"] {
+    font-size: 0;
+}
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="support_btn"]::before {
+    content: "❤️";
+    font-size: 16px;
+}
+
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="legend_btn"] {
+    font-size: 0;
+}
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="legend_btn"]::before {
+    content: "ℹ️";
+    font-size: 16px;
+}
+
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="fullscreen_btn"] {
+    font-size: 0;
+}
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="fullscreen_btn"]::before {
+    content: "📺";
+    font-size: 16px;
+}
+
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="settings_btn"] {
+    font-size: 0;
+}
+body.raspberry-mode #widget-header .hdr-btn[data-i18n="settings_btn"]::before {
+    content: "⚙️";
+    font-size: 16px;
+}
+
+/* Reset button as icon */
+body.raspberry-mode #widget-header .hdr-btn[onclick*="resetGridLayout"] {
+    font-size: 0;
+}
+body.raspberry-mode #widget-header .hdr-btn[onclick*="resetGridLayout"]::before {
+    content: "🔄";
+    font-size: 16px;
+}
+
+/* Kiosk page button compact */
+body.raspberry-mode #kiosk-page-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* ============================================
+   CARDS - Compact styling
+   ============================================ */
+body.raspberry-mode .card {
+    border-radius: 6px;
+    margin: 0;
+}
+
+body.raspberry-mode .card-header {
+    padding: 5px 8px;
+    font-size: 12px;
+    min-height: 28px;
+}
+
+body.raspberry-mode .card-header .icon {
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+body.raspberry-mode .card-content,
+body.raspberry-mode .grid-stack-item-content > div:not(.card-header) {
+    padding: 6px;
+    font-size: 11px;
+}
+
+/* ============================================
+   QTH WIDGET
+   ============================================ */
+body.raspberry-mode #widget-qth .grid-square {
+    font-size: 18px;
+}
+
+body.raspberry-mode #widget-qth .coords {
+    font-size: 10px;
+}
+
+body.raspberry-mode #widget-qth .celestial-row {
+    padding: 2px 0;
+    font-size: 11px;
+}
+
+body.raspberry-mode #widget-qth .celestial-times-text {
+    font-size: 10px;
+}
+
+/* ============================================
+   BAND CONDITIONS
+   ============================================ */
+body.raspberry-mode #widget-bands .band-row {
+    padding: 2px 4px;
+    font-size: 10px;
+}
+
+body.raspberry-mode #widget-bands .band-freq {
+    font-size: 9px;
+}
+
+/* ============================================
+   WEATHER WIDGETS
+   ============================================ */
+body.raspberry-mode #widget-weather-local .weather-main,
+body.raspberry-mode #widget-weather-space .weather-main {
+    font-size: 20px;
+}
+
+body.raspberry-mode #widget-weather-local .weather-detail,
+body.raspberry-mode #widget-weather-space .weather-detail {
+    font-size: 10px;
+}
+
+/* ============================================
+   SATELLITES & DX - Scrollable with fixed height
+   ============================================ */
+body.raspberry-mode #widget-satellites .grid-stack-item-content,
+body.raspberry-mode #widget-dx .grid-stack-item-content {
+    display: flex;
+    flex-direction: column;
+}
+
+body.raspberry-mode #satellite-container,
+body.raspberry-mode #dx-cluster-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: none;
+    font-size: 10px;
+}
+
+body.raspberry-mode #satellite-container > div,
+body.raspberry-mode #dx-cluster-list > div {
+    padding: 3px 4px;
+    font-size: 10px;
+}
+
+/* ============================================
+   SYSTEM STATS
+   ============================================ */
+body.raspberry-mode #widget-system .stat-row {
+    padding: 2px 0;
+    font-size: 10px;
+}
+
+body.raspberry-mode #widget-system .progress-bar {
+    height: 6px;
+}
+
+/* ============================================
+   CLOCK
+   ============================================ */
+body.raspberry-mode #widget-clock .time-main {
+    font-size: 24px;
+}
+
+body.raspberry-mode #widget-clock .time-sub {
+    font-size: 10px;
+}
+
+/* ============================================
+   SUN WIDGET - SDO Image sizing
+   ============================================ */
+body.raspberry-mode #widget-sun img {
+    max-height: 140px;
+    object-fit: contain;
+}
+
+/* ============================================
+   SCROLLBARS - Thin for touch
+   ============================================ */
+body.raspberry-mode ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+body.raspberry-mode ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.raspberry-mode ::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 136, 0.3);
+    border-radius: 2px;
+}
+
+/* ============================================
+   KIOSK MODE adjustments for Raspberry
+   ============================================ */
+body.raspberry-mode.kiosk-mode #widget-header {
+    display: none !important;
+}
+
+body.raspberry-mode.kiosk-mode {
+    padding: 0;
+}
+
+body.raspberry-mode.kiosk-mode .grid-stack {
+    margin-top: 0 !important;
+}
+
+/* ============================================
+   TOUCH OPTIMIZATIONS
+   ============================================ */
+body.raspberry-mode button,
+body.raspberry-mode a {
+    min-height: 32px;
+    min-width: 32px;
+    touch-action: manipulation;
+}
+
+/* Disable drag on touch devices */
+body.raspberry-mode .grid-stack-item .card-header {
+    cursor: default !important;
+}
+
+/* Prevent text selection */
+body.raspberry-mode {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* But allow selection in text content */
+body.raspberry-mode .card-content {
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+/* ============================================
+   MODALS - Smaller for small screen
+   ============================================ */
+body.raspberry-mode .modal-content {
+    width: 96%;
+    max-height: 90vh;
+    margin: 2% auto;
+}
+
+body.raspberry-mode .modal-header {
+    padding: 10px;
+    font-size: 14px;
+}
+
+body.raspberry-mode .modal-body {
+    padding: 10px;
+    font-size: 12px;
+}
+
+/* ============================================
+   LOADING OVERLAY
+   ============================================ */
+body.raspberry-mode #loading-overlay {
+    font-size: 14px;
+}

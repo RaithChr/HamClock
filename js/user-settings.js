@@ -9,6 +9,7 @@ const UserSettings = {
         callsign: 'OE3LCR',
         locator: 'JN87ct',
         language: 'de',
+        display_profile: 'auto',
         timestamp: new Date().toISOString()
     },
 
@@ -46,6 +47,7 @@ const UserSettings = {
             callsign: (settings.callsign || this.defaults.callsign).toUpperCase(),
             locator: this.formatLocator(settings.locator || this.defaults.locator),
             language: settings.language || this.defaults.language,
+            display_profile: settings.display_profile || this.defaults.display_profile,
             timestamp: new Date().toISOString()
         };
         localStorage.setItem('gwen_hp_settings', JSON.stringify(toSave));
@@ -206,6 +208,18 @@ const SetupModal = {
                         </select>
                     </div>
                     
+                    <div class="form-group">
+                        <label>📺 Display-Modus:</label>
+                        <select name="display_profile">
+                            <option value="auto" ${settings.display_profile === 'auto' ? 'selected' : ''}>🤖 Automatisch</option>
+                            <option value="desktop" ${settings.display_profile === 'desktop' ? 'selected' : ''}>🖥️ Desktop</option>
+                            <option value="raspberry" ${settings.display_profile === 'raspberry' ? 'selected' : ''}>📟 Raspberry Pi 7"</option>
+                            <option value="tablet" ${settings.display_profile === 'tablet' ? 'selected' : ''}>📱 Tablet</option>
+                            <option value="mobile" ${settings.display_profile === 'mobile' ? 'selected' : ''}>📲 Smartphone</option>
+                        </select>
+                        <small style="color:#888; display:block; margin-top:4px;">Automatisch erkennt die optimale Einstellung</small>
+                    </div>
+                    
                     <div class="settings-buttons">
                         <button type="submit" class="btn-save">${this.getTranslation('save')}</button>
                         <button type="button" class="btn-reset" onclick="SetupModal.confirmReset()">${this.getTranslation('reset')}</button>
@@ -240,11 +254,21 @@ const SetupModal = {
             }
 
             // Format AFTER validation
+            const display_profile = form.display_profile ? form.display_profile.value : 'auto';
             const newSettings = {
                 callsign: rawCallsign,
                 locator: UserSettings.formatLocator(rawLocator),
-                language: language
+                language: language,
+                display_profile: display_profile
             };
+            // Apply display profile immediately
+            if (window.DisplayProfile) {
+                if (display_profile === 'auto') {
+                    window.DisplayProfile.clearOverride();
+                } else {
+                    window.DisplayProfile.setOverride(display_profile);
+                }
+            }
             
             console.log('📝 Saving new settings from modal:', newSettings);
             UserSettings.save(newSettings);
