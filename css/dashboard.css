@@ -870,3 +870,18 @@ body.mobile-mode #widget-clock .card {
     margin-top: 0 !important;
     border-top: none !important;
 }
+
+/* ============================================
+   MOBILE HEADER 130px + 50px BUTTON SPACE
+   ============================================ */
+
+body.mobile-mode #widget-header,
+body.mobile-mode #widget-header .card {
+    min-height: 130px !important;
+    height: 130px !important;
+}
+
+/* 50px Platz unter den Buttons */
+body.mobile-mode #widget-header .btn-box {
+    margin-bottom: 50px !important;
+}
