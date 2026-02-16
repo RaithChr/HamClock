@@ -58,20 +58,20 @@
     }
 
     function detectProfile() {
-        // Immer Desktop verwenden (keine automatische Mobile-Detection)
-        // Außer bei manuellem Override
         if (manualOverride && PROFILES[manualOverride]) {
             return PROFILES[manualOverride];
         }
 
         const { width: w, height: h } = getScreenSize();
 
-        // Nur Raspberry Pi erkennen, sonst immer Desktop
         if (PROFILES.raspberry.detect(w, h)) {
             return PROFILES.raspberry;
         }
 
-        // IMMER Desktop - auch auf Handys
+        if (w >= PROFILES.desktop.minWidth) return PROFILES.desktop;
+        if (w >= PROFILES.tablet.minWidth) return PROFILES.tablet;
+        if (w <= PROFILES.mobile.maxWidth) return PROFILES.mobile;
+        
         return PROFILES.desktop;
     }
 

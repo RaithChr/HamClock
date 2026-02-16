@@ -322,6 +322,6 @@ return phase;
     window.disableKioskMode = function() { if(typeof _origDisable==="function") _origDisable(); setGridKioskMode(false); };
     </script>
     <!-- Mobile Mode Handler -->
-    <script src="/js/display-profile.js?v=20260216r"></script>
+    <script src="/js/display-profile.js?v=20260216t"></script>
 </body>
 </html>
