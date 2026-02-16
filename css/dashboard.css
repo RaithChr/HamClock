@@ -747,3 +747,39 @@ body.mobile-mode #widget-header .hdr-btn {
     padding: 6px 10px;
     font-size: 11px;
 }
+
+/* ============================================
+   MOBILE COMPACT LAYOUT - 2026-02-16
+   ============================================ */
+
+/* Kein Zwischenraum zwischen Boxen */
+body.mobile-mode .grid-stack-item {
+    margin-bottom: 2px !important;
+    margin-top: 0 !important;
+}
+
+/* Höherer Header */
+body.mobile-mode #widget-header {
+    min-height: 80px !important;
+}
+
+body.mobile-mode #widget-header .card {
+    min-height: 70px !important;
+    padding: 20px 15px !important;
+}
+
+/* Resize Handles sichtbar */
+body.mobile-mode .grid-stack-item .ui-resizable-handle,
+body.mobile-mode .grid-stack-item .ui-resizable-se,
+body.mobile-mode .grid-stack-item .ui-resizable-sw {
+    width: 15px !important;
+    height: 15px !important;
+    background: rgba(0,255,136,0.3) !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(0,255,136,0.5) !important;
+}
+
+/* Touch-Griffe für Resize */
+body.mobile-mode .grid-stack-item {
+    touch-action: none !important;
+}
