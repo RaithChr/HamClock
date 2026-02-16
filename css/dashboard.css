@@ -873,3 +873,38 @@ body.mobile-mode #widget-header .card {
     min-height: 33.33vh !important;
     height: 33.33vh !important;
 }
+
+/* ============================================
+   MOBILE HEADER 180px + BOXEN ANDOCKEN
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    min-height: 180px !important;
+    height: 180px !important;
+}
+
+body.mobile-mode #widget-header .card {
+    min-height: 180px !important;
+    height: 180px !important;
+}
+
+/* ALLE Boxen direkt andocken */
+body.mobile-mode .grid-stack-item {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.mobile-mode .grid-stack-item .card {
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* Nur erste Box oben abrunden */
+body.mobile-mode .grid-stack-item:first-child .card {
+    border-radius: 12px 12px 0 0 !important;
+}
+
+/* Letzte Box unten abrunden */
+body.mobile-mode .grid-stack-item:last-child .card {
+    border-radius: 0 0 12px 12px !important;
+}
