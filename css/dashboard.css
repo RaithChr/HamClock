@@ -1089,3 +1089,23 @@ body.mobile-mode #widget-header .hdr-btn {
         gap: 3px !important;
     }
 }
+
+/* ============================================
+   MOBILE HEADER GRÖßER - 2026-02-16
+   Für bessere Touch-Bedienung und Resize
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    min-height: 60px !important;
+}
+
+body.mobile-mode #widget-header .card {
+    min-height: 54px !important;
+    padding: 8px 10px !important;
+}
+
+body.mobile-mode #widget-header .hdr-btn {
+    min-height: 36px !important;
+    min-width: 36px !important;
+    font-size: 11px !important;
+}
