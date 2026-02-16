@@ -833,3 +833,29 @@ body.mobile-mode #widget-header .card {
     border-radius: 15px !important;
     margin-bottom: 2px !important;
 }
+
+/* ============================================
+   MOBILE HEADER 173px + CLOCK ANDOCKEN
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    min-height: 173px !important;
+    height: 173px !important;
+}
+
+body.mobile-mode #widget-header .card {
+    min-height: 173px !important;
+    height: 173px !important;
+    padding: 25px 20px !important;
+}
+
+/* Uhr direkt andocken - kein Abstand */
+body.mobile-mode #widget-clock {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body.mobile-mode #widget-clock .card {
+    border-top: none !important;
+    margin-top: 0 !important;
+}
