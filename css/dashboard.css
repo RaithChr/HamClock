@@ -756,10 +756,10 @@ body.mobile-mode .grid-stack-item:last-child .card {
     border-bottom: none;
 }
 
-/* Header: 180px hoch */
+/* Header: 230px hoch */
 body.mobile-mode #widget-header .card {
-    min-height: 180px;
-    height: 180px;
+    min-height: 230px;
+    height: 230px;
     display: flex;
     flex-direction: column;
     align-items: center;
