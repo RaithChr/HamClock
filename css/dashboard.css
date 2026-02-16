@@ -859,3 +859,17 @@ body.mobile-mode #widget-clock .card {
     border-top: none !important;
     margin-top: 0 !important;
 }
+
+/* ============================================
+   MOBILE HEADER 1/3 BILDSCHIRM
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    min-height: 33.33vh !important;
+    height: 33.33vh !important;
+}
+
+body.mobile-mode #widget-header .card {
+    min-height: 33.33vh !important;
+    height: 33.33vh !important;
+}
