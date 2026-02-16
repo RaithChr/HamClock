@@ -779,3 +779,156 @@ body.raspberry-mode .modal-body {
 body.raspberry-mode #loading-overlay {
     font-size: 14px;
 }
+/**
+ * MOBILE MODE FIX
+ * Ensures widgets are properly visible in single-column layout
+ */
+
+/* ============================================
+   MOBILE MODE - Core visibility fixes
+   ============================================ */
+
+body.mobile-mode {
+    padding: 2px;
+    overflow-x: hidden;
+}
+
+/* Ensure grid is visible */
+body.mobile-mode .grid-stack {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+}
+
+/* Force all items to be visible and single column */
+body.mobile-mode .grid-stack-item {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    top: auto !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+    margin-bottom: 8px;
+}
+
+body.mobile-mode .grid-stack-item-content {
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* Header sticky at top */
+body.mobile-mode #widget-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    margin-bottom: 8px;
+}
+
+body.mobile-mode #widget-header .card {
+    padding: 6px 8px !important;
+    min-height: 50px;
+}
+
+body.mobile-mode #widget-header #header-callsign {
+    font-size: clamp(14px, 5vw, 18px);
+}
+
+/* Compact buttons */
+body.mobile-mode #widget-header .btn-box {
+    gap: 4px;
+}
+
+body.mobile-mode #widget-header .hdr-btn {
+    padding: 6px 8px;
+    font-size: 12px;
+    min-height: 36px;
+    min-width: 36px;
+}
+
+/* Card styling */
+body.mobile-mode .card {
+    border-radius: 8px;
+    margin: 0;
+    overflow: hidden;
+}
+
+body.mobile-mode .card-header {
+    padding: 8px 10px;
+    font-size: 13px;
+    min-height: 36px;
+}
+
+body.mobile-mode .card-content,
+body.mobile-mode .grid-stack-item-content > div:not(.card-header) {
+    padding: 8px;
+    font-size: 12px;
+}
+
+/* Specific widget adjustments */
+body.mobile-mode #widget-sun img {
+    max-width: 100%;
+    height: auto;
+}
+
+body.mobile-mode #satellite-container,
+body.mobile-mode #dx-cluster-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+body.mobile-mode #satellite-container > div,
+body.mobile-mode #dx-cluster-list > div {
+    padding: 4px 6px;
+    font-size: 11px;
+}
+
+/* Prevent drag on mobile */
+body.mobile-mode .grid-stack-item .card-header {
+    cursor: default !important;
+}
+
+/* Touch optimizations */
+body.mobile-mode button,
+body.mobile-mode a {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+}
+
+/* Kiosk mode in mobile */
+body.mobile-mode.kiosk-mode #widget-header {
+    display: none !important;
+}
+
+body.mobile-mode.kiosk-mode {
+    padding: 0;
+}
+
+/* Modal adjustments */
+body.mobile-mode .modal-content {
+    width: 96%;
+    margin: 2% auto;
+    max-height: 96vh;
+}
+
+/* Scrollbar styling */
+body.mobile-mode ::-webkit-scrollbar {
+    width: 6px;
+}
+
+body.mobile-mode ::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 136, 0.4);
+    border-radius: 3px;
+}
+
+/* Animation disable for performance */
+body.mobile-mode .grid-stack-item {
+    transition: none !important;
+}

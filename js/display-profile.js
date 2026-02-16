@@ -46,6 +46,7 @@
 
     let currentProfile = null;
     let manualOverride = localStorage.getItem('gwen_display_profile_override');
+    let isInitialized = false;
 
     function getScreenSize() {
         return {
@@ -78,8 +79,11 @@
         return PROFILES.desktop;
     }
 
-    function applyProfile(profile) {
-        if (!profile || currentProfile === profile.name) return;
+    function applyProfile(profile, force = false) {
+        if (!profile) return;
+        if (currentProfile === profile.name && !force) return;
+        
+        console.log('[Display] Applying profile:', profile.name);
         
         // Remove old profile classes
         Object.values(PROFILES).forEach(p => {
@@ -92,35 +96,26 @@
 
         // Apply grid settings if grid is ready
         if (window.grid && typeof window.grid.column === 'function') {
-            // Save current layout before switching
-            if (window.saveGridLayout) {
-                window.saveGridLayout();
-            }
-
+            // Disable animation for smoother transition
+            const wasAnimated = window.grid.opts.animate;
+            window.grid.animate(false);
+            
             // Apply new grid configuration
             window.grid.column(profile.columns);
             window.grid.cellHeight(profile.cellHeight);
             window.grid.margin(profile.margin);
-
-            // Load profile-specific layout or compact
-            const profileLayout = localStorage.getItem(`gwen_grid_layout_${profile.name}`);
-            if (profileLayout) {
-                try {
-                    const items = JSON.parse(profileLayout);
-                    window.grid.load(items);
-                } catch(e) {
-                    window.grid.compact();
-                }
-            } else {
-                // Apply default layout for profile
-                applyDefaultLayout(profile.name);
+            
+            // Apply layout for this profile
+            applyLayoutForProfile(profile.name);
+            
+            // Re-enable animation
+            if (wasAnimated) {
+                setTimeout(() => window.grid.animate(true), 100);
             }
         }
 
         // Store current profile
         localStorage.setItem('gwen_display_profile', profile.name);
-        
-        console.log('[Display] Profile applied:', profile.name);
         
         // Dispatch event for other components
         window.dispatchEvent(new CustomEvent('displayProfileChanged', { 
@@ -128,7 +123,7 @@
         }));
     }
 
-    function applyDefaultLayout(profileName) {
+    function applyLayoutForProfile(profileName) {
         if (!window.grid) return;
 
         const layouts = {
@@ -143,25 +138,55 @@
                 { id: 'widget-system', x: 2, y: 8, w: 2, h: 2 },
                 { id: 'widget-satellites', x: 0, y: 10, w: 4, h: 3 },
                 { id: 'widget-dx', x: 0, y: 13, w: 4, h: 4 },
+            ],
+            mobile: [
+                { id: 'widget-header', x: 0, y: 0, w: 1, h: 1 },
+                { id: 'widget-sun', x: 0, y: 1, w: 1, h: 3 },
+                { id: 'widget-qth', x: 0, y: 4, w: 1, h: 3 },
+                { id: 'widget-bands', x: 0, y: 7, w: 1, h: 3 },
+                { id: 'widget-clock', x: 0, y: 10, w: 1, h: 2 },
+                { id: 'widget-weather-local', x: 0, y: 12, w: 1, h: 2 },
+                { id: 'widget-weather-space', x: 0, y: 14, w: 1, h: 2 },
+                { id: 'widget-system', x: 0, y: 16, w: 1, h: 2 },
+                { id: 'widget-satellites', x: 0, y: 18, w: 1, h: 3 },
+                { id: 'widget-dx', x: 0, y: 21, w: 1, h: 4 },
             ]
         };
 
         const layout = layouts[profileName];
+        
         if (layout) {
             // Update each widget position
             layout.forEach(item => {
                 const el = document.querySelector(`[gs-id="${item.id}"]`);
-                if (el && window.grid.engine.nodes.find(n => n.id === item.id)) {
-                    window.grid.update(el, { x: item.x, y: item.y, w: item.w, h: item.h });
+                if (el) {
+                    const node = window.grid.engine.nodes.find(n => n.el === el);
+                    if (node) {
+                        window.grid.update(el, { 
+                            x: item.x, 
+                            y: item.y, 
+                            w: item.w, 
+                            h: item.h 
+                        });
+                    }
                 }
             });
             window.grid.compact();
+        } else {
+            // For desktop/tablet: just compact
+            window.grid.compact();
         }
+        
+        // Force visibility update
+        document.querySelectorAll('.grid-stack-item').forEach(item => {
+            item.style.visibility = 'visible';
+            item.style.display = '';
+        });
     }
 
-    function checkAndApply() {
+    function checkAndApply(force = false) {
         const profile = detectProfile();
-        applyProfile(profile);
+        applyProfile(profile, force);
     }
 
     // Manual override functions
@@ -173,39 +198,45 @@
             manualOverride = profileName;
             localStorage.setItem('gwen_display_profile_override', profileName);
         }
-        checkAndApply();
+        checkAndApply(true);
     }
 
     // Initialize
     function init() {
+        if (isInitialized) return;
+        
         if (!window.grid) {
-            setTimeout(init, 100);
+            console.log('[Display] Waiting for grid...');
+            setTimeout(init, 200);
             return;
         }
+        
+        isInitialized = true;
+        console.log('[Display] Initializing...');
 
         // Initial check
-        checkAndApply();
+        checkAndApply(true);
 
         // Listen for resize with debounce
         let resizeTimeout;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(checkAndApply, 300);
+            resizeTimeout = setTimeout(() => checkAndApply(), 300);
         });
 
         // Orientation change
         window.addEventListener('orientationchange', function() {
-            setTimeout(checkAndApply, 500);
+            setTimeout(() => checkAndApply(true), 500);
         });
     }
 
-    // Start
+    // Start - wait for both DOM and GridStack
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(init, 600);
+            setTimeout(init, 800);
         });
     } else {
-        setTimeout(init, 600);
+        setTimeout(init, 800);
     }
 
     // Expose API
@@ -216,7 +247,8 @@
         clearOverride: () => setManualOverride(null),
         isRaspberry: () => currentProfile === 'raspberry',
         isMobile: () => currentProfile === 'mobile',
-        forceDetect: checkAndApply
+        forceDetect: () => checkAndApply(true),
+        init: init
     };
 
 })();
