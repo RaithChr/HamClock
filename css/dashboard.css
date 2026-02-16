@@ -1060,3 +1060,52 @@ body.mobile-mode .grid-stack-item[style*="translate"] {
     }
 }
 
+/* ============================================
+   MOBILE HEADER - WIE ANDERE WIDGETS
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+}
+
+body.mobile-mode #widget-header .card {
+    /* Genau wie .card Standard */
+    background: rgba(20,20,35,0.9) !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+    /* Layout */
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+body.mobile-mode #widget-header #header-callsign {
+    font-family: "Orbitron", sans-serif !important;
+    font-size: 1.5em !important;
+    font-weight: 700 !important;
+    color: #00ff88 !important;
+    text-shadow: 0 0 10px rgba(0,255,136,0.3) !important;
+}
+
+body.mobile-mode #widget-header .btn-box {
+    display: flex !important;
+    gap: 8px !important;
+}
+
+body.mobile-mode #widget-header .hdr-btn {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 8px !important;
+    color: #e0e0e0 !important;
+    cursor: pointer !important;
+}
+
+body.mobile-mode #widget-header .hdr-btn:hover {
+    background: rgba(255,255,255,0.1) !important;
+}
