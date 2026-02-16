@@ -75,6 +75,6 @@
         document.addEventListener('DOMContentLoaded', () => { updateModalTranslations(); updatePageTranslations(); });
     </script>
     <link rel="stylesheet" href="/css/gridstack.min.css">
-    <link rel="stylesheet" href="/css/dashboard.css?v=20260217a">
-    <link rel="stylesheet" href="/css/dashboard.css?v=20260217a">
+    <link rel="stylesheet" href="/css/dashboard.css?v=20260217b">
+    <link rel="stylesheet" href="/css/dashboard.css?v=20260217b">
 </head>

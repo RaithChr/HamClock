@@ -782,3 +782,28 @@ body.mobile-mode #widget-header .hdr-btn {
     padding: 8px 12px;
     font-size: 11px;
 }
+
+/* ============================================
+   MOBILE FULL WIDTH FIX
+   ============================================ */
+
+/* ALLE Widgets volle Breite */
+body.mobile-mode .grid-stack-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+}
+
+/* Gridstack Container */
+body.mobile-mode .grid-stack {
+    width: 100% !important;
+}
+
+/* Gridstack Item Content */
+body.mobile-mode .grid-stack-item-content {
+    width: 100% !important;
+    left: 0 !important;
+}
