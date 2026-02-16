@@ -885,3 +885,19 @@ body.mobile-mode #widget-header .card {
 body.mobile-mode #widget-header .btn-box {
     margin-bottom: 50px !important;
 }
+
+/* ============================================
+   MOBILE HEADER FIX - PADDING BOTTOM
+   ============================================ */
+
+body.mobile-mode #widget-header,
+body.mobile-mode #widget-header .card {
+    min-height: 180px !important;
+    height: auto !important;
+    padding-bottom: 50px !important;
+}
+
+/* Margin entfernen, Padding verwenden */
+body.mobile-mode #widget-header .btn-box {
+    margin-bottom: 0 !important;
+}
