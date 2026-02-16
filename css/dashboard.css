@@ -1162,3 +1162,49 @@ body.mobile-mode #widget-header .hdr-btn {
     border-radius: 8px !important;
     color: #00ff88 !important;
 }
+
+/* ============================================
+   MOBILE HEADER MEHR PLATZ - 2026-02-16
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    margin-bottom: 12px !important;
+}
+
+body.mobile-mode #widget-header .card {
+    padding: 18px 15px !important;
+    min-height: 70px !important;
+    gap: 15px !important;
+}
+
+body.mobile-mode #widget-header #header-callsign {
+    font-size: 1.4em !important;
+    letter-spacing: 1px !important;
+}
+
+body.mobile-mode #widget-header .btn-box {
+    gap: 8px !important;
+}
+
+body.mobile-mode #widget-header .hdr-btn {
+    padding: 10px 12px !important;
+    font-size: 12px !important;
+    min-height: 40px !important;
+    min-width: 40px !important;
+}
+
+/* Auf kleinen Screens Buttons wrap erlauben */
+@media (max-width: 380px) {
+    body.mobile-mode #widget-header .card {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+    body.mobile-mode #widget-header #header-callsign {
+        width: 100% !important;
+        text-align: center !important;
+    }
+    body.mobile-mode #widget-header .btn-box {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
