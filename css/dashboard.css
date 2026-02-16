@@ -987,3 +987,12 @@ body.mobile-mode #widget-header #header-callsign {
         display: none !important;
     }
 }
+
+/* MOBILE CLOCK FIX - Force Visibility */
+body.mobile-mode #widget-clock {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    transform: none !important;
+}

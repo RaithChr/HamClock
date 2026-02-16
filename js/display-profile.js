@@ -125,8 +125,13 @@
 
     function applyLayoutForProfile(profileName) {
         if (!window.grid) return;
+        
+        // Mobile: Immer das vorgegebene Layout verwenden (gespeichertes ignorieren)
+        if (profileName === 'mobile') {
+            console.log('[Display] Mobile: applying hardcoded layout');
+        }
 
-        const layouts = {
+        const layouts = 
             raspberry: [
                 { id: 'widget-header', x: 0, y: 0, w: 4, h: 1 },
                 { id: 'widget-sun', x: 0, y: 1, w: 2, h: 3 },
