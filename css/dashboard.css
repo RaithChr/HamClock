@@ -315,46 +315,10 @@ body.mobile-mode {
 }
 
 /* Sticky Header - Buttons always visible on top */
-body.mobile-mode #widget-header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 60px;
-    z-index: 9999 !important;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%) !important;
-    border-bottom: 2px solid rgba(0, 255, 136, 0.3);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    transform: none !important;
-}
-
-body.mobile-mode #widget-header .card {
-    padding: 8px 10px !important;
-    height: auto !important;
-}
-
 /* Compact buttons for mobile */
-body.mobile-mode #widget-header .btn-box {
-    gap: 4px;
-}
-
-body.mobile-mode #widget-header .hdr-btn {
-    padding: 6px 10px;
-    font-size: 12px;
-    min-width: auto;
-    min-height: 36px;
-    touch-action: manipulation;
-}
-
 /* Hide less important buttons on very small screens */
 @media (max-width: 380px) {
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="support_btn"],
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="legend_btn"] {
-        display: none;
     }
-}
 
 /* Main content starts below sticky header */
 body.mobile-mode .grid-stack {
@@ -824,34 +788,7 @@ body.mobile-mode .grid-stack-item-content {
 }
 
 /* Header sticky at top */
-body.mobile-mode #widget-header {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 1000 !important;
-    margin-bottom: 8px;
-}
-
-body.mobile-mode #widget-header .card {
-    padding: 6px 8px !important;
-    min-height: 50px;
-}
-
-body.mobile-mode #widget-header #header-callsign {
-    font-size: clamp(14px, 5vw, 18px);
-}
-
 /* Compact buttons */
-body.mobile-mode #widget-header .btn-box {
-    gap: 4px;
-}
-
-body.mobile-mode #widget-header .hdr-btn {
-    padding: 6px 8px;
-    font-size: 12px;
-    min-height: 36px;
-    min-width: 36px;
-}
-
 /* Card styling */
 body.mobile-mode .card {
     border-radius: 8px;
@@ -934,55 +871,14 @@ body.mobile-mode .grid-stack-item {
 }
 
 /* Buttons zusammenschieben, nicht zu weit rechts */
-body.mobile-mode #widget-header .btn-box {
-    gap: 3px !important;
-    margin-right: 0 !important;
-    padding-right: 0 !important;
-}
-
-body.mobile-mode #widget-header .hdr-btn {
-    padding: 5px 6px !important;
-    font-size: 11px !important;
-    min-height: 32px !important;
-    min-width: 32px !important;
-    white-space: nowrap;
-}
-
 /* Header Content besser ausnutzen */
-body.mobile-mode #widget-header .card {
-    padding: 6px 8px !important;
-    justify-content: space-between !important;
-}
-
-body.mobile-mode #widget-header #header-callsign {
-    flex-shrink: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 /* Extra klein auf sehr kleinen Screens */
 @media (max-width: 380px) {
-    body.mobile-mode #widget-header .btn-box {
-        gap: 2px !important;
     }
-    body.mobile-mode #widget-header .hdr-btn {
-        padding: 4px 5px !important;
-        font-size: 10px !important;
-        min-height: 28px !important;
-        min-width: 28px !important;
-    }
-    body.mobile-mode #widget-header #header-callsign {
-        font-size: 13px !important;
-    }
-}
 
 /* iPhone SE / kleine Geräte */
 @media (max-width: 340px) {
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="support_btn"],
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="legend_btn"] {
-        display: none !important;
     }
-}
 
 /* MOBILE CLOCK FIX - Force Visibility */
 body.mobile-mode #widget-clock {
@@ -1033,146 +929,80 @@ body.mobile-mode .grid-stack-item[style*="translate"] {
 
 /* Auf sehr kleinen Screens noch kompakter */
 @media (max-width: 360px) {
-    body.mobile-mode #widget-header .hdr-btn {
-        padding: 4px 5px !important;
-        font-size: 9px !important;
-        min-height: 28px !important;
-        min-width: 28px !important;
     }
-    body.mobile-mode #widget-header .btn-box {
-        gap: 3px !important;
-    }
-}
 
 /* Auf kleinen Screens Buttons wrap erlauben */
 @media (max-width: 380px) {
-    body.mobile-mode #widget-header .card {
-        flex-wrap: wrap !important;
-        gap: 10px !important;
     }
-    body.mobile-mode #widget-header #header-callsign {
-        width: 100% !important;
-        text-align: center !important;
+
+/* Resize Handles sichtbarer */
+/* Touch-Optimierung */
+/* Auf sehr kleinen Screens nur Icons */
+@media (max-width: 400px) {
     }
-    body.mobile-mode #widget-header .btn-box {
-        width: 100% !important;
-        justify-content: center !important;
-    }
-}
 
 /* ============================================
-   MOBILE HEADER - WIE ANDERE WIDGETS
+   MOBILE HEADER - WIE DESKTOP QUERANSICHT
    ============================================ */
 
 body.mobile-mode #widget-header {
-    margin: 0 0 10px 0 !important;
-    padding: 0 !important;
+    width: 100% !important;
+    margin: 0 0 15px 0 !important;
 }
 
 body.mobile-mode #widget-header .card {
-    /* Genau wie .card Standard */
     background: rgba(20,20,35,0.9) !important;
     border-radius: 15px !important;
-    padding: 20px !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
-    /* Layout */
+    padding: 15px 20px !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: space-between !important;
+    gap: 20px !important;
+    min-height: 60px !important;
 }
 
 body.mobile-mode #widget-header #header-callsign {
     font-family: "Orbitron", sans-serif !important;
-    font-size: 1.5em !important;
+    font-size: 1.8em !important;
     font-weight: 700 !important;
     color: #00ff88 !important;
-    text-shadow: 0 0 10px rgba(0,255,136,0.3) !important;
+    flex-shrink: 0 !important;
 }
 
 body.mobile-mode #widget-header .btn-box {
     display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     gap: 8px !important;
+    margin: 0 !important;
 }
 
 body.mobile-mode #widget-header .hdr-btn {
-    padding: 8px 12px !important;
-    font-size: 11px !important;
+    display: inline-block !important;
+    padding: 8px 14px !important;
+    font-size: 12px !important;
     background: rgba(255,255,255,0.05) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
     border-radius: 8px !important;
     color: #e0e0e0 !important;
+    white-space: nowrap !important;
     cursor: pointer !important;
 }
 
-body.mobile-mode #widget-header .hdr-btn:hover {
-    background: rgba(255,255,255,0.1) !important;
-}
-
-/* ============================================
-   MOBILE HEADER RESIZE FIX - 2026-02-16
-   ============================================ */
-
-body.mobile-mode #widget-header {
-    min-height: 80px !important;
-}
-
-body.mobile-mode #widget-header .card {
-    min-height: 70px !important;
-    padding: 25px 20px !important;
-}
-
-/* Resize Handles sichtbarer */
-body.mobile-mode #widget-header .ui-resizable-handle,
-body.mobile-mode #widget-header .grid-stack-item-content::after {
-    width: 20px !important;
-    height: 20px !important;
-    background: rgba(0,255,136,0.5) !important;
-    border-radius: 50% !important;
-}
-
-/* Touch-Optimierung */
-body.mobile-mode #widget-header .grid-stack-item-content {
-    touch-action: pan-y !important;
-}
-
-/* ============================================
-   MOBILE HEADER BUTTONS SICHTBAR MACHEN
-   ============================================ */
-
-body.mobile-mode #widget-header .btn-box {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    gap: 6px !important;
-    margin-left: auto !important;
-}
-
-body.mobile-mode #widget-header .hdr-btn {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    padding: 8px 10px !important;
-    font-size: 10px !important;
-    background: rgba(255,255,255,0.1) !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    border-radius: 6px !important;
-    color: #fff !important;
-    white-space: nowrap !important;
-}
-
-/* Auf sehr kleinen Screens nur Icons */
-@media (max-width: 400px) {
-    body.mobile-mode #widget-header .hdr-btn {
-        padding: 8px !important;
-        font-size: 14px !important;
-        min-width: 36px !important;
-        min-height: 36px !important;
+/* Auf kleinen Screens etwas kompakter */
+@media (max-width: 380px) {
+    body.mobile-mode #widget-header .card {
+        padding: 12px 15px !important;
+        gap: 10px !important;
     }
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="support_btn"]::before { content: "❤️"; }
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="legend_btn"]::before { content: "ℹ️"; }
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="fullscreen_btn"]::before { content: "📺"; }
-    body.mobile-mode #widget-header .hdr-btn[data-i18n="settings_btn"]::before { content: "⚙️"; }
-    body.mobile-mode #widget-header .hdr-btn { font-size: 0 !important; }
+    body.mobile-mode #widget-header #header-callsign {
+        font-size: 1.4em !important;
+    }
+    body.mobile-mode #widget-header .hdr-btn {
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+    }
 }
