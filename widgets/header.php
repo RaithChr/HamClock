@@ -10,7 +10,7 @@
     </div>
 
     <!-- Buttons -->
-    <div class="btn-box" style="display:flex; gap:6px; flex-wrap:wrap; margin-left:auto; align-items:center;">
+    <div class="btn-box" style="display:flex; gap:6px; flex-wrap:wrap; margin-left:20px; align-items:center;">
         <a href="support.html" style="text-decoration:none;">
             <button class="hdr-btn btn-support" data-i18n="support_btn">❤️ Support</button>
         </a>

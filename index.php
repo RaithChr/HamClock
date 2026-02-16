@@ -14,7 +14,14 @@
             </div>
         </div>
 
-        <!-- ROW 1: Sun | QTH | Bands | Clock -->
+        <!-- ROW 1: Clock | Sun | QTH | Bands -->
+        <div class="grid-stack-item" id="widget-clock" gs-id="widget-clock"
+             gs-x="6" gs-y="2" gs-w="2" gs-h="5" gs-min-w="2">
+            <div class="grid-stack-item-content">
+                <?php include __DIR__ . '/widgets/clock.php'; ?>
+            </div>
+        </div>
+
         <div class="grid-stack-item" id="widget-sun" gs-id="widget-sun"
              gs-x="0" gs-y="2" gs-w="3" gs-h="5" gs-min-w="2">
             <div class="grid-stack-item-content">
@@ -30,16 +37,9 @@
         </div>
 
         <div class="grid-stack-item" id="widget-bands" gs-id="widget-bands"
-             gs-x="6" gs-y="2" gs-w="4" gs-h="5" gs-min-w="3">
+             gs-x="8" gs-y="2" gs-w="4" gs-h="5" gs-min-w="2">
             <div class="grid-stack-item-content">
                 <?php include __DIR__ . '/widgets/bands.php'; ?>
-            </div>
-        </div>
-
-        <div class="grid-stack-item" id="widget-clock" gs-id="widget-clock"
-             gs-x="10" gs-y="2" gs-w="2" gs-h="5" gs-min-w="2">
-            <div class="grid-stack-item-content">
-                <?php include __DIR__ . '/widgets/clock.php'; ?>
             </div>
         </div>
 

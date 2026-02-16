@@ -1,11 +1,21 @@
+// URL-Parameter ?reset löscht das gespeicherte Layout
+if (window.location.search.includes('reset')) {
+    localStorage.removeItem('gwen_grid_layout');
+    localStorage.removeItem('gwen_kiosk_layout_p1');
+    localStorage.removeItem('gwen_kiosk_layout_p2');
+    localStorage.removeItem('gwen_widget_pages');
+    console.log('Layout reset - localStorage gelöscht');
+    window.location.href = window.location.pathname;
+}
+
 const GRID_STORAGE_KEY = 'gwen_grid_layout';
 
 const DEFAULT_LAYOUT = [
     {id:'widget-header',        x:0,  y:0,  w:12, h:2,  minW:6},
     {id:'widget-sun',           x:0,  y:2,  w:3,  h:5,  minW:2},
     {id:'widget-qth',           x:3,  y:2,  w:3,  h:5,  minW:2},
-    {id:'widget-bands',         x:6,  y:2,  w:3,  h:5,  minW:2},
-    {id:'widget-clock',         x:9,  y:2,  w:3,  h:5,  minW:2},
+    {id:'widget-clock',         x:6,  y:2,  w:2,  h:5,  minW:2},
+    {id:'widget-bands',         x:8,  y:2,  w:4,  h:5,  minW:2},
     {id:'widget-weather-local', x:0,  y:7,  w:4,  h:4,  minW:2},
     {id:'widget-weather-space', x:4,  y:7,  w:8,  h:4,  minW:3},
     {id:'widget-system',        x:0,  y:11, w:4,  h:6,  minW:2},
