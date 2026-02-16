@@ -303,3 +303,166 @@
 @container header-widget (min-width: 1px) {
     #header-callsign { font-size: clamp(13px, 3.5cqw, 60px) !important; }
 }
+/**
+ * Mobile Mode Styles - Only applied when .mobile-mode class is present
+ * Desktop/PC layout remains completely unchanged
+ */
+
+/* Mobile mode base */
+body.mobile-mode {
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Sticky Header - Buttons always visible on top */
+body.mobile-mode #widget-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 60px;
+    z-index: 9999 !important;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%) !important;
+    border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transform: none !important;
+}
+
+body.mobile-mode #widget-header .card {
+    padding: 8px 10px !important;
+    height: auto !important;
+}
+
+/* Compact buttons for mobile */
+body.mobile-mode #widget-header .btn-box {
+    gap: 4px;
+}
+
+body.mobile-mode #widget-header .hdr-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    min-width: auto;
+    min-height: 36px;
+    touch-action: manipulation;
+}
+
+/* Hide less important buttons on very small screens */
+@media (max-width: 380px) {
+    body.mobile-mode #widget-header .hdr-btn[data-i18n="support_btn"],
+    body.mobile-mode #widget-header .hdr-btn[data-i18n="legend_btn"] {
+        display: none;
+    }
+}
+
+/* Main content starts below sticky header */
+body.mobile-mode .grid-stack {
+    margin-top: 70px !important;
+}
+
+/* Single column layout for all widgets */
+body.mobile-mode .grid-stack-item {
+    width: 100% !important;
+    left: 0 !important;
+    position: relative !important;
+    margin-bottom: 10px;
+}
+
+body.mobile-mode .grid-stack-item-content {
+    min-height: auto;
+}
+
+/* Card adjustments */
+body.mobile-mode .card {
+    margin: 0;
+    border-radius: 10px;
+}
+
+body.mobile-mode .card-header {
+    padding: 10px 12px;
+    font-size: 14px;
+    touch-action: none; /* Prevent drag issues on touch */
+}
+
+/* Content padding */
+body.mobile-mode .card > div:not(.card-header) {
+    padding: 10px;
+}
+
+/* Font sizes */
+body.mobile-mode .grid-square {
+    font-size: 20px;
+}
+
+body.mobile-mode .coords {
+    font-size: 12px;
+}
+
+/* DX Cluster - full width */
+body.mobile-mode #dx-cluster-list {
+    max-height: 300px;
+}
+
+/* Satellites - compact */
+body.mobile-mode #satellite-container {
+    max-height: 250px;
+}
+
+/* Band conditions - scrollable */
+body.mobile-mode #band-conditions-body {
+    overflow-x: auto;
+}
+
+/* Touch-friendly tap targets */
+body.mobile-mode button,
+body.mobile-mode a {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Disable drag on mobile (touch scrolling priority) */
+body.mobile-mode .grid-stack-item {
+    touch-action: pan-y pinch-zoom;
+}
+
+body.mobile-mode .card-header {
+    cursor: default !important;
+}
+
+/* Kiosk mode adjustments for mobile */
+body.mobile-mode.kiosk-mode {
+    padding: 0;
+}
+
+body.mobile-mode.kiosk-mode #widget-header {
+    display: none !important; /* Hide header in kiosk on mobile */
+}
+
+body.mobile-mode.kiosk-mode .grid-stack {
+    margin-top: 0 !important;
+}
+
+/* Prevent text selection on buttons */
+body.mobile-mode button {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Smooth scrolling */
+body.mobile-mode {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Modal adjustments */
+body.mobile-mode .modal-content {
+    width: 95%;
+    margin: 10px auto;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+body.mobile-mode .modal-close {
+    font-size: 24px;
+    padding: 10px;
+}

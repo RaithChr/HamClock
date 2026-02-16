@@ -358,5 +358,7 @@ window.addEventListener('resize',enforceKioskWidths);
     const _origDisable = window.disableKioskMode;
     window.disableKioskMode = function() { if(typeof _origDisable==="function") _origDisable(); setGridKioskMode(false); };
     </script>
+    <!-- Mobile Mode Handler -->
+    <script src="/js/mobile-handler.js?v=20260215f"></script>
 </body>
 </html>
