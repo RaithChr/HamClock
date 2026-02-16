@@ -908,3 +908,29 @@ body.mobile-mode .grid-stack-item:first-child .card {
 body.mobile-mode .grid-stack-item:last-child .card {
     border-radius: 0 0 12px 12px !important;
 }
+
+/* ============================================
+   MOBILE REMOVE GAP BETWEEN BOXES
+   ============================================ */
+
+/* Gridstack interne Abstände killen */
+body.mobile-mode .grid-stack .grid-stack-item-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    inset: 0 !important;
+}
+
+body.mobile-mode .grid-stack-item[data-gs-y="0"] {
+    margin-bottom: 0 !important;
+}
+
+/* Übergang Header → Uhr nahtlos */
+body.mobile-mode #widget-header + #widget-clock,
+body.mobile-mode #widget-header ~ #widget-clock {
+    margin-top: -1px !important;
+}
+
+body.mobile-mode #widget-clock .card {
+    border-top: none !important;
+    margin-top: 0 !important;
+}
