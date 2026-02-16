@@ -1109,3 +1109,30 @@ body.mobile-mode #widget-header .hdr-btn {
 body.mobile-mode #widget-header .hdr-btn:hover {
     background: rgba(255,255,255,0.1) !important;
 }
+
+/* ============================================
+   MOBILE HEADER RESIZE FIX - 2026-02-16
+   ============================================ */
+
+body.mobile-mode #widget-header {
+    min-height: 80px !important;
+}
+
+body.mobile-mode #widget-header .card {
+    min-height: 70px !important;
+    padding: 25px 20px !important;
+}
+
+/* Resize Handles sichtbarer */
+body.mobile-mode #widget-header .ui-resizable-handle,
+body.mobile-mode #widget-header .grid-stack-item-content::after {
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(0,255,136,0.5) !important;
+    border-radius: 50% !important;
+}
+
+/* Touch-Optimierung */
+body.mobile-mode #widget-header .grid-stack-item-content {
+    touch-action: pan-y !important;
+}
