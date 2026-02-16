@@ -1136,3 +1136,43 @@ body.mobile-mode #widget-header .grid-stack-item-content::after {
 body.mobile-mode #widget-header .grid-stack-item-content {
     touch-action: pan-y !important;
 }
+
+/* ============================================
+   MOBILE HEADER BUTTONS SICHTBAR MACHEN
+   ============================================ */
+
+body.mobile-mode #widget-header .btn-box {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    gap: 6px !important;
+    margin-left: auto !important;
+}
+
+body.mobile-mode #widget-header .hdr-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 8px 10px !important;
+    font-size: 10px !important;
+    background: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 6px !important;
+    color: #fff !important;
+    white-space: nowrap !important;
+}
+
+/* Auf sehr kleinen Screens nur Icons */
+@media (max-width: 400px) {
+    body.mobile-mode #widget-header .hdr-btn {
+        padding: 8px !important;
+        font-size: 14px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+    body.mobile-mode #widget-header .hdr-btn[data-i18n="support_btn"]::before { content: "❤️"; }
+    body.mobile-mode #widget-header .hdr-btn[data-i18n="legend_btn"]::before { content: "ℹ️"; }
+    body.mobile-mode #widget-header .hdr-btn[data-i18n="fullscreen_btn"]::before { content: "📺"; }
+    body.mobile-mode #widget-header .hdr-btn[data-i18n="settings_btn"]::before { content: "⚙️"; }
+    body.mobile-mode #widget-header .hdr-btn { font-size: 0 !important; }
+}
