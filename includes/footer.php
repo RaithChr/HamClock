@@ -310,56 +310,10 @@ return phase;
     setInterval(loadTLEData,3600000); // Reload TLE every hour
     </script>
 
-<script>
-// Kiosk Mode with Auto-Rotate
-let kioskMode=false,currentView='top',rotateInterval=null;
-function loadKioskState(){const s=localStorage.getItem('kioskMode');if(s==='true')enableKioskMode();}
-function saveKioskState(e){localStorage.setItem('kioskMode',e?'true':'false');}
-function enableKioskMode(){if(kioskMode)return;kioskMode=true;saveKioskState(true);const e=document.documentElement;if(e.requestFullscreen)e.requestFullscreen();else if(e.webkitRequestFullscreen)e.webkitRequestFullscreen();document.body.classList.add('kiosk-mode');startAutoRotate();showView('top');}
-function disableKioskMode(){if(!kioskMode)return;kioskMode=false;saveKioskState(false);if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();document.body.classList.remove('kiosk-mode','view-top','view-bottom');stopAutoRotate();}
-function toggleKioskMode(){kioskMode?disableKioskMode():enableKioskMode();}
-function showView(v){
-currentView=v;
-document.body.classList.remove('view-top','view-bottom');
-document.body.classList.add('view-'+v);
-console.log('[Kiosk] View changed to:', v);
-if(v==='bottom'){
-setTimeout(()=>{
-const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
-console.log('[Kiosk] Setting equal widths...');
-if(s){s.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('Sat:',s.style.width);}
-if(d){d.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('DX:',d.style.width);}
-if(y){y.style.cssText='flex:0 0 33.333%!important;width:33.333%!important;max-width:33.333%!important;min-width:33.333%!important;';console.log('Sys:',y.style.width);}
-},100);
-}}
-function startAutoRotate(){stopAutoRotate();rotateInterval=setInterval(()=>{currentView=currentView==='top'?'bottom':'top';showView(currentView);},7000);}
-function stopAutoRotate(){if(rotateInterval){clearInterval(rotateInterval);rotateInterval=null;}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&kioskMode)disableKioskMode();});
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&kioskMode)disableKioskMode();});
-window.addEventListener('DOMContentLoaded',()=>{loadKioskState();});
-
-
-
-// BRUTAL width enforcement for kiosk mode
-function enforceKioskWidths(){
-if(!document.body.classList.contains('kiosk-mode')||!document.body.classList.contains('view-bottom'))return;
-const container=document.querySelector('.grid-3');
-if(!container)return;
-const containerWidth=container.offsetWidth;
-const panelWidth=Math.floor(containerWidth/3);
-const s=document.getElementById('kiosk-satellites'),d=document.getElementById('kiosk-dx'),y=document.getElementById('kiosk-system');
-if(s){s.style.width=panelWidth+'px';s.style.flex='none';s.style.maxWidth=panelWidth+'px';s.style.minWidth=panelWidth+'px';}
-if(d){d.style.width=panelWidth+'px';d.style.flex='none';d.style.maxWidth=panelWidth+'px';d.style.minWidth=panelWidth+'px';}
-if(y){y.style.width=panelWidth+'px';y.style.flex='none';y.style.maxWidth=panelWidth+'px';y.style.minWidth=panelWidth+'px';}
-}
-setInterval(enforceKioskWidths,100);
-window.addEventListener('resize',enforceKioskWidths);
-
-</script>
 
     <script src="/js/gridstack.min.js"></script>
     <script src="/js/dashboard-grid.js?v=20260215d"></script>
-        <script src="/js/kiosk.js?v=20260215e"></script>
+        <script src="/js/kiosk.js?v=20260216b"></script>
     <!-- Kiosk grid hook -->
     <script>
     const _origEnable = window.enableKioskMode;
