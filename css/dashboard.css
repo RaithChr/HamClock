@@ -783,3 +783,53 @@ body.mobile-mode .grid-stack-item .ui-resizable-sw {
 body.mobile-mode .grid-stack-item {
     touch-action: none !important;
 }
+
+/* ============================================
+   MOBILE NO GAP - ZERO MARGIN
+   ============================================ */
+
+/* Gridstack interne Margins entfernen */
+body.mobile-mode .grid-stack {
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+
+body.mobile-mode .grid-stack-item {
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+}
+
+body.mobile-mode .grid-stack-item-content {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Card direkt aneinander */
+body.mobile-mode .grid-stack-item .card {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* Erste und letzte Card abrunden */
+body.mobile-mode .grid-stack-item:first-child .card {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+body.mobile-mode .grid-stack-item:last-child .card {
+    border-radius: 0 0 15px 15px !important;
+    border-bottom: none !important;
+}
+
+/* Nur Header hat etwas Abstand nach oben */
+body.mobile-mode #widget-header {
+    margin-top: 0 !important;
+}
+
+body.mobile-mode #widget-header .card {
+    border-radius: 15px !important;
+    margin-bottom: 2px !important;
+}
