@@ -121,8 +121,8 @@
             // ALLE Widgets auf eine Spalte zwingen
             const mobileLayout = [
                 { id: 'widget-header', x: 0, y: 0, w: 1, h: 1 },
-                { id: 'widget-clock', x: 0, y: 1, w: 1, h: 2 },
-                { id: 'widget-sun', x: 0, y: 3, w: 1, h: 3 },
+                { id: 'widget-clock', x: 0, y: 1, w: 1, h: 2 },  // ⏰ UHRZEIT zuerst!
+                { id: 'widget-sun', x: 0, y: 4, w: 1, h: 3 },     // ☀️ SONNE danach
                 { id: 'widget-qth', x: 0, y: 6, w: 1, h: 3 },
                 { id: 'widget-bands', x: 0, y: 9, w: 1, h: 3 },
                 { id: 'widget-weather-local', x: 0, y: 12, w: 1, h: 2 },
