@@ -60,25 +60,36 @@
 
         <!-- ROW 3: Satellites | DX | System -->
         <div class="grid-stack-item" id="widget-satellites" gs-id="widget-satellites"
-             gs-x="0" gs-y="11" gs-w="4" gs-h="6" gs-min-w="2">
+             gs-x="0" gs-y="17" gs-w="6" gs-h="6" gs-min-w="3">
             <div class="grid-stack-item-content">
                 <?php include __DIR__ . '/widgets/satellites.php'; ?>
             </div>
         </div>
 
         <div class="grid-stack-item" id="widget-dx" gs-id="widget-dx"
-             gs-x="4" gs-y="11" gs-w="4" gs-h="6" gs-min-w="2">
+             gs-x="6" gs-y="17" gs-w="6" gs-h="6" gs-min-w="3">
             <div class="grid-stack-item-content">
                 <?php include __DIR__ . '/widgets/dx.php'; ?>
             </div>
         </div>
 
+        <!-- Contests & FT8 hinzugefügt -->
+        <div class="grid-stack-item" id="widget-contests-ft8" gs-id="widget-contests-ft8"
+             gs-x="0" gs-y="11" gs-w="6" gs-h="6" gs-min-w="3">
+            <div class="grid-stack-item-content">
+                <?php include __DIR__ . '/widgets/contests-ft8.php'; ?>
+            </div>
+        </div>
+
         <div class="grid-stack-item" id="widget-system" gs-id="widget-system"
-             gs-x="8" gs-y="11" gs-w="4" gs-h="6" gs-min-w="2">
+             gs-x="6" gs-y="11" gs-w="6" gs-h="6" gs-min-w="3">
             <div class="grid-stack-item-content">
                 <?php include __DIR__ . '/widgets/system.php'; ?>
             </div>
         </div>
+
+        <!-- ROW 4: Contests & FT8 Activity Monitor - Full Width Bottom -->
+
 
     </div>
 </div>

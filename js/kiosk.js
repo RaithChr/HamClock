@@ -20,6 +20,7 @@ const DEFAULT_PAGES = {
     'widget-satellites':    'both',
     'widget-dx':            'both',
     'widget-system':        'both',
+    'widget-contests-ft8':  'both',
 };
 
 const KIOSK_PAGE_LAYOUTS = {

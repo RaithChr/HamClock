@@ -52,3 +52,7 @@ google*.html
 
 # Private Counter-Scripts (referenziert myhoney/)
 count_images.php
+
+# ÖBB Abfahrtsmonitor - NUR LOKAL, NIEMALS AUF GITHUB
+/oebb/
+oebb/

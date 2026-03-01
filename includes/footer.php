@@ -24,6 +24,18 @@ return phase;
 
     // === SUN/MOON TIMES (US Naval Observatory API) ===
     let sunData = null;
+    // Moon phase descriptions with direction
+    const MOON_PHASE_DATA = {
+        'New Moon':           {de: 'Neumond',            dir: 'Zunehmend'},
+        'Waxing Crescent':    {de: 'Zunehmende Sichel',  dir: 'Zunehmend'},
+        'First Quarter':      {de: 'Erstes Viertel',     dir: 'Zunehmend'},
+        'Waxing Gibbous':     {de: 'Zunehmender Mond',   dir: 'Zunehmend'},
+        'Full Moon':          {de: 'Vollmond',           dir: 'Abnehmend'},
+        'Waning Gibbous':     {de: 'Abnehmender Mond',   dir: 'Abnehmend'},
+        'Last Quarter':       {de: 'Letztes Viertel',    dir: 'Abnehmend'},
+        'Waning Crescent':    {de: 'Abnehmende Sichel',  dir: 'Abnehmend'},
+    };
+
     const MOON_PHASE_DE = {
         'New Moon':'Neumond','Waxing Crescent':'Zunehmende Sichel',
         'First Quarter':'Erstes Viertel','Waxing Gibbous':'Zunehmender Mond',
@@ -48,13 +60,30 @@ return phase;
             // Moon rise/set
             if ($('moonTimes') && sunData.moonrise)
                 $('moonTimes').textContent = sunData.moonrise + ' / ' + sunData.moonset;
-            // Moon phase text in QTH panel
+            // Moon phase text in QTH panel - with direction!
             if ($('moonPhaseName') && sunData.moon_phase) {
                 const lang = UserSettings.load().language || 'de';
-                const phaseName = lang === 'de'
-                    ? (MOON_PHASE_DE[sunData.moon_phase] || sunData.moon_phase)
-                    : sunData.moon_phase;
-                $('moonPhaseName').textContent = phaseName + ' (' + (sunData.moon_illum||'') + ')';
+                const phaseData = MOON_PHASE_DATA[sunData.moon_phase];
+                let phaseName, direction;
+                
+                if (phaseData) {
+                    phaseName = lang === 'de' ? phaseData.de : sunData.moon_phase;
+                    direction = lang === 'de' ? phaseData.dir : (phaseData.dir === 'Zunehmend' ? 'Waxing' : 'Waning');
+                } else {
+                    phaseName = sunData.moon_phase;
+                    direction = '';
+                }
+                
+                const illumStr = sunData.moon_illum || '';
+                const dirStr = direction ? ` • ${direction}` : '';
+                $('moonPhaseName').textContent = phaseName + dirStr + (illumStr ? ` (${illumStr})` : '');
+            }
+            // Next moon phases
+            if ($('nextNewMoonDE') && sunData.next_new_moon_de) {
+                $('nextNewMoonDE').textContent = sunData.next_new_moon_de;
+            }
+            if ($('nextFullMoonDE') && sunData.next_full_moon_de) {
+                $('nextFullMoonDE').textContent = sunData.next_full_moon_de;
             }
         } catch(e) {
             console.warn('Sun/Moon data fetch failed:', e);
